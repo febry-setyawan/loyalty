@@ -550,54 +550,151 @@ class DataMasker {
 
 ### 2. Unit Testing Standards
 
-#### Test Structure
-```javascript
-// Test file naming: [ComponentName].test.js
-describe('UserRegistrationService', () => {
-  let userRegistrationService;
-  let mockUserRepository;
-  let mockEmailService;
+#### Java Unit Testing with JUnit 5
+```java
+@ExtendWith(MockitoExtension.class)
+class UserRegistrationServiceTest {
+    
+    @Mock
+    private UserRepository userRepository;
+    
+    @Mock
+    private EmailService emailService;
+    
+    @Mock
+    private PasswordEncoder passwordEncoder;
+    
+    @InjectMocks
+    private UserRegistrationService userRegistrationService;
+    
+    @Test
+    @DisplayName("Should register user successfully when valid data provided")
+    void should_register_user_successfully_when_valid_data_provided() {
+        // Given
+        CreateUserRequest request = CreateUserRequest.builder()
+            .email("test@example.com")
+            .password("ValidPass123!")
+            .firstName("John")
+            .lastName("Doe")
+            .build();
+            
+        User expectedUser = User.builder()
+            .id("user-123")
+            .email(request.getEmail())
+            .firstName(request.getFirstName())
+            .lastName(request.getLastName())
+            .status(UserStatus.ACTIVE)
+            .build();
+        
+        when(userRepository.existsByEmail(request.getEmail())).thenReturn(false);
+        when(passwordEncoder.encode(request.getPassword())).thenReturn("encoded-password");
+        when(userRepository.save(any(User.class))).thenReturn(expectedUser);
+        
+        // When
+        User result = userRegistrationService.registerUser(request);
+        
+        // Then
+        assertThat(result).isNotNull();
+        assertThat(result.getEmail()).isEqualTo(request.getEmail());
+        assertThat(result.getStatus()).isEqualTo(UserStatus.ACTIVE);
+        
+        verify(userRepository).existsByEmail(request.getEmail());
+        verify(passwordEncoder).encode(request.getPassword());
+        verify(userRepository).save(argThat(user -> 
+            user.getEmail().equals(request.getEmail()) &&
+            user.getPassword().equals("encoded-password")
+        ));
+        verify(emailService).sendWelcomeEmail(result);
+    }
+    
+    @Test
+    @DisplayName("Should throw ConflictException when email already exists")
+    void should_throw_exception_when_email_already_exists() {
+        // Given
+        CreateUserRequest request = CreateUserRequest.builder()
+            .email("existing@example.com")
+            .password("ValidPass123!")
+            .build();
+            
+        when(userRepository.existsByEmail(request.getEmail())).thenReturn(true);
+        
+        // When & Then
+        assertThatThrownBy(() -> userRegistrationService.registerUser(request))
+            .isInstanceOf(ConflictException.class)
+            .hasMessage("Email already exists: existing@example.com");
+            
+        verify(userRepository, never()).save(any(User.class));
+        verify(emailService, never()).sendWelcomeEmail(any(User.class));
+    }
+    
+    @ParameterizedTest
+    @ValueSource(strings = {"", "   ", "invalid-email", "@example.com"})
+    @DisplayName("Should throw ValidationException for invalid email formats")
+    void should_throw_validation_exception_for_invalid_emails(String invalidEmail) {
+        // Given
+        CreateUserRequest request = CreateUserRequest.builder()
+            .email(invalidEmail)
+            .password("ValidPass123!")
+            .firstName("John")
+            .lastName("Doe")
+            .build();
+        
+        // When & Then
+        assertThatThrownBy(() -> userRegistrationService.registerUser(request))
+            .isInstanceOf(ValidationException.class)
+            .hasMessageContaining("Invalid email format");
+    }
+}
+```
 
-  beforeEach(() => {
-    // Setup test doubles
-    mockUserRepository = {
-      findByEmail: jest.fn(),
-      save: jest.fn()
-    };
-    mockEmailService = {
-      sendVerificationEmail: jest.fn()
-    };
-
-    // Create service instance
-    userRegistrationService = new UserRegistrationService(
-      mockUserRepository,
-      mockEmailService
-    );
-  });
-
-  describe('registerUser', () => {
-    it('should register user successfully when valid data provided', async () => {
-      // Arrange
-      const userData = {
-        email: 'test@example.com',
-        password: 'ValidPass123!',
-        firstName: 'John',
-        lastName: 'Doe'
-      };
-
-      mockUserRepository.findByEmail.mockResolvedValue(null);
-      mockUserRepository.save.mockResolvedValue({ id: '123', ...userData });
-
-      // Act
-      const result = await userRegistrationService.registerUser(userData);
-
-      // Assert
-      expect(result).toHaveProperty('id', '123');
-      expect(result.email).toBe(userData.email);
-      expect(mockUserRepository.save).toHaveBeenCalledWith(
-        expect.objectContaining({
-          email: userData.email,
-          firstName: userData.firstName,
+#### Integration Testing with TestContainers
+```java
+@SpringBootTest
+@TestMethodOrder(OrderAnnotation.class)
+@Testcontainers
+class UserServiceIntegrationTest {
+    
+    @Container
+    @ServiceConnection
+    static PostgreSQLContainer<?> postgres = new PostgreSQLContainer<>("postgres:15-alpine")
+        .withDatabaseName("loyalty_test")
+        .withUsername("test")
+        .withPassword("test");
+    
+    @Container
+    @ServiceConnection  
+    static GenericContainer<?> redis = new GenericContainer<>("redis:7-alpine")
+        .withExposedPorts(6379);
+    
+    @Autowired
+    private UserService userService;
+    
+    @Autowired
+    private UserRepository userRepository;
+    
+    @Test
+    @Order(1)
+    @DisplayName("Should create user and persist to database")
+    void should_create_user_and_persist_to_database() {
+        // Given
+        CreateUserRequest request = CreateUserRequest.builder()
+            .email("integration@example.com")
+            .password("SecurePass123!")
+            .firstName("Integration")
+            .lastName("Test")
+            .build();
+        
+        // When
+        User createdUser = userService.createUser(request);
+        
+        // Then
+        assertThat(createdUser.getId()).isNotNull();
+        
+        Optional<User> persistedUser = userRepository.findById(createdUser.getId());
+        assertThat(persistedUser).isPresent();
+        assertThat(persistedUser.get().getEmail()).isEqualTo(request.getEmail());
+    }
+}
           lastName: userData.lastName
         })
       );
