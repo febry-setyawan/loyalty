@@ -13,26 +13,26 @@ import org.springframework.stereotype.Component;
 @Component
 public class EncryptedStringConverter implements AttributeConverter<String, String> {
 
-    private final EncryptionService encryptionService;
+  private final EncryptionService encryptionService;
 
-    @Autowired
-    public EncryptedStringConverter(EncryptionService encryptionService) {
-        this.encryptionService = encryptionService;
-    }
+  @Autowired
+  public EncryptedStringConverter(EncryptionService encryptionService) {
+    this.encryptionService = encryptionService;
+  }
 
-    @Override
-    public String convertToDatabaseColumn(String attribute) {
-        if (encryptionService == null || attribute == null) {
-            return attribute;
-        }
-        return encryptionService.encryptSensitiveData(attribute);
+  @Override
+  public String convertToDatabaseColumn(String attribute) {
+    if (encryptionService == null || attribute == null) {
+      return attribute;
     }
+    return encryptionService.encryptSensitiveData(attribute);
+  }
 
-    @Override
-    public String convertToEntityAttribute(String dbData) {
-        if (encryptionService == null || dbData == null) {
-            return dbData;
-        }
-        return encryptionService.decryptSensitiveData(dbData);
+  @Override
+  public String convertToEntityAttribute(String dbData) {
+    if (encryptionService == null || dbData == null) {
+      return dbData;
     }
+    return encryptionService.decryptSensitiveData(dbData);
+  }
 }
