@@ -1,52 +1,52 @@
 # Business Requirements Document (BRD)
-# Sistem Loyalty - Program Loyalitas Pelanggan
+# Loyalty System - Customer Loyalty Program
 
-**Versi:** 1.0  
-**Tanggal:** Desember 2024  
-**Dokumen:** Business Requirements Document  
+**Version:** 1.0  
+**Date:** December 2024  
+**Document:** Business Requirements Document  
 **Project:** Loyalty System Development  
 
 ---
 
 ## 1. Executive Summary
 
-Dokumen ini menyajikan requirement bisnis lengkap untuk pengembangan sistem loyalty yang komprehensif. Sistem ini dirancang untuk meningkatkan retensi pelanggan, mendorong repeat purchase, dan memberikan value proposition yang menarik bagi customer melalui program point dan reward yang terstruktur.
+This document presents comprehensive business requirements for developing a comprehensive loyalty system. This system is designed to improve customer retention, encourage repeat purchases, and provide attractive value propositions for customers through structured point and reward programs.
 
 ## 2. Business Objectives
 
 ### 2.1 Primary Objectives
-- Meningkatkan customer retention rate hingga 40%
-- Meningkatkan average order value (AOV) sebesar 25%
-- Meningkatkan frequency of purchase sebesar 30%
-- Membangun customer engagement yang berkelanjutan
+- Increase customer retention rate by up to 40%
+- Increase average order value (AOV) by 25%
+- Increase frequency of purchase by 30%
+- Build sustainable customer engagement
 
 ### 2.2 Secondary Objectives
-- Mengumpulkan customer data dan behavior analytics
-- Meningkatkan brand loyalty dan advocacy
-- Menciptakan competitive advantage di pasar
-- Mengoptimalkan customer lifetime value (CLV)
+- Collect customer data and behavior analytics
+- Increase brand loyalty and advocacy
+- Create competitive advantage in the market
+- Optimize customer lifetime value (CLV)
 
 ---
 
-## 3. Daftar Fitur dan Requirements
+## 3. Feature List and Requirements
 
-### **FITUR 1: User Management & Registration**
+### **FEATURE 1: User Management & Registration**
 
-**Prioritas Phase:** Phase 1 (Foundation) - Critical
+**Priority Phase:** Phase 1 (Foundation) - Critical
 
 #### Business Requirements:
-- Sistem harus dapat mengelola registrasi dan profil member
-- Sistem harus mendukung multiple channel registration (web, mobile, in-store)
-- Sistem harus dapat mengelola customer data secara aman dan compliant
-- Sistem harus dapat melakukan verifikasi identitas member
+- System must be able to manage member registration and profiles
+- System must support multiple channel registration (web, mobile, in-store)
+- System must be able to manage customer data securely and compliantly
+- System must be able to verify member identity
 
 #### Acceptance Criteria:
-- [x] Member dapat melakukan registrasi dengan email, phone number, atau social media
-- [x] Sistem mengirim email/SMS verifikasi dalam waktu < 2 menit
-- [x] Member profile dapat diupdate dan disinkronisasi across all channels
-- [x] Sistem menyimpan customer data sesuai regulasi data protection
-- [x] Member dapat melakukan login dengan credential yang valid
-- [x] Sistem dapat handle concurrent registration hingga 1000 users/hour
+- [x] Members can register with email, phone number, or social media
+- [x] System sends email/SMS verification within < 2 minutes
+- [x] Member profiles can be updated and synchronized across all channels
+- [x] System stores customer data according to data protection regulations
+- [x] Members can login with valid credentials
+- [x] System can handle concurrent registration up to 1000 users/hour
 
 ---
 
@@ -325,23 +325,23 @@ Dokumen ini menyajikan requirement bisnis lengkap untuk pengembangan sistem loya
 ## 7. Risk Assessment & Mitigation
 
 ### 7.1 Business Risks
-- **Point Liability**: Mitigation dengan setting point expiration dan redemption limits
-- **Fraud & Abuse**: Mitigation dengan advanced monitoring dan validation rules
-- **Customer Adoption**: Mitigation dengan attractive onboarding incentives
+- **Point Liability**: Mitigation by setting point expiration and redemption limits
+- **Fraud & Abuse**: Mitigation with advanced monitoring and validation rules
+- **Customer Adoption**: Mitigation with attractive onboarding incentives
 
 ### 7.2 Technical Risks  
-- **System Downtime**: Mitigation dengan redundant infrastructure dan monitoring
-- **Data Security**: Mitigation dengan encryption dan regular security audits
-- **Scalability Issues**: Mitigation dengan cloud-based architecture dan auto-scaling
+- **System Downtime**: Mitigation with redundant infrastructure and monitoring
+- **Data Security**: Mitigation with encryption and regular security audits
+- **Scalability Issues**: Mitigation with cloud-based architecture and auto-scaling
 
 ---
 
 ## 8. Conclusion
 
-Dokumen BRD ini menyediakan roadmap lengkap untuk pengembangan sistem loyalty yang komprehensif. Dengan implementasi bertahap sesuai priority phases, sistem ini akan memberikan value yang signifikan bagi business dan customer experience.
+This BRD document provides a complete roadmap for developing a comprehensive loyalty system. With phased implementation according to priority phases, this system will provide significant value for business and customer experience.
 
-Sistem loyalty ini dirancang untuk menjadi competitive advantage dan driver utama untuk customer retention dan revenue growth. Semua requirements telah didefinisikan dengan jelas untuk memastikan successful implementation dan adoption.
+This loyalty system is designed to be a competitive advantage and main driver for customer retention and revenue growth. All requirements have been clearly defined to ensure successful implementation and adoption.
 
 ---
 
-**Dokumen ini akan menjadi acuan utama untuk development team dalam membangun sistem loyalty sesuai dengan business objectives dan user needs yang telah didefinisikan.**
+**This document will serve as the main reference for the development team in building a loyalty system that aligns with the defined business objectives and user needs.**

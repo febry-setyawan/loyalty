@@ -1,86 +1,86 @@
 # Loyalty System Documentation
 
-Selamat datang di dokumentasi sistem loyalty! Folder ini berisi semua dokumentasi bisnis dan teknis untuk pengembangan sistem loyalty yang komprehensif.
+Welcome to the loyalty system documentation! This folder contains all business and technical documentation for comprehensive loyalty system development.
 
-## 📚 Daftar Dokumen
+## 📚 Document List
 
 ### 📋 Business Documents
 - **[Business Requirements Document (BRD)](./business-requirements-document.md)**
-  - Dokumen requirement bisnis lengkap dengan 10 fitur utama
-  - Business objectives dan success metrics
-  - Detailed acceptance criteria untuk setiap fitur
-  - Risk assessment dan mitigation strategies
+  - Complete business requirement document with 10 key features
+  - Business objectives and success metrics
+  - Detailed acceptance criteria for each feature
+  - Risk assessment and mitigation strategies
 
 - **[Implementation Roadmap](./implementation-roadmap.md)**
-  - Quick reference guide untuk development team
+  - Quick reference guide for development team
   - 3-phase implementation timeline
-  - Technical recommendations dan checklist
-  - Critical success factors dan monitoring points
+  - Technical recommendations and checklist
+  - Critical success factors and monitoring points
 
 ### 🎨 UI/UX Design Documents
 - **[UI/UX Design Specification](./ui-ux-design-specification.md)**
-  - Complete mockup designs untuk customer mobile app dan admin dashboard
-  - Design system foundation dengan color palette, typography, dan spacing
-  - User journey flows dan customer experience optimization
+  - Complete mockup designs for customer mobile app and admin dashboard
+  - Design system foundation with color palette, typography, and spacing
+  - User journey flows and customer experience optimization
   - Mobile-first responsive design guidelines
-  - Accessibility standards dan compliance requirements
+  - Accessibility standards and compliance requirements
 
 - **[Wireframes & User Flows](./wireframes-user-flows.md)**
-  - Detailed wireframes untuk setiap screen dan interaction
+  - Detailed wireframes for each screen and interaction
   - Critical user flows: registration, point earning, reward redemption
   - State management specifications (loading, error, empty states)
-  - Admin dashboard wireframes dan management interfaces
-  - Interactive flow documentation dengan clear navigation paths
+  - Admin dashboard wireframes and management interfaces
+  - Interactive flow documentation with clear navigation paths
 
 - **[Design System & Component Library](./design-system-components.md)**
-  - Complete component specifications untuk frontend development
-  - CSS/SCSS implementation guidelines dan best practices
-  - React component examples dengan props dan usage patterns
-  - Mobile-specific components dan touch-friendly interactions
+  - Complete component specifications for frontend development
+  - CSS/SCSS implementation guidelines and best practices
+  - React component examples with props and usage patterns
+  - Mobile-specific components and touch-friendly interactions
   - Accessibility implementation guidelines (WCAG 2.1 AA compliance)
 
 ### 🏗️ Technical Documents
 - **[Technical Design Architecture](./technical-design-architecture.md)**
-  - Complete system architecture dan technology specifications
-  - Database schema design dengan detailed tables
-  - API specifications untuk semua microservices
-  - Infrastructure architecture dengan AWS cloud deployment
-  - Security architecture dan compliance guidelines
-  - Performance dan scalability design untuk 100K users
-  - Development environment setup dan CI/CD pipeline
+  - Complete system architecture and technology specifications
+  - Database schema design with detailed tables
+  - API specifications for all microservices
+  - Infrastructure architecture with AWS cloud deployment
+  - Security architecture and compliance guidelines
+  - Performance and scalability design for 100K users
+  - Development environment setup and CI/CD pipeline
 
 ## 🎯 Project Overview
 
-**Tujuan Utama:** Membangun sistem loyalty yang dapat meningkatkan customer retention, average order value, dan purchase frequency.
+**Primary Goal:** Build a loyalty system that can increase customer retention, average order value, and purchase frequency.
 
 **Target Metrics:**
 - Customer retention: +40%
 - Average order value: +25% 
 - Purchase frequency: +30%
-- Program enrollment: 60% dari total customers
+- Program enrollment: 60% of total customers
 
-## 🚀 Quick Start untuk Development Team
+## 🚀 Quick Start for Development Team
 
-1. **Baca BRD terlebih dahulu** untuk memahami complete business requirements
-2. **Review Implementation Roadmap** untuk technical guidance dan timeline
-3. **Ikuti phase-based development** sesuai priority yang telah ditentukan
-4. **Gunakan acceptance criteria** sebagai definition of done untuk setiap fitur
+1. **Read BRD first** to understand complete business requirements
+2. **Review Implementation Roadmap** for technical guidance and timeline
+3. **Follow phase-based development** according to established priorities
+4. **Use acceptance criteria** as definition of done for each feature
 
 ## 🔄 Phase Execution
 
-### Phase 1 - Foundation (Bulan 1-3) ⭐ CRITICAL
+### Phase 1 - Foundation (Months 1-3) ⭐ CRITICAL
 Core functionality: User management, point earning/redemption, admin system
 
-### Phase 2 - Enhancement (Bulan 4-6) 🔥 HIGH PRIORITY  
+### Phase 2 - Enhancement (Months 4-6) 🔥 HIGH PRIORITY  
 Advanced features: Tiered membership, rewards catalog, transaction tracking
 
-### Phase 3 - Advanced (Bulan 7-9) 📊 MEDIUM PRIORITY
+### Phase 3 - Advanced (Months 7-9) 📊 MEDIUM PRIORITY
 Business intelligence: Analytics, partner integration, mobile enhancement
 
 ## 📊 Key Features Overview
 
-| Fitur | Phase | Priority | Status |
-|-------|-------|----------|---------|
+| Feature | Phase | Priority | Status |
+|---------|-------|----------|---------|
 | User Management & Registration | 1 | Critical | 📋 Planned |
 | Point Earning System | 1 | Critical | 📋 Planned |
 | Point Redemption System | 1 | Critical | 📋 Planned |
@@ -92,27 +92,27 @@ Business intelligence: Analytics, partner integration, mobile enhancement
 | Partner/Merchant Integration | 3 | Medium | 📋 Planned |
 | Mobile Application Support | 3 | Medium | 📋 Planned |
 
-## 🛠️ Untuk Developer
+## 🛠️ For Developers
 
 ### Before Starting Development:
 - [ ] Review complete BRD document
-- [ ] Study UI/UX design specifications dan wireframes
-- [ ] Understand design system dan component library requirements
-- [ ] Review business objectives dan success metrics
-- [ ] Check acceptance criteria untuk fitur yang akan dikerjakan
+- [ ] Study UI/UX design specifications and wireframes
+- [ ] Understand design system and component library requirements
+- [ ] Review business objectives and success metrics
+- [ ] Check acceptance criteria for features to be worked on
 - [ ] Follow implementation roadmap guidelines
 - [ ] **Read [Contributing Guidelines](../CONTRIBUTING.md) for development workflow**
 - [ ] **Setup development environment using [DevOps Guide](../framework/guidelines/devops-deployment-guide.md)**
 
 ### Development Guidelines:
-- Implementasi sesuai priority phases (Phase 1 → Phase 2 → Phase 3)
-- Follow UI/UX design specifications untuk consistent user experience
-- Use design system components untuk maintain visual consistency
+- Implement according to priority phases (Phase 1 → Phase 2 → Phase 3)
+- Follow UI/UX design specifications for consistent user experience
+- Use design system components to maintain visual consistency
 - Ensure mobile-first responsive implementation
-- Gunakan acceptance criteria sebagai testing requirements
-- Maintain scalability untuk 100,000 concurrent users
-- Ensure real-time processing dengan latency < 3 seconds
-- Implement proper security dan compliance measures
+- Use acceptance criteria as testing requirements
+- Maintain scalability for 100,000 concurrent users
+- Ensure real-time processing with latency < 3 seconds
+- Implement proper security and compliance measures
 - Follow accessibility standards (WCAG 2.1 AA compliance)
 - **Adhere to [Development Standards](../framework/guidelines/development-standards.md)**
 - **Follow [API Design Guidelines](../framework/guidelines/api-design-standards.md)**
@@ -129,17 +129,17 @@ Business intelligence: Analytics, partner integration, mobile enhancement
 
 ## 📞 Contact & Support
 
-Untuk pertanyaan mengenai business requirements atau clarification, silakan kontak:
+For questions regarding business requirements or clarifications, please contact:
 - **Product Owner:** [To be assigned]
 - **Technical Lead:** [To be assigned]
 - **Project Manager:** [To be assigned]
 
 ## 🔄 Document Updates
 
-Dokumen ini akan diupdate secara berkala sesuai dengan perkembangan project. Selalu check versi terbaru sebelum memulai development.
+This document will be updated periodically according to project development. Always check the latest version before starting development.
 
 **Version History:**
-- v1.0 (Dec 2024) - Initial BRD dan implementation roadmap
+- v1.0 (Dec 2024) - Initial BRD and implementation roadmap
 
 ---
 
