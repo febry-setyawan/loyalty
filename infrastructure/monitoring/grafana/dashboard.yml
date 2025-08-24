@@ -1,0 +1,9 @@
+apiVersion: 1
+
+providers:
+  - name: 'loyalty-dashboards'
+    orgId: 1
+    folder: 'Loyalty System'
+    type: file
+    options:
+      path: /etc/grafana/provisioning/dashboards
