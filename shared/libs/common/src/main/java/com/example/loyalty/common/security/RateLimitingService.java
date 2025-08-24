@@ -29,26 +29,31 @@ public class RateLimitingService {
      */
     public boolean isAllowed(String identifier, int maxRequests, Duration duration) {
         String key = "rate_limit:" + identifier;
-        
         try {
-            // Get current count
-            String currentCountStr = redisTemplate.opsForValue().get(key);
-            int currentCount = currentCountStr != null ? Integer.parseInt(currentCountStr) : 0;
-            
-            if (currentCount >= maxRequests) {
-                return false;
-            }
-            
-            // Increment counter
-            Long newCount = redisTemplate.opsForValue().increment(key);
-            
-            // Set expiration if this is the first request in the window
-            if (newCount == 1) {
-                redisTemplate.expire(key, duration.toSeconds(), TimeUnit.SECONDS);
-            }
-            
-            return newCount <= maxRequests;
-            
+            // Lua script for atomic increment and check
+            String luaScript =
+                    "local current = redis.call('incr', KEYS[1])\n" +
+                    "if tonumber(current) == 1 then\n" +
+                    "  redis.call('expire', KEYS[1], ARGV[2])\n" +
+                    "end\n" +
+                    "if tonumber(current) > tonumber(ARGV[1]) then\n" +
+                    "  return 0\n" +
+                    "else\n" +
+                    "  return 1\n" +
+                    "end";
+
+            DefaultRedisScript<Long> redisScript = new DefaultRedisScript<>();
+            redisScript.setScriptText(luaScript);
+            redisScript.setResultType(Long.class);
+
+            Long allowed = redisTemplate.execute(
+                    redisScript,
+                    Collections.singletonList(key),
+                    String.valueOf(maxRequests),
+                    String.valueOf(duration.getSeconds())
+            );
+
+            return allowed != null && allowed == 1L;
         } catch (Exception e) {
             // If Redis is unavailable, allow the request (fail open for availability)
             // But log the error for monitoring
