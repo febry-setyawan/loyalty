@@ -794,20 +794,27 @@ Regular Usage → Points Accumulate → Tier Threshold Reached → Upgrade Notif
 
 ### CSS Framework Recommendation
 ```scss
-// Use Tailwind CSS + Custom CSS Variables
-// Benefits: Utility-first, responsive, customizable
+// Use Material UI with custom theming
+// Benefits: Component library, accessibility, TypeScript support
 
-@tailwind base;
-@tailwind components;
-@tailwind utilities;
+// Material UI theme configuration
+import { createTheme } from '@mui/material/styles';
 
-// Custom loyalty theme
-:root {
-  // Color palette defined above
-}
+const loyaltyTheme = createTheme({
+  palette: {
+    primary: {
+      main: '#1E40AF',
+    },
+    secondary: {
+      main: '#F59E0B',
+    },
+  },
+  typography: {
+    fontFamily: '"Inter", system-ui, sans-serif',
+  },
+});
 
-// Component styles
-@layer components {
+// Custom component styles using Material UI's styling system
   .btn-loyalty {
     @apply px-6 py-3 rounded-lg font-semibold transition-all;
   }

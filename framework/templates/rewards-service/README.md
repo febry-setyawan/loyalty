@@ -3,7 +3,7 @@
 **⚠️ IMPORTANT: This service follows the [STANDARD SPRING BOOT TEMPLATE](../SPRING-BOOT-STANDARD-TEMPLATE.md)**  
 **For new services, use the standard template and replace placeholders with rewards-service specifics.**
 
-**Technology Stack:** Java Spring Boot, JDK 17, Maven, PostgreSQL, Redis, S3  
+**Technology Stack:** Java Spring Boot, JDK 17, Maven, PostgreSQL, Redis, MinIO/S3  
 **Architecture Pattern:** Clean Architecture (Domain-Driven Design)  
 **Purpose:** Catalog management, inventory, tier-based availability  
 
@@ -58,7 +58,7 @@ rewards-service/
 │   │   │   │       ├── CategoryEntity.java
 │   │   │   │       └── InventoryEntity.java
 │   │   │   ├── external/             # External service integrations
-│   │   │   │   ├── S3ImageService.java
+│   │   │   │   ├── StorageService.java        # MinIO/S3 image storage
 │   │   │   │   ├── EmailNotificationService.java
 │   │   │   │   └── UserTierService.java
 │   │   │   ├── messaging/            # Message queue handling

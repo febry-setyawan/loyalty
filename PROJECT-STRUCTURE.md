@@ -233,10 +233,14 @@ loyalty-system/
 │   └── compliance/                     # Compliance documentation
 │
 ├── 📱 mobile/                          # Mobile Application (Future)
-│   ├── react-native/                  # React Native app
-│   ├── ios/                           # iOS specific code
-│   ├── android/                       # Android specific code
-│   └── shared/                        # Shared mobile code
+│   ├── flutter/                        # Flutter app
+│   ├── lib/                            # Flutter source code
+│   │   ├── core/                       # Core utilities, constants
+│   │   ├── features/                   # Feature modules
+│   │   └── shared/                     # Shared components
+│   ├── ios/                            # iOS platform files
+│   ├── android/                        # Android platform files  
+│   └── test/                           # Flutter tests
 │
 ├── 🌐 web/                             # Web Application
 │   ├── customer-portal/               # Customer facing web app
