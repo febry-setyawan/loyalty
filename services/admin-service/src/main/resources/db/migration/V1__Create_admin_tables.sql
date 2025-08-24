@@ -107,6 +107,15 @@ CREATE INDEX idx_system_metrics_name_recorded ON system_metrics(metric_name, rec
 CREATE INDEX idx_admin_sessions_user_id ON admin_sessions(user_id);
 CREATE INDEX idx_admin_sessions_expires_at ON admin_sessions(expires_at);
 
+-- Trigger function to update updated_at automatically
+CREATE OR REPLACE FUNCTION update_updated_at_column()
+RETURNS TRIGGER AS $$
+BEGIN
+    NEW.updated_at = CURRENT_TIMESTAMP;
+    RETURN NEW;
+END;
+$$ language 'plpgsql';
+
 -- Trigger to update updated_at automatically
 CREATE TRIGGER update_admin_users_updated_at BEFORE UPDATE ON admin_users 
     FOR EACH ROW EXECUTE FUNCTION update_updated_at_column();

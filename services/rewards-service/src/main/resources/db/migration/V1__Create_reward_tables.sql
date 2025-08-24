@@ -96,6 +96,15 @@ CREATE INDEX idx_reward_redemptions_status ON reward_redemptions(status);
 CREATE INDEX idx_reward_redemptions_redeemed_at ON reward_redemptions(redeemed_at);
 CREATE INDEX idx_reward_inventory_available_count ON reward_inventory(available_count);
 
+-- Trigger function to update updated_at automatically
+CREATE OR REPLACE FUNCTION update_updated_at_column()
+RETURNS TRIGGER AS $$
+BEGIN
+    NEW.updated_at = CURRENT_TIMESTAMP;
+    RETURN NEW;
+END;
+$$ language 'plpgsql';
+
 -- Trigger to update updated_at automatically
 CREATE TRIGGER update_rewards_catalog_updated_at BEFORE UPDATE ON rewards_catalog 
     FOR EACH ROW EXECUTE FUNCTION update_updated_at_column();

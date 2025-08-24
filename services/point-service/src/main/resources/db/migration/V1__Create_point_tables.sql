@@ -73,6 +73,15 @@ CREATE INDEX idx_points_expiry_expiry_date ON points_expiry(expiry_date);
 CREATE INDEX idx_points_expiry_status ON points_expiry(status);
 CREATE INDEX idx_earning_rules_active ON earning_rules(is_active, start_date, end_date);
 
+-- Trigger function to update updated_at automatically
+CREATE OR REPLACE FUNCTION update_updated_at_column()
+RETURNS TRIGGER AS $$
+BEGIN
+    NEW.updated_at = CURRENT_TIMESTAMP;
+    RETURN NEW;
+END;
+$$ language 'plpgsql';
+
 -- Trigger to update updated_at automatically
 CREATE TRIGGER update_points_balance_updated_at BEFORE UPDATE ON points_balance 
     FOR EACH ROW EXECUTE FUNCTION update_updated_at_column();
