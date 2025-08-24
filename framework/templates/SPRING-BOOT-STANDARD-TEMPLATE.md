@@ -153,6 +153,13 @@
     </properties>
 
     <dependencies>
+        <!-- Loyalty Common Library -->
+        <dependency>
+            <groupId>com.example.loyalty</groupId>
+            <artifactId>loyalty-common</artifactId>
+            <version>1.0.0-SNAPSHOT</version>
+        </dependency>
+
         <!-- Spring Boot Core Starters -->
         <dependency>
             <groupId>org.springframework.boot</groupId>
