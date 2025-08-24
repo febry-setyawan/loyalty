@@ -1,6 +1,5 @@
 # Docker Compose for Loyalty System Development Environment
 # Based on framework/cicd/pipeline-templates.md
-version: '3.8'
 
 services:
   # ============================================================================
