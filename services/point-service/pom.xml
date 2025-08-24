@@ -154,21 +154,21 @@
                     <format>ALL</format>
                     <outputDirectory>${project.build.directory}</outputDirectory>
                     <failBuildOnCVSS>7</failBuildOnCVSS>
-                    <!-- Disable NVD feeds to avoid API authentication issues -->
-                    <nvdApiDatafeed>false</nvdApiDatafeed>
-                    <nvdDatafeedEnabled>false</nvdDatafeedEnabled>
-                    <!-- Disable slow analyzers for CI/CD -->
+                    <!-- Configure NVD API with authentication -->
+                    <nvdApiKey>${env.NVD_API_KEY}</nvdApiKey>
+                    <nvdApiDatafeed>true</nvdApiDatafeed>
+                    <nvdDatafeedEnabled>true</nvdDatafeedEnabled>
+                    <!-- Optimize analyzers for CI/CD -->
                     <centralAnalyzerEnabled>false</centralAnalyzerEnabled>
                     <nexusAnalyzerEnabled>false</nexusAnalyzerEnabled>
-                    <!-- Use only fast local analyzers -->
                     <retireJsAnalyzerEnabled>false</retireJsAnalyzerEnabled>
                     <ossIndexAnalyzerEnabled>false</ossIndexAnalyzerEnabled>
                     <jarAnalyzerEnabled>true</jarAnalyzerEnabled>
                     <archiveAnalyzerEnabled>true</archiveAnalyzerEnabled>
-                    <!-- Fast settings for CI/CD -->
-                    <nvdMaxRetryCount>0</nvdMaxRetryCount>
-                    <connectionTimeout>10000</connectionTimeout>
-                    <readTimeout>10000</readTimeout>
+                    <!-- Optimized settings for CI/CD -->
+                    <nvdMaxRetryCount>3</nvdMaxRetryCount>
+                    <connectionTimeout>30000</connectionTimeout>
+                    <readTimeout>30000</readTimeout>
                     <skipOnError>true</skipOnError>
                 </configuration>
             </plugin>

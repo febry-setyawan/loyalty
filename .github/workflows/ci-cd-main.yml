@@ -137,6 +137,8 @@ jobs:
         run: |
           cd shared/libs/common
           mvn org.owasp:dependency-check-maven:check
+        env:
+          NVD_API_KEY: ${{ secrets.NVD_API_KEY }}
         continue-on-error: true
 
       - name: Upload security scan results
@@ -169,6 +171,8 @@ jobs:
         run: |
           cd services/${{ matrix.service }}
           mvn org.owasp:dependency-check-maven:check
+        env:
+          NVD_API_KEY: ${{ secrets.NVD_API_KEY }}
         continue-on-error: true
 
       - name: Upload security scan results
