@@ -17,6 +17,28 @@ Selamat datang di dokumentasi sistem loyalty! Folder ini berisi semua dokumentas
   - Technical recommendations dan checklist
   - Critical success factors dan monitoring points
 
+### 🎨 UI/UX Design Documents
+- **[UI/UX Design Specification](./ui-ux-design-specification.md)**
+  - Complete mockup designs untuk customer mobile app dan admin dashboard
+  - Design system foundation dengan color palette, typography, dan spacing
+  - User journey flows dan customer experience optimization
+  - Mobile-first responsive design guidelines
+  - Accessibility standards dan compliance requirements
+
+- **[Wireframes & User Flows](./wireframes-user-flows.md)**
+  - Detailed wireframes untuk setiap screen dan interaction
+  - Critical user flows: registration, point earning, reward redemption
+  - State management specifications (loading, error, empty states)
+  - Admin dashboard wireframes dan management interfaces
+  - Interactive flow documentation dengan clear navigation paths
+
+- **[Design System & Component Library](./design-system-components.md)**
+  - Complete component specifications untuk frontend development
+  - CSS/SCSS implementation guidelines dan best practices
+  - React component examples dengan props dan usage patterns
+  - Mobile-specific components dan touch-friendly interactions
+  - Accessibility implementation guidelines (WCAG 2.1 AA compliance)
+
 ### 🏗️ Technical Documents
 - **[Technical Design Architecture](./technical-design-architecture.md)**
   - Complete system architecture dan technology specifications
@@ -74,16 +96,22 @@ Business intelligence: Analytics, partner integration, mobile enhancement
 
 ### Before Starting Development:
 - [ ] Review complete BRD document
-- [ ] Understand business objectives dan success metrics
+- [ ] Study UI/UX design specifications dan wireframes
+- [ ] Understand design system dan component library requirements
+- [ ] Review business objectives dan success metrics
 - [ ] Check acceptance criteria untuk fitur yang akan dikerjakan
 - [ ] Follow implementation roadmap guidelines
 
 ### Development Guidelines:
-- Implementasi sesuai priority phases
+- Implementasi sesuai priority phases (Phase 1 → Phase 2 → Phase 3)
+- Follow UI/UX design specifications untuk consistent user experience
+- Use design system components untuk maintain visual consistency
+- Ensure mobile-first responsive implementation
 - Gunakan acceptance criteria sebagai testing requirements
 - Maintain scalability untuk 100,000 concurrent users
 - Ensure real-time processing dengan latency < 3 seconds
 - Implement proper security dan compliance measures
+- Follow accessibility standards (WCAG 2.1 AA compliance)
 
 ## 📞 Contact & Support
 
