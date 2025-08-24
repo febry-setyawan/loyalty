@@ -1,12 +1,29 @@
-FROM node:18-alpine
+# Multi-stage build for Spring Boot application
+FROM maven:3.9-eclipse-temurin-17 AS builder
 
 WORKDIR /app
 
-# Copy source code
-COPY . .
+# Copy pom.xml and download dependencies
+COPY pom.xml .
+RUN mvn dependency:go-offline
+
+# Copy source code and build application
+COPY src ./src
+RUN mvn clean package -DskipTests
+
+# Runtime stage with Red Hat UBI minimal
+FROM registry.redhat.io/ubi9-minimal:9.6-1754000177
+
+WORKDIR /app
+
+# Install Java 21 OpenJDK headless
+RUN microdnf install -y java-21-openjdk-headless && microdnf clean all
+
+# Copy built jar from builder stage
+COPY --from=builder /app/target/*.jar app.jar
 
 # Expose port
-EXPOSE 8080
+EXPOSE 8082
 
-# Start application
-CMD ["node", "server.js"]
+# Start Spring Boot application
+CMD ["java", "-jar", "app.jar"]
