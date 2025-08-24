@@ -7,11 +7,11 @@ WORKDIR /app
 COPY pom.xml ./
 
 # Download dependencies for better layer caching  
-RUN mvn dependency:go-offline -B -Dmaven.wagon.http.ssl.insecure=true -Dmaven.wagon.http.ssl.allowall=true || true
+RUN mvn dependency:go-offline -B || true
 
 # Copy source code and build
 COPY src/ ./src/
-RUN mvn clean package -DskipTests -B -Dmaven.wagon.http.ssl.insecure=true -Dmaven.wagon.http.ssl.allowall=true
+RUN mvn clean package -DskipTests -B
 
 # Production runtime with minimal base image  
 FROM registry.access.redhat.com/ubi9/openjdk-17-runtime:1.18
