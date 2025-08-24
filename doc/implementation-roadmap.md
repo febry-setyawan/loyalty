@@ -97,15 +97,19 @@ Dokumen ini merupakan quick reference untuk implementation roadmap sistem loyalt
 - **Framework:** Java Spring Boot + JDK 17 + Maven (standardized)
 - **GroupId:** com.example.loyalty untuk semua microservices
 - **Database:** PostgreSQL (primary), Redis (cache)
-- **Message Queue:** RabbitMQ atau Apache Kafka
+- **Message Broker:** Apache Kafka
+- **API Gateway:** Kong OpenSource
 - **API:** RESTful dengan OpenAPI documentation
 
 ### Frontend  
-- **Web:** React.js atau Vue.js dengan responsive design
-- **Mobile:** React Native atau Flutter untuk cross-platform
-- **Admin Dashboard:** React Admin atau similar
+- **Web:** ReactJS + TypeScript + Material UI dengan responsive design
+- **Mobile:** Flutter untuk cross-platform development
+- **Admin Dashboard:** ReactJS + TypeScript + Material UI
 
 ### Infrastructure
+- **Development Environment:** Docker + Docker Compose
+- **Production Environment:** Kubernetes
+- **Storage:** Development (MinIO), Production (S3)
 - **Cloud:** AWS, GCP, atau Azure dengan auto-scaling
 - **Monitoring:** Prometheus + Grafana
 - **Security:** OAuth 2.0, JWT tokens, API rate limiting

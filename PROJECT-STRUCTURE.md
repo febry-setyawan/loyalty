@@ -380,18 +380,19 @@ loyalty-system/
 - **Package Structure:** com.example.loyalty.{service-name} (standardized)
 - **GroupId:** com.example.loyalty for all microservices
 - **Databases:** PostgreSQL, Redis
-- **Message Queue:** RabbitMQ/Apache Kafka
-- **API Gateway:** Kong/AWS API Gateway
+- **Message Broker:** Apache Kafka
+- **API Gateway:** Kong OpenSource
 
 ### Frontend Technologies
-- **Web Application:** React.js, Redux/Context API
-- **Admin Dashboard:** React.js with admin components
-- **Mobile App:** React Native (Phase 3)
-- **Styling:** Tailwind CSS/Material-UI
+- **Web Application:** ReactJS + TypeScript + Material UI
+- **Admin Dashboard:** ReactJS + TypeScript + Material UI  
+- **Mobile App:** Flutter
+- **State Management:** React Context API/Redux Toolkit (Web), Riverpod/Provider (Flutter)
 
 ### Infrastructure & DevOps
-- **Containerization:** Docker, Docker Compose
-- **Orchestration:** Kubernetes
+- **Development Environment:** Docker + Docker Compose
+- **Production Environment:** Kubernetes
+- **Storage:** Development (MinIO), Production (S3)
 - **CI/CD:** GitHub Actions/GitLab CI
 - **Infrastructure:** Terraform
 - **Monitoring:** Prometheus, Grafana, ELK Stack
