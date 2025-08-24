@@ -1,12 +1,15 @@
 # Admin Service Template - Java Spring Boot
 
+**⚠️ IMPORTANT: This service follows the [STANDARD SPRING BOOT TEMPLATE](../SPRING-BOOT-STANDARD-TEMPLATE.md)**  
+**For new services, use the standard template and replace placeholders with admin-service specifics.**
+
 **Technology Stack:** Java Spring Boot, JDK 17, Maven, PostgreSQL, React Frontend  
 **Architecture Pattern:** Clean Architecture (Domain-Driven Design) + Frontend Integration  
 **Purpose:** Administrative dashboard, reporting, system configuration  
 
 ---
 
-## 📁 Project Structure
+## 📁 **STANDARDIZED** Project Structure
 
 ```
 admin-service/

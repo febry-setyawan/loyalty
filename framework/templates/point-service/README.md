@@ -8,95 +8,109 @@
 
 ## 📁 Project Structure
 
+# Point Service Template - Java Spring Boot
+
+**⚠️ IMPORTANT: This service follows the [STANDARD SPRING BOOT TEMPLATE](../SPRING-BOOT-STANDARD-TEMPLATE.md)**  
+**For new services, use the standard template and replace placeholders with point-service specifics.**
+
+**Technology Stack:** Java 17, Spring Boot 3.2.0, PostgreSQL, Redis, Apache Kafka  
+**Architecture Pattern:** Clean Architecture (Domain-Driven Design)  
+**Purpose:** Point earning, redemption, balance management, transaction processing  
+
+---
+
+## 📁 **STANDARDIZED** Project Structure
+
 ```
 point-service/
 ├── src/
 │   ├── main/
 │   │   ├── java/
-│   │   │   └── com/loyalty/points/
-│   │   │       ├── domain/              # Business Logic Layer
-│   │   │       │   ├── entities/        # Domain entities
+│   │   │   └── com/example/loyalty/points/        # ✅ STANDARDIZED PACKAGE
+│   │   │       ├── domain/                        # Business Logic Layer
+│   │   │       │   ├── entities/                 # Domain entities
 │   │   │       │   │   ├── PointTransaction.java
 │   │   │       │   │   ├── PointBalance.java
 │   │   │       │   │   ├── EarningRule.java
 │   │   │       │   │   └── RedemptionRule.java
-│   │   │       │   ├── repositories/    # Repository interfaces
+│   │   │       │   ├── repositories/             # Repository interfaces
 │   │   │       │   │   ├── PointTransactionRepository.java
 │   │   │       │   │   ├── PointBalanceRepository.java
 │   │   │       │   │   └── EarningRuleRepository.java
-│   │   │       │   ├── services/       # Domain services
+│   │   │       │   ├── services/                 # Domain services
 │   │   │       │   │   ├── PointCalculationService.java
 │   │   │       │   │   ├── FraudDetectionService.java
 │   │   │       │   │   └── BalanceService.java
-│   │   │       │   └── valueobjects/   # Value objects
+│   │   │       │   └── valueobjects/             # Value objects
 │   │   │       │       ├── Points.java
 │   │   │       │       ├── Money.java
 │   │   │       │       └── TransactionType.java
 │   │   │       │
-│   │   │       ├── application/         # Application Logic Layer
-│   │   │       │   ├── usecases/       # Use case implementations
+│   │   │       ├── application/                  # Application Logic Layer
+│   │   │       │   ├── usecases/                # Use case implementations
 │   │   │       │   │   ├── EarnPointsUseCase.java
 │   │   │       │   │   ├── RedeemPointsUseCase.java
 │   │   │       │   │   ├── GetBalanceUseCase.java
 │   │   │       │   │   └── GetTransactionHistoryUseCase.java
-│   │   │       │   ├── dto/            # Data Transfer Objects
+│   │   │       │   ├── dto/                     # Data Transfer Objects
 │   │   │       │   │   ├── EarnPointsDTO.java
 │   │   │       │   │   ├── RedeemPointsDTO.java
 │   │   │       │   │   └── BalanceDTO.java
-│   │   │       │   └── validators/     # Input validation
+│   │   │       │   └── validators/              # Input validation
 │   │   │       │       ├── PointsValidator.java
 │   │   │       │       └── TransactionValidator.java
 │   │   │       │
-│   │   │       ├── infrastructure/      # Infrastructure Layer
-│   │   │       │   ├── persistence/    # Database implementations
+│   │   │       ├── infrastructure/               # Infrastructure Layer
+│   │   │       │   ├── persistence/             # Database implementations
 │   │   │       │   │   ├── repositories/
 │   │   │       │   │   │   ├── JpaPointTransactionRepository.java
 │   │   │       │   │   │   ├── RedisPointBalanceRepository.java
 │   │   │       │   │   │   └── JpaEarningRuleRepository.java
-│   │   │       │   │   ├── entities/   # JPA entities
+│   │   │       │   │   ├── entities/            # JPA entities
 │   │   │       │   │   │   ├── PointTransactionEntity.java
 │   │   │       │   │   │   └── EarningRuleEntity.java
-│   │   │       │   │   └── config/     # Database configuration
+│   │   │       │   │   └── config/              # Database configuration
 │   │   │       │   │       ├── DatabaseConfig.java
 │   │   │       │   │       └── RedisConfig.java
-│   │   │       │   ├── messaging/      # Message handling
+│   │   │       │   ├── messaging/               # Message handling
 │   │   │       │   │   ├── publishers/
 │   │   │       │   │   │   └── PointEventPublisher.java
 │   │   │       │   │   ├── consumers/
 │   │   │       │   │   │   └── TransactionEventConsumer.java
 │   │   │       │   │   └── config/
 │   │   │       │   │       └── KafkaConfig.java
-│   │   │       │   └── external/       # External integrations
+│   │   │       │   └── external/                # External integrations
 │   │   │       │       ├── NotificationClient.java
 │   │   │       │       └── UserServiceClient.java
 │   │   │       │
-│   │   │       ├── interfaces/          # Interface Layer
-│   │   │       │   ├── web/            # REST controllers
+│   │   │       ├── interfaces/                   # Interface Layer
+│   │   │       │   ├── web/                     # REST controllers
 │   │   │       │   │   ├── controllers/
 │   │   │       │   │   │   ├── PointsController.java
 │   │   │       │   │   │   ├── BalanceController.java
 │   │   │       │   │   │   └── TransactionController.java
-│   │   │       │   │   ├── dto/        # Web DTOs
+│   │   │       │   │   ├── dto/                 # Web DTOs
 │   │   │       │   │   │   ├── EarnPointsRequest.java
 │   │   │       │   │   │   ├── RedeemPointsRequest.java
 │   │   │       │   │   │   └── ApiResponse.java
-│   │   │       │   │   └── config/     # Web configuration
+│   │   │       │   │   └── config/              # Web configuration
 │   │   │       │   │       ├── WebConfig.java
 │   │   │       │   │       └── SecurityConfig.java
-│   │   │       │   └── messaging/      # Message handlers
+│   │   │       │   └── messaging/               # Message handlers
 │   │   │       │       └── EventMessageHandler.java
 │   │   │       │
-│   │   │       ├── shared/              # Shared utilities
-│   │   │       │   ├── exceptions/     # Custom exceptions
-│   │   │       │   ├── utils/          # Utility classes
-│   │   │       │   └── constants/      # Application constants
+│   │   │       ├── shared/                       # Shared utilities
+│   │   │       │   ├── exceptions/              # Custom exceptions
+│   │   │       │   ├── utils/                   # Utility classes
+│   │   │       │   └── constants/               # Application constants
 │   │   │       │
 │   │   │       └── PointServiceApplication.java  # Main application
 │   │   │
 │   │   └── resources/
-│   │       ├── application.yml         # Application configuration
-│   │       ├── application-dev.yml     # Development configuration
-│   │       ├── application-prod.yml    # Production configuration
+│   │       ├── application.yml                   # Application configuration
+│   │       ├── application-dev.yml               # Development configuration
+│   │       ├── application-staging.yml           # Staging configuration
+│   │       ├── application-prod.yml              # Production configuration
 │   │       └── db/
 │   │           └── migration/          # Database migrations
 │   │               ├── V1__Create_point_transaction_table.sql

@@ -31,10 +31,11 @@ loyalty-system/
 │   │   ├── phase-2-enhancement.md        # Phase 2 detailed tasks
 │   │   └── phase-3-advanced.md           # Phase 3 detailed tasks
 │   ├── templates/                        # Service templates
-│   │   ├── user-service/                 # Java Spring Boot service template
-│   │   ├── point-service/                # Java Spring Boot template
-│   │   ├── rewards-service/              # Java Spring Boot service template
-│   │   └── admin-service/                # Java Spring Boot + React template
+│   │   ├── SPRING-BOOT-STANDARD-TEMPLATE.md  # **STANDARD** Spring Boot template
+│   │   ├── user-service/                 # User service implementation
+│   │   ├── point-service/                # Point service implementation
+│   │   ├── rewards-service/              # Rewards service implementation
+│   │   └── admin-service/                # Admin service implementation
 │   ├── diagrams/                         # Sequence diagrams
 │   │   └── sequence-diagrams.md          # Critical business flows
 │   ├── guidelines/                       # Development standards
@@ -45,64 +46,80 @@ loyalty-system/
 │       └── pipeline-templates.md         # GitHub Actions & GitLab CI
 │
 ├── 🔧 services/                           # Microservices Implementation
+│   │                                     # ⚠️ ALL SERVICES FOLLOW STANDARD TEMPLATE:
+│   │                                     # See: framework/templates/SPRING-BOOT-STANDARD-TEMPLATE.md
+│   │
 │   ├── user-service/                     # User management service
-│   │   ├── src/
+│   │   ├── src/main/java/com/example/loyalty/users/
 │   │   │   ├── domain/                   # Business logic layer
-│   │   │   │   ├── entities/             # Domain entities
-│   │   │   │   ├── repositories/         # Repository interfaces
-│   │   │   │   ├── services/             # Domain services
-│   │   │   │   └── value-objects/        # Value objects
-│   │   │   ├── application/              # Application logic layer
-│   │   │   │   ├── use-cases/            # Use case implementations
-│   │   │   │   ├── dto/                  # Data Transfer Objects
-│   │   │   │   └── validators/           # Input validation
+│   │   │   ├── application/              # Application logic layer  
 │   │   │   ├── infrastructure/           # Infrastructure layer
-│   │   │   │   ├── database/             # Database implementations
-│   │   │   │   ├── external/             # External service clients
-│   │   │   │   ├── messaging/            # Message queue handlers
-│   │   │   │   └── config/               # Configuration
-│   │   │   ├── interfaces/               # Interface layer
-│   │   │   │   ├── http/                 # REST controllers
-│   │   │   │   └── messaging/            # Message consumers
+│   │   │   ├── interfaces/               # Interface layer (REST controllers)
 │   │   │   ├── shared/                   # Shared utilities
-│   │   │   └── server.js                 # Application entry point
-│   │   ├── tests/                        # Test files
-│   │   │   ├── unit/                     # Unit tests
-│   │   │   ├── integration/              # Integration tests
-│   │   │   └── e2e/                      # End-to-end tests
+│   │   │   └── UserServiceApplication.java
+│   │   ├── src/main/resources/           # Application resources
+│   │   ├── src/test/java/                # Test files (unit/integration/e2e)
 │   │   ├── docker/                       # Docker configurations
 │   │   ├── docs/                         # Service documentation
 │   │   ├── scripts/                      # Utility scripts
-│   │   ├── pom.xml                      # Maven dependencies and scripts
+│   │   ├── k8s/                         # Kubernetes manifests
+│   │   ├── pom.xml                       # Maven configuration
 │   │   ├── Dockerfile                    # Production Docker image
 │   │   └── README.md                     # Service documentation
 │   │
-│   ├── point-service/                    # Point processing service (Java)
-│   │   ├── src/
-│   │   │   ├── main/java/com/loyalty/points/
-│   │   │   │   ├── domain/               # Business logic layer
-│   │   │   │   ├── application/          # Application logic layer
-│   │   │   │   ├── infrastructure/       # Infrastructure layer
-│   │   │   │   ├── interfaces/           # Interface layer
-│   │   │   │   ├── shared/               # Shared utilities
-│   │   │   │   └── PointServiceApplication.java
-│   │   │   ├── main/resources/           # Application resources
-│   │   │   │   ├── application.yml       # Configuration
-│   │   │   │   └── db/migration/         # Database migrations
-│   │   │   └── test/java/                # Test files
+│   ├── point-service/                    # Point processing service
+│   │   ├── src/main/java/com/example/loyalty/points/
+│   │   │   ├── domain/                   # Business logic layer
+│   │   │   ├── application/              # Application logic layer
+│   │   │   ├── infrastructure/           # Infrastructure layer
+│   │   │   ├── interfaces/               # Interface layer (REST controllers)
+│   │   │   ├── shared/                   # Shared utilities
+│   │   │   └── PointServiceApplication.java
+│   │   ├── src/main/resources/           # Application resources
+│   │   ├── src/test/java/                # Test files (unit/integration/e2e)
 │   │   ├── docker/                       # Docker configurations
 │   │   ├── docs/                         # Service documentation
 │   │   ├── scripts/                      # Utility scripts
+│   │   ├── k8s/                         # Kubernetes manifests
 │   │   ├── pom.xml                       # Maven configuration
 │   │   ├── Dockerfile                    # Production Docker image
 │   │   └── README.md                     # Service documentation
 │   │
 │   ├── rewards-service/                  # Rewards catalog service
-│   │   ├── [Similar structure to user-service]
+│   │   ├── src/main/java/com/example/loyalty/rewards/
+│   │   │   ├── domain/                   # Business logic layer
+│   │   │   ├── application/              # Application logic layer
+│   │   │   ├── infrastructure/           # Infrastructure layer
+│   │   │   ├── interfaces/               # Interface layer (REST controllers)
+│   │   │   ├── shared/                   # Shared utilities
+│   │   │   └── RewardsServiceApplication.java
+│   │   ├── src/main/resources/           # Application resources
+│   │   ├── src/test/java/                # Test files (unit/integration/e2e)
+│   │   ├── docker/                       # Docker configurations
+│   │   ├── docs/                         # Service documentation
+│   │   ├── scripts/                      # Utility scripts
+│   │   ├── k8s/                         # Kubernetes manifests
+│   │   ├── pom.xml                       # Maven configuration
+│   │   ├── Dockerfile                    # Production Docker image
+│   │   └── README.md                     # Service documentation
 │   │
 │   └── admin-service/                    # Admin dashboard service
 │       ├── backend/                      # Java Spring Boot backend
-│       │   └── [Similar structure to user-service]
+│       │   ├── src/main/java/com/example/loyalty/admin/
+│       │   │   ├── domain/               # Business logic layer
+│       │   │   ├── application/          # Application logic layer
+│       │   │   ├── infrastructure/       # Infrastructure layer
+│       │   │   ├── interfaces/           # Interface layer (REST controllers)
+│       │   │   ├── shared/               # Shared utilities
+│       │   │   └── AdminServiceApplication.java
+│       │   ├── src/main/resources/       # Application resources
+│       │   ├── src/test/java/            # Test files (unit/integration/e2e)
+│       │   ├── docker/                   # Docker configurations
+│       │   ├── docs/                     # Service documentation
+│       │   ├── scripts/                  # Utility scripts
+│       │   ├── k8s/                     # Kubernetes manifests
+│       │   ├── pom.xml                   # Maven configuration
+│       │   └── Dockerfile                # Production Docker image
 │       ├── frontend/                     # React frontend
 │       │   ├── src/
 │       │   │   ├── components/           # React components
@@ -276,7 +293,10 @@ loyalty-system/
 
 3. **Choose Your Service Template**
    ```bash
-   # For Java Spring Boot services (All backend services)
+   # ⭐ USE THE STANDARD TEMPLATE FOR ALL NEW SERVICES
+   open framework/templates/SPRING-BOOT-STANDARD-TEMPLATE.md
+   
+   # For reference, existing service implementations:
    open framework/templates/user-service/README.md
    open framework/templates/point-service/README.md
    open framework/templates/rewards-service/README.md
@@ -356,6 +376,8 @@ loyalty-system/
 
 ### Backend Technologies
 - **All Services:** Java Spring Boot + JDK 17 + Maven (standardized)
+- **Standard Template:** [framework/templates/SPRING-BOOT-STANDARD-TEMPLATE.md](framework/templates/SPRING-BOOT-STANDARD-TEMPLATE.md)
+- **Package Structure:** com.example.loyalty.{service-name} (standardized)
 - **GroupId:** com.example.loyalty for all microservices
 - **Databases:** PostgreSQL, Redis
 - **Message Queue:** RabbitMQ/Apache Kafka
