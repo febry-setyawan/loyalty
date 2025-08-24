@@ -135,12 +135,12 @@ point-service/
 
 #### Point Transaction Entity
 ```java
-// src/main/java/com/loyalty/points/domain/entities/PointTransaction.java
-package com.loyalty.points.domain.entities;
+// src/main/java/com/example/loyalty/points/domain/entities/PointTransaction.java
+package com.example.loyalty.points.domain.entities;
 
-import com.loyalty.points.domain.valueobjects.Points;
-import com.loyalty.points.domain.valueobjects.Money;
-import com.loyalty.points.domain.valueobjects.TransactionType;
+import com.example.loyalty.points.domain.valueobjects.Points;
+import com.example.loyalty.points.domain.valueobjects.Money;
+import com.example.loyalty.points.domain.valueobjects.TransactionType;
 import java.time.LocalDateTime;
 import java.util.UUID;
 
@@ -194,7 +194,7 @@ public class PointTransaction {
 #### Points Value Object
 ```java
 // src/main/java/com/loyalty/points/domain/valueobjects/Points.java
-package com.loyalty.points.domain.valueobjects;
+package com.example.loyalty.points.domain.valueobjects;
 
 import java.math.BigDecimal;
 import java.util.Objects;
@@ -256,9 +256,9 @@ public class Points {
 #### Repository Interface
 ```java
 // src/main/java/com/loyalty/points/domain/repositories/PointTransactionRepository.java
-package com.loyalty.points.domain.repositories;
+package com.example.loyalty.points.domain.repositories;
 
-import com.loyalty.points.domain.entities.PointTransaction;
+import com.example.loyalty.points.domain.entities.PointTransaction;
 import java.util.List;
 import java.util.Optional;
 import java.util.UUID;
@@ -279,17 +279,17 @@ public interface PointTransactionRepository {
 #### Earn Points Use Case
 ```java
 // src/main/java/com/loyalty/points/application/usecases/EarnPointsUseCase.java
-package com.loyalty.points.application.usecases;
+package com.example.loyalty.points.application.usecases;
 
-import com.loyalty.points.domain.entities.PointTransaction;
-import com.loyalty.points.domain.repositories.PointTransactionRepository;
-import com.loyalty.points.domain.repositories.PointBalanceRepository;
-import com.loyalty.points.domain.services.PointCalculationService;
-import com.loyalty.points.domain.valueobjects.Points;
-import com.loyalty.points.domain.valueobjects.Money;
-import com.loyalty.points.domain.valueobjects.TransactionType;
-import com.loyalty.points.application.dto.EarnPointsDTO;
-import com.loyalty.points.infrastructure.messaging.publishers.PointEventPublisher;
+import com.example.loyalty.points.domain.entities.PointTransaction;
+import com.example.loyalty.points.domain.repositories.PointTransactionRepository;
+import com.example.loyalty.points.domain.repositories.PointBalanceRepository;
+import com.example.loyalty.points.domain.services.PointCalculationService;
+import com.example.loyalty.points.domain.valueobjects.Points;
+import com.example.loyalty.points.domain.valueobjects.Money;
+import com.example.loyalty.points.domain.valueobjects.TransactionType;
+import com.example.loyalty.points.application.dto.EarnPointsDTO;
+import com.example.loyalty.points.infrastructure.messaging.publishers.PointEventPublisher;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
@@ -370,11 +370,11 @@ public class EarnPointsUseCase {
 #### JPA Point Transaction Repository
 ```java
 // src/main/java/com/loyalty/points/infrastructure/persistence/repositories/JpaPointTransactionRepository.java
-package com.loyalty.points.infrastructure.persistence.repositories;
+package com.example.loyalty.points.infrastructure.persistence.repositories;
 
-import com.loyalty.points.domain.entities.PointTransaction;
-import com.loyalty.points.domain.repositories.PointTransactionRepository;
-import com.loyalty.points.infrastructure.persistence.entities.PointTransactionEntity;
+import com.example.loyalty.points.domain.entities.PointTransaction;
+import com.example.loyalty.points.domain.repositories.PointTransactionRepository;
+import com.example.loyalty.points.infrastructure.persistence.entities.PointTransactionEntity;
 import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.data.jpa.repository.Query;
 import org.springframework.stereotype.Repository;
@@ -466,10 +466,10 @@ interface SpringDataPointTransactionRepository extends JpaRepository<PointTransa
 #### Redis Balance Repository
 ```java
 // src/main/java/com/loyalty/points/infrastructure/persistence/repositories/RedisPointBalanceRepository.java
-package com.loyalty.points.infrastructure.persistence.repositories;
+package com.example.loyalty.points.infrastructure.persistence.repositories;
 
-import com.loyalty.points.domain.repositories.PointBalanceRepository;
-import com.loyalty.points.domain.valueobjects.Points;
+import com.example.loyalty.points.domain.repositories.PointBalanceRepository;
+import com.example.loyalty.points.domain.valueobjects.Points;
 import org.springframework.data.redis.core.RedisTemplate;
 import org.springframework.stereotype.Repository;
 
@@ -539,15 +539,15 @@ public class RedisPointBalanceRepository implements PointBalanceRepository {
 #### Points Controller
 ```java
 // src/main/java/com/loyalty/points/interfaces/web/controllers/PointsController.java
-package com.loyalty.points.interfaces.web.controllers;
+package com.example.loyalty.points.interfaces.web.controllers;
 
-import com.loyalty.points.application.usecases.EarnPointsUseCase;
-import com.loyalty.points.application.usecases.RedeemPointsUseCase;
-import com.loyalty.points.application.dto.EarnPointsDTO;
-import com.loyalty.points.application.dto.RedeemPointsDTO;
-import com.loyalty.points.interfaces.web.dto.EarnPointsRequest;
-import com.loyalty.points.interfaces.web.dto.RedeemPointsRequest;
-import com.loyalty.points.interfaces.web.dto.ApiResponse;
+import com.example.loyalty.points.application.usecases.EarnPointsUseCase;
+import com.example.loyalty.points.application.usecases.RedeemPointsUseCase;
+import com.example.loyalty.points.application.dto.EarnPointsDTO;
+import com.example.loyalty.points.application.dto.RedeemPointsDTO;
+import com.example.loyalty.points.interfaces.web.dto.EarnPointsRequest;
+import com.example.loyalty.points.interfaces.web.dto.RedeemPointsRequest;
+import com.example.loyalty.points.interfaces.web.dto.ApiResponse;
 
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
@@ -631,7 +631,7 @@ public class PointsController {
         <relativePath/>
     </parent>
 
-    <groupId>com.loyalty</groupId>
+    <groupId>com.example.loyalty</groupId>
     <artifactId>point-service</artifactId>
     <version>1.0.0</version>
     <name>Point Service</name>
@@ -835,7 +835,7 @@ management:
 
 logging:
   level:
-    com.loyalty.points: DEBUG
+    com.example.loyalty.points: DEBUG
     org.springframework.security: DEBUG
   pattern:
     console: "%d{yyyy-MM-dd HH:mm:ss} - %msg%n"
@@ -859,16 +859,16 @@ loyalty:
 
 ```java
 // src/test/java/com/loyalty/points/application/usecases/EarnPointsUseCaseTest.java
-package com.loyalty.points.application.usecases;
+package com.example.loyalty.points.application.usecases;
 
-import com.loyalty.points.domain.entities.PointTransaction;
-import com.loyalty.points.domain.repositories.PointTransactionRepository;
-import com.loyalty.points.domain.repositories.PointBalanceRepository;
-import com.loyalty.points.domain.services.PointCalculationService;
-import com.loyalty.points.domain.valueobjects.Points;
-import com.loyalty.points.domain.valueobjects.Money;
-import com.loyalty.points.application.dto.EarnPointsDTO;
-import com.loyalty.points.infrastructure.messaging.publishers.PointEventPublisher;
+import com.example.loyalty.points.domain.entities.PointTransaction;
+import com.example.loyalty.points.domain.repositories.PointTransactionRepository;
+import com.example.loyalty.points.domain.repositories.PointBalanceRepository;
+import com.example.loyalty.points.domain.services.PointCalculationService;
+import com.example.loyalty.points.domain.valueobjects.Points;
+import com.example.loyalty.points.domain.valueobjects.Money;
+import com.example.loyalty.points.application.dto.EarnPointsDTO;
+import com.example.loyalty.points.infrastructure.messaging.publishers.PointEventPublisher;
 
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;

@@ -94,7 +94,8 @@ Dokumen ini merupakan quick reference untuk implementation roadmap sistem loyalt
 ## 🔧 Technical Stack Recommendations
 
 ### Backend
-- **Framework:** Node.js/Express atau Java Spring Boot
+- **Framework:** Java Spring Boot + JDK 17 + Maven (standardized)
+- **GroupId:** com.example.loyalty untuk semua microservices
 - **Database:** PostgreSQL (primary), Redis (cache)
 - **Message Queue:** RabbitMQ atau Apache Kafka
 - **API:** RESTful dengan OpenAPI documentation
