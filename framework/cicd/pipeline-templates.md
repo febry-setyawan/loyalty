@@ -166,14 +166,23 @@ jobs:
         ports:
           - 6379:6379
 
-      rabbitmq:
-        image: rabbitmq:3-management-alpine
+      kafka:
+        image: confluentinc/cp-kafka:latest
         env:
-          RABBITMQ_DEFAULT_USER: test_user
-          RABBITMQ_DEFAULT_PASS: test_password
+          KAFKA_BROKER_ID: 1
+          KAFKA_ZOOKEEPER_CONNECT: zookeeper:2181
+          KAFKA_ADVERTISED_LISTENERS: PLAINTEXT://localhost:9092
+          KAFKA_OFFSETS_TOPIC_REPLICATION_FACTOR: 1
         ports:
-          - 5672:5672
-          - 15672:15672
+          - 9092:9092
+          
+      zookeeper:
+        image: confluentinc/cp-zookeeper:latest
+        env:
+          ZOOKEEPER_CLIENT_PORT: 2181
+          ZOOKEEPER_TICK_TIME: 2000
+        ports:
+          - 2181:2181
 
     steps:
       - name: Checkout code

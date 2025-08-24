@@ -22,7 +22,7 @@
 - [ ] Configure Docker development environment
 - [ ] Setup database (PostgreSQL) with initial schema
 - [ ] Configure Redis for caching
-- [ ] Setup message queue (RabbitMQ/Kafka)
+- [ ] Setup message queue (Apache Kafka)
 - [ ] Create development environment documentation
 
 **Acceptance Criteria:**

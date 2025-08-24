@@ -215,9 +215,9 @@ Phase 3 introduces advanced features that differentiate the loyalty system in th
      - Push notifications for important events
      - Biometric authentication support
    - **Technical Tasks:**
-     - Set up React Native development environment
-     - Implement navigation and routing
-     - Create mobile UI components
+     - Set up Flutter development environment
+     - Implement navigation and routing with Flutter
+     - Create mobile UI components using Material Design
      - Add offline data synchronization
      - Implement push notification system
      - Add biometric authentication

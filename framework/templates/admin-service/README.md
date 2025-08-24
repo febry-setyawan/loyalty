@@ -3,7 +3,7 @@
 **⚠️ IMPORTANT: This service follows the [STANDARD SPRING BOOT TEMPLATE](../SPRING-BOOT-STANDARD-TEMPLATE.md)**  
 **For new services, use the standard template and replace placeholders with admin-service specifics.**
 
-**Technology Stack:** Java Spring Boot, JDK 17, Maven, PostgreSQL, React Frontend  
+**Technology Stack:** Java Spring Boot, JDK 17, Maven, PostgreSQL, ReactJS + TypeScript + Material UI Frontend  
 **Architecture Pattern:** Clean Architecture (Domain-Driven Design) + Frontend Integration  
 **Purpose:** Administrative dashboard, reporting, system configuration  
 
@@ -115,7 +115,7 @@ admin-service/
 │   ├── .gitignore
 │   └── README.md
 │
-├── frontend/                             # React frontend
+├── frontend/                             # ReactJS + TypeScript + Material UI
 │   ├── src/
 │   │   ├── components/                   # React components
 │   │   │   ├── common/                   # Common components
@@ -418,17 +418,22 @@ public class AdminUser {
     "react-dom": "^18.2.0",
     "react-router-dom": "^6.8.0",
     "axios": "^1.3.0",
-    "antd": "^5.2.0",
-    "@ant-design/icons": "^5.0.1",
+    "@mui/material": "^5.14.0",
+    "@mui/icons-material": "^5.14.0",
+    "@emotion/react": "^11.11.0",
+    "@emotion/styled": "^11.11.0",
     "recharts": "^2.5.0",
     "react-query": "^3.39.0",
-    "moment": "^2.29.0"
+    "typescript": "^5.0.0"
   },
   "devDependencies": {
+    "@types/react": "^18.2.0",
+    "@types/react-dom": "^18.2.0", 
     "@vitejs/plugin-react": "^3.1.0",
     "vite": "^4.1.0",
     "eslint": "^8.35.0",
-    "eslint-plugin-react": "^7.32.0"
+    "eslint-plugin-react": "^7.32.0",
+    "typescript": "^5.0.0"
   },
   "scripts": {
     "dev": "vite",
@@ -493,8 +498,8 @@ public class DashboardController {
 - [ ] Configure application profiles (dev, prod)
 
 ### Frontend Setup Tasks
-- [ ] Initialize React project with Vite
-- [ ] Setup Ant Design UI components
+- [ ] Initialize React project with TypeScript and Vite
+- [ ] Setup Material UI theme and components
 - [ ] Configure API client with Axios
 - [ ] Setup React Query for data fetching
 - [ ] Configure routing with React Router
@@ -520,7 +525,7 @@ public class DashboardController {
 
 ---
 
-**Technology:** Java Spring Boot + JDK 17 + Maven (Backend) + React (Frontend)  
+**Technology:** Java Spring Boot + JDK 17 + Maven (Backend) + ReactJS + TypeScript + Material UI (Frontend)  
 **GroupId:** com.example.loyalty  
 **ArtifactId:** admin-service  
 **Version:** 1.0.0

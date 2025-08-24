@@ -36,7 +36,7 @@ Dokumen ini menyajikan desain arsitektur teknis lengkap untuk sistem loyalty ber
                            │
 ┌─────────────────────────────────────────────────────────────────┐
 │                      API GATEWAY                                │
-│              (Kong/AWS API Gateway)                             │
+│                Kong OpenSource                                 │
 │     • Rate Limiting  • Authentication  • Load Balancing        │
 └─────────────────────────────────────────────────────────────────┘
                            │
@@ -53,7 +53,7 @@ Dokumen ini menyajikan desain arsitektur teknis lengkap untuk sistem loyalty ber
                            │
 ┌─────────────────────────────────────────────────────────────────┐
 │                    MESSAGING LAYER                              │
-│                (RabbitMQ/Apache Kafka)                         │
+│                    Apache Kafka                                │
 │   • Event Streaming  • Async Processing  • Notifications      │
 └─────────────────────────────────────────────────────────────────┘
                            │
@@ -61,7 +61,7 @@ Dokumen ini menyajikan desain arsitektur teknis lengkap untuk sistem loyalty ber
 │                     DATA LAYER                                  │
 ├─────────────────┬─────────────────┬─────────────────────────────┤
 │   PostgreSQL    │      Redis      │    File Storage             │
-│   (Primary DB)  │     (Cache)     │    (AWS S3)                 │
+│   (Primary DB)  │     (Cache)     │    (MinIO/S3)               │
 │                 │                 │                             │
 │• User Data      │• Session Data   │• Images/Documents           │
 │• Transactions   │• Point Cache    │• Reports                    │
@@ -88,7 +88,7 @@ Dokumen ini menyajikan desain arsitektur teknis lengkap untuk sistem loyalty ber
 #### 3. Rewards Service
 - **Responsibility:** Catalog management, inventory, tier-based availability
 - **Technology:** Java Spring Boot + JDK 17 + Maven dengan image handling
-- **Database:** PostgreSQL (catalog) + S3 (images)
+- **Database:** PostgreSQL (catalog) + MinIO/S3 (images)
 - **APIs:** Catalog CRUD, search, filter, availability check
 - **Maven:** groupId: com.example.loyalty, artifactId: rewards-service
 
@@ -687,7 +687,7 @@ Delivery Requirements:
 
 ### API Gateway Configuration
 
-#### Kong Gateway Setup
+#### Kong OpenSource Gateway Setup
 ```yaml
 Plugins:
   - Rate Limiting: Per user/IP limits
@@ -750,7 +750,7 @@ Cache Layers:
 #### Asynchronous Processing
 ```yaml
 Event-Driven Architecture:
-  Message Broker: RabbitMQ with high availability
+  Message Broker: Apache Kafka with high availability
   
   Event Types:
     - user.registered
@@ -831,7 +831,8 @@ Tool Stack:
 Local Development:
   Database: PostgreSQL in Docker
   Cache: Redis in Docker
-  Message Queue: RabbitMQ in Docker
+  Message Queue: Apache Kafka in Docker
+  Storage: MinIO in Docker
   
   Service Ports:
     - User Service: 3001
@@ -917,8 +918,8 @@ Production Configuration:
 - [ ] Point Service: Earning, redemption, balance management  
 - [ ] Rewards Service: Catalog management, inventory tracking
 - [ ] Admin Service: Dashboard, user management, reporting
-- [ ] API Gateway: Rate limiting, authentication, routing
-- [ ] Message Queue: Event processing, notifications
+- [ ] API Gateway: Kong OpenSource rate limiting, authentication, routing
+- [ ] Message Queue: Apache Kafka event processing, notifications
 
 #### Security Implementation
 - [ ] JWT authentication system

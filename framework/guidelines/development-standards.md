@@ -70,7 +70,7 @@
 
 #### Asynchronous Communication
 - **Use for:** Event notifications, background processing
-- **Protocol:** Message queues (Kafka/RabbitMQ)
+- **Protocol:** Apache Kafka message broker
 - **Delivery:** At least once delivery guarantee
 - **Idempotency:** All event handlers must be idempotent
 

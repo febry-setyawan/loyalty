@@ -42,11 +42,11 @@ Dokumen ini merupakan ringkasan implementasi dari complete UI/UX design specific
 
 ### Frontend Technology Stack Recommendations
 ```
-Primary Framework: React.js dengan TypeScript
-UI Component Library: Custom design system + Ant Design (admin)
-CSS Framework: Tailwind CSS + SCSS untuk custom components
-State Management: React Context + useReducer (atau Redux Toolkit)
-Mobile Development: React Native (atau Progressive Web App)
+Primary Framework: ReactJS dengan TypeScript
+UI Component Library: Material UI (MUI) + Custom design system
+CSS Framework: Material UI theming system + CSS-in-JS
+State Management: React Context + useReducer (atau Redux Toolkit)  
+Mobile Development: Flutter
 ```
 
 ### File Structure Recommendation
@@ -143,40 +143,66 @@ src/
 }
 ```
 
-### Core Component Classes
-```scss
-// Button Base Class
-.btn {
-  display: inline-flex;
-  align-items: center;
-  justify-content: center;
-  padding: 12px 24px;
-  min-height: var(--button-height);
-  font-weight: 600;
-  border-radius: var(--radius-md);
-  transition: all 0.2s ease;
-  cursor: pointer;
-  user-select: none;
-}
+### Core Component Implementation with Material UI
 
-// Card Base Class  
-.card {
-  background: white;
-  border-radius: var(--radius-lg);
-  padding: var(--space-md);
-  box-shadow: var(--shadow-sm);
-  transition: all 0.2s ease;
-}
+```tsx
+// Material UI Theme Configuration
+import { createTheme, ThemeProvider } from '@mui/material/styles';
 
-// Input Base Class
-.input {
-  width: 100%;
-  padding: 12px 16px;
-  min-height: var(--input-height);
-  font-size: 16px; /* Prevent iOS zoom */
-  border: 2px solid #E5E7EB;
-  border-radius: var(--radius-sm);
-  transition: all 0.2s ease;
+const loyaltyTheme = createTheme({
+  palette: {
+    primary: {
+      main: '#1E40AF', // Primary blue
+    },
+    secondary: {
+      main: '#F59E0B', // Gold for loyalty tiers
+    },
+    success: {
+      main: '#10B981',
+    },
+    error: {
+      main: '#EF4444',
+    },
+  },
+  typography: {
+    fontFamily: '"Inter", system-ui, -apple-system, sans-serif',
+    h1: {
+      fontSize: '2rem',
+      fontWeight: 700,
+    },
+    h2: {
+      fontSize: '1.5rem', 
+      fontWeight: 600,
+    },
+  },
+  components: {
+    MuiButton: {
+      styleOverrides: {
+        root: {
+          textTransform: 'none',
+          borderRadius: '8px',
+          minHeight: '44px', // Touch-friendly
+        },
+      },
+    },
+    MuiCard: {
+      styleOverrides: {
+        root: {
+          borderRadius: '12px',
+          boxShadow: '0 1px 3px 0 rgba(0, 0, 0, 0.1)',
+        },
+      },
+    },
+  },
+});
+
+// Usage in App Component
+function App() {
+  return (
+    <ThemeProvider theme={loyaltyTheme}>
+      {/* Your app components */}
+    </ThemeProvider>
+  );
 }
 ```
 
@@ -476,9 +502,10 @@ export const ZeroPoints = () => (
 
 ## 📱 Mobile-Specific Considerations
 
-### Touch Interactions
+### Web App - Responsive Design
+#### Touch Interactions for Web
 ```scss
-// Touch-friendly sizing
+// Touch-friendly sizing for web responsive design
 .touch-target {
   min-height: 44px;
   min-width: 44px;
@@ -492,14 +519,14 @@ export const ZeroPoints = () => (
   user-select: none;
 }
 
-// iOS safe area support
+// iOS safe area support for PWA
 .safe-area {
   padding-top: max(20px, env(safe-area-inset-top));
   padding-bottom: max(20px, env(safe-area-inset-bottom));
 }
 ```
 
-### Viewport Configuration
+#### Viewport Configuration
 ```html
 <!-- Meta tag untuk responsive design -->
 <meta 
@@ -513,6 +540,76 @@ export const ZeroPoints = () => (
 <meta name="apple-mobile-web-app-status-bar-style" content="default">
 ```
 
+### Native Mobile App - Flutter Implementation
+
+#### Flutter Project Structure
+```
+lib/
+├── core/
+│   ├── constants/        # App constants, colors, themes
+│   ├── services/        # API services, storage
+│   └── utils/           # Helper functions
+├── features/
+│   ├── auth/           # Authentication screens & logic
+│   ├── loyalty/        # Loyalty screens & logic
+│   ├── rewards/        # Rewards catalog & redemption
+│   └── profile/        # User profile management
+├── shared/
+│   ├── widgets/        # Reusable UI components
+│   ├── models/         # Data models
+│   └── providers/      # State management (Riverpod/Provider)
+└── main.dart
+```
+
+#### Flutter Material Theme Configuration
+```dart
+// lib/core/theme/app_theme.dart
+import 'package:flutter/material.dart';
+
+class AppTheme {
+  static ThemeData get lightTheme {
+    return ThemeData(
+      useMaterial3: true,
+      colorScheme: ColorScheme.fromSeed(
+        seedColor: const Color(0xFF1E40AF), // Primary blue
+        secondary: const Color(0xFFF59E0B), // Gold
+      ),
+      fontFamily: 'Inter',
+      elevatedButtonTheme: ElevatedButtonThemeData(
+        style: ElevatedButton.styleFrom(
+          minimumSize: const Size(88, 44), // Touch-friendly
+          shape: RoundedRectangleBorder(
+            borderRadius: BorderRadius.circular(8),
+          ),
+        ),
+      ),
+      cardTheme: CardTheme(
+        elevation: 2,
+        shape: RoundedRectangleBorder(
+          borderRadius: BorderRadius.circular(12),
+        ),
+      ),
+    );
+  }
+}
+```
+
+#### Flutter State Management Setup (Riverpod)
+```dart
+// lib/shared/providers/loyalty_provider.dart
+import 'package:flutter_riverpod/flutter_riverpod.dart';
+
+final loyaltyProvider = StateNotifierProvider<LoyaltyNotifier, LoyaltyState>(
+  (ref) => LoyaltyNotifier(),
+);
+
+class LoyaltyNotifier extends StateNotifier<LoyaltyState> {
+  LoyaltyNotifier() : super(const LoyaltyState.initial());
+  
+  // Implementation methods
+}
+```
+
 ---
 
 ## 🔧 Development Tools & Setup
@@ -521,13 +618,34 @@ export const ZeroPoints = () => (
 ```json
 {
   "recommendations": [
-    "bradlc.vscode-tailwindcss",
-    "esbenp.prettier-vscode",
-    "dbaeumer.vscode-eslint",
     "ms-vscode.vscode-typescript-next",
+    "esbenp.prettier-vscode", 
+    "dbaeumer.vscode-eslint",
     "formulahendry.auto-rename-tag",
-    "christian-kohler.path-intellisense"
+    "christian-kohler.path-intellisense",
+    "bradlc.vscode-tailwindcss", 
+    "dart-code.dart-code",
+    "dart-code.flutter"
   ]
+}
+```
+
+### Package.json Dependencies
+```json
+{
+  "dependencies": {
+    "@mui/material": "^5.14.0",
+    "@mui/icons-material": "^5.14.0", 
+    "@emotion/react": "^11.11.0",
+    "@emotion/styled": "^11.11.0",
+    "react": "^18.2.0",
+    "react-dom": "^18.2.0",
+    "typescript": "^5.0.0"
+  },
+  "devDependencies": {
+    "@types/react": "^18.2.0",
+    "@types/react-dom": "^18.2.0"
+  }
 }
 ```
 
@@ -552,15 +670,24 @@ module.exports = {
 
 ## 📋 Implementation Checklist
 
-### Phase 1 Deliverables
-- [ ] Design system tokens implemented in CSS/SCSS
-- [ ] Core component library created (Button, Input, Card, Modal)
+### Phase 1 Deliverables - Web Application
+- [ ] Material UI theme configuration implemented
+- [ ] Core component library created using Material UI components
 - [ ] Authentication screens completed with responsive design
 - [ ] Main dashboard with points card dan navigation
 - [ ] QR scanner integration dan camera permissions
 - [ ] Basic rewards catalog dengan search/filter
 - [ ] Admin dashboard dengan member management
 - [ ] Accessibility audit completed (WCAG 2.1 AA)
+
+### Phase 1 Deliverables - Flutter Mobile App
+- [ ] Flutter project structure setup
+- [ ] Material 3 theme configuration
+- [ ] Core screens implemented (Auth, Dashboard, QR Scanner)
+- [ ] State management setup (Riverpod/Provider)
+- [ ] API integration services
+- [ ] Platform-specific features (camera, notifications)
+- [ ] Cross-platform testing (iOS & Android)
 
 ### Quality Assurance
 - [ ] Cross-browser testing (Chrome, Safari, Firefox, Edge)
