@@ -17,6 +17,16 @@ Selamat datang di dokumentasi sistem loyalty! Folder ini berisi semua dokumentas
   - Technical recommendations dan checklist
   - Critical success factors dan monitoring points
 
+### 🏗️ Technical Documents
+- **[Technical Design Architecture](./technical-design-architecture.md)**
+  - Complete system architecture dan technology specifications
+  - Database schema design dengan detailed tables
+  - API specifications untuk semua microservices
+  - Infrastructure architecture dengan AWS cloud deployment
+  - Security architecture dan compliance guidelines
+  - Performance dan scalability design untuk 100K users
+  - Development environment setup dan CI/CD pipeline
+
 ## 🎯 Project Overview
 
 **Tujuan Utama:** Membangun sistem loyalty yang dapat meningkatkan customer retention, average order value, dan purchase frequency.

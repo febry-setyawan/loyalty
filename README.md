@@ -15,6 +15,7 @@ Complete business requirements and implementation details are available in the d
 
 - **[📋 Business Requirements Document](./doc/business-requirements-document.md)** - Complete feature specifications, acceptance criteria, and business requirements
 - **[🚀 Implementation Roadmap](./doc/implementation-roadmap.md)** - Development timeline, technical recommendations, and quick reference guide
+- **[🏗️ Technical Design Architecture](./doc/technical-design-architecture.md)** - Complete system architecture, database design, API specifications, and infrastructure blueprints
 - **[📖 Documentation Overview](./doc/README.md)** - Navigation guide for all project documentation
 
 ## 🏗️ System Features
