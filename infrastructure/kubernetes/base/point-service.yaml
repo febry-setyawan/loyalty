@@ -1,0 +1,104 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: point-service
+  labels:
+    app: point-service
+    service: loyalty
+    tier: backend
+spec:
+  replicas: 2
+  selector:
+    matchLabels:
+      app: point-service
+  template:
+    metadata:
+      labels:
+        app: point-service
+        service: loyalty
+        tier: backend
+    spec:
+      containers:
+      - name: point-service
+        image: point-service:latest
+        imagePullPolicy: Always
+        ports:
+        - containerPort: 8081
+          name: http
+        env:
+        - name: SPRING_PROFILES_ACTIVE
+          value: "kubernetes"
+        - name: DATABASE_URL
+          valueFrom:
+            secretKeyRef:
+              name: database-credentials
+              key: url
+        - name: DATABASE_USERNAME
+          valueFrom:
+            secretKeyRef:
+              name: database-credentials
+              key: username
+        - name: DATABASE_PASSWORD
+          valueFrom:
+            secretKeyRef:
+              name: database-credentials
+              key: password
+        - name: REDIS_URL
+          valueFrom:
+            configMapKeyRef:
+              name: redis-config
+              key: url
+        - name: KAFKA_BOOTSTRAP_SERVERS
+          valueFrom:
+            configMapKeyRef:
+              name: kafka-config
+              key: bootstrap-servers
+        resources:
+          requests:
+            memory: "512Mi"
+            cpu: "250m"
+          limits:
+            memory: "1Gi"
+            cpu: "500m"
+        livenessProbe:
+          httpGet:
+            path: /actuator/health/liveness
+            port: 8081
+          initialDelaySeconds: 60
+          periodSeconds: 30
+          timeoutSeconds: 5
+          failureThreshold: 3
+        readinessProbe:
+          httpGet:
+            path: /actuator/health/readiness
+            port: 8081
+          initialDelaySeconds: 30
+          periodSeconds: 10
+          timeoutSeconds: 5
+          failureThreshold: 3
+        startupProbe:
+          httpGet:
+            path: /actuator/health/liveness
+            port: 8081
+          initialDelaySeconds: 30
+          periodSeconds: 10
+          timeoutSeconds: 5
+          failureThreshold: 30
+      restartPolicy: Always
+---
+apiVersion: v1
+kind: Service
+metadata:
+  name: point-service
+  labels:
+    app: point-service
+    service: loyalty
+spec:
+  selector:
+    app: point-service
+  ports:
+  - name: http
+    port: 80
+    targetPort: 8081
+    protocol: TCP
+  type: ClusterIP
