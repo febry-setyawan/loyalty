@@ -57,10 +57,14 @@ public class MFAService {
 #### JWT Token Management
 ```java
 @Service
+import org.springframework.beans.factory.annotation.Value;
 public class JWTService {
     
-    private static final int ACCESS_TOKEN_EXPIRY = 15; // minutes
-    private static final int REFRESH_TOKEN_EXPIRY = 7; // days
+    @Value("${security.jwt.access-token-expiry-minutes:15}")
+    private int accessTokenExpiryMinutes;
+
+    @Value("${security.jwt.refresh-token-expiry-days:7}")
+    private int refreshTokenExpiryDays;
     
     public TokenPair generateTokens(User user) {
         String accessToken = Jwts.builder()
