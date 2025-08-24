@@ -156,13 +156,17 @@ public class JwtTokenService {
     public boolean isTokenExpired(String token) {
         try {
             Claims claims = Jwts.parser()
-                    .unsecured()
+                    .verifyWith(accessTokenKey)
                     .build()
-                    .parseUnsecuredClaims(token)
+                    .parseSignedClaims(token)
                     .getPayload();
-                    
+
             return claims.getExpiration().before(new Date());
-        } catch (Exception ex) {
+        } catch (ExpiredJwtException ex) {
+            // Token is expired
+            return true;
+        } catch (JwtException ex) {
+            // Token is invalid for other reasons
             return true;
         }
     }
