@@ -13,11 +13,11 @@ import org.springframework.stereotype.Component;
 @Component
 public class EncryptedStringConverter implements AttributeConverter<String, String> {
 
-    private static EncryptionService encryptionService;
+    private final EncryptionService encryptionService;
 
     @Autowired
-    public void setEncryptionService(EncryptionService encryptionService) {
-        EncryptedStringConverter.encryptionService = encryptionService;
+    public EncryptedStringConverter(EncryptionService encryptionService) {
+        this.encryptionService = encryptionService;
     }
 
     @Override
