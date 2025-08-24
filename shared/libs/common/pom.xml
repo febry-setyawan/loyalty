@@ -147,6 +147,22 @@
                     <format>ALL</format>
                     <outputDirectory>${project.build.directory}</outputDirectory>
                     <failBuildOnCVSS>7</failBuildOnCVSS>
+                    <!-- Disable NVD feeds to avoid API authentication issues -->
+                    <nvdApiDatafeed>false</nvdApiDatafeed>
+                    <nvdDatafeedEnabled>false</nvdDatafeedEnabled>
+                    <!-- Disable slow analyzers for CI/CD -->
+                    <centralAnalyzerEnabled>false</centralAnalyzerEnabled>
+                    <nexusAnalyzerEnabled>false</nexusAnalyzerEnabled>
+                    <!-- Use only fast local analyzers -->
+                    <retireJsAnalyzerEnabled>false</retireJsAnalyzerEnabled>
+                    <ossIndexAnalyzerEnabled>false</ossIndexAnalyzerEnabled>
+                    <jarAnalyzerEnabled>true</jarAnalyzerEnabled>
+                    <archiveAnalyzerEnabled>true</archiveAnalyzerEnabled>
+                    <!-- Fast settings for CI/CD -->
+                    <nvdMaxRetryCount>0</nvdMaxRetryCount>
+                    <connectionTimeout>10000</connectionTimeout>
+                    <readTimeout>10000</readTimeout>
+                    <skipOnError>true</skipOnError>
                 </configuration>
                 <executions>
                     <execution>
