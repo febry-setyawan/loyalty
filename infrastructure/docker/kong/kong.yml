@@ -113,10 +113,5 @@ plugins:
       hour: 1000
       policy: local
 
-  - name: request-id
-    config:
-      header_name: X-Request-ID
-      generator: uuid
-
 # Global rate limiting for development
 # Production will have more specific rules per service

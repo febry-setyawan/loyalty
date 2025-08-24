@@ -220,7 +220,7 @@ services:
   # API GATEWAY
   # ============================================================================
   api-gateway:
-    image: kong:3.4-alpine
+    image: kong:3.4-ubuntu
     container_name: loyalty-api-gateway
     environment:
       KONG_DATABASE: "off"
