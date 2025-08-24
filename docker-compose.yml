@@ -2,8 +2,6 @@
 # Main entry point for development environment
 # Usage: docker-compose up
 
-version: '3.8'
-
 # Include the development configuration
 include:
   - docker-compose.dev.yml
