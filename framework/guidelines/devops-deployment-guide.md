@@ -580,8 +580,8 @@ jobs:
         # Switch traffic to green
         kubectl patch service user-service -n loyalty-system-production -p '{"spec":{"selector":{"color":"green"}}}'
 
-        # Wait and monitor
-        sleep 300
+        MONITOR_DURATION=${MONITOR_DURATION:-300}
+        sleep $MONITOR_DURATION
 
         # Cleanup blue deployment
         helm uninstall loyalty-system-blue -n loyalty-system-production || true
