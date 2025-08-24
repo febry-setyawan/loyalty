@@ -13,10 +13,10 @@ This project aims to build a scalable loyalty system that enables businesses to 
 ## 📚 Documentation
 Complete business requirements and implementation details are available in the documentation folder:
 
-- **[📋 Business Requirements Document](./doc/business-requirements-document.md)** - Complete feature specifications, acceptance criteria, and business requirements
-- **[🚀 Implementation Roadmap](./doc/implementation-roadmap.md)** - Development timeline, technical recommendations, and quick reference guide
-- **[🏗️ Technical Design Architecture](./doc/technical-design-architecture.md)** - Complete system architecture, database design, API specifications, and infrastructure blueprints
 - **[📖 Documentation Overview](./doc/README.md)** - Navigation guide for all project documentation
+- **[📋 Business Requirements Document](./doc/business-requirements-document.md)** - Complete feature specifications, acceptance criteria, and business requirements
+- **[🏗️ Technical Design Architecture](./doc/technical-design-architecture.md)** - Complete system architecture, database design, API specifications, and infrastructure blueprints
+- **[🚀 Implementation Roadmap](./doc/implementation-roadmap.md)** - Development timeline, technical recommendations, and quick reference guide
 
 ## 🏗️ System Features
 - **User Management & Registration** - Multi-channel customer onboarding
