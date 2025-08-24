@@ -14,6 +14,7 @@ import org.springframework.web.cors.CorsConfiguration;
 import org.springframework.web.cors.CorsConfigurationSource;
 import org.springframework.web.cors.UrlBasedCorsConfigurationSource;
 
+import java.util.Arrays;
 import java.util.List;
 
 /**
@@ -37,6 +38,25 @@ public class LoyaltySecurityConfig {
             .csrf(csrf -> csrf.disable())
             .cors(cors -> cors.configurationSource(corsConfigurationSource()))
             .sessionManagement(session -> session.sessionCreationPolicy(SessionCreationPolicy.STATELESS))
+            .headers(headers -> headers
+                // Security headers for protection against common attacks
+                .frameOptions(frameOptions -> frameOptions.deny())
+                .contentTypeOptions(contentTypeOptions -> {})
+                .httpStrictTransportSecurity(hsts -> hsts
+                    .maxAgeInSeconds(31536000) // 1 year
+                    .includeSubDomains(true))
+                .addHeaderWriter((request, response) -> {
+                    // Content Security Policy
+                    response.setHeader("Content-Security-Policy", 
+                        "default-src 'self'; script-src 'self' 'unsafe-inline'; style-src 'self' 'unsafe-inline'; img-src 'self' data: https:;");
+                    // Additional security headers
+                    response.setHeader("X-Content-Type-Options", "nosniff");
+                    response.setHeader("X-Frame-Options", "DENY");
+                    response.setHeader("X-XSS-Protection", "1; mode=block");
+                    response.setHeader("Referrer-Policy", "strict-origin-when-cross-origin");
+                    response.setHeader("Permissions-Policy", "geolocation=(), microphone=(), camera=()");
+                })
+            )
             .authorizeHttpRequests(authz -> authz
                 // Public endpoints
                 .requestMatchers("/health/**", "/metrics/**", "/actuator/**").permitAll()

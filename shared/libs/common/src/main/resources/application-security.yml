@@ -1,0 +1,139 @@
+# Security Configuration Template
+# This file provides templates for security-related configurations
+
+# ==============================================================================
+# TLS 1.3 Configuration
+# ==============================================================================
+# HTTPS Configuration
+server:
+  port: 8443
+  ssl:
+    enabled: true
+    key-store: classpath:keystore.p12
+    key-store-password: ${SSL_KEYSTORE_PASSWORD}
+    key-store-type: PKCS12
+    key-alias: loyalty-system
+    # Force TLS 1.3
+    enabled-protocols: TLSv1.3
+    # Strong cipher suites for TLS 1.3
+    ciphers: TLS_AES_256_GCM_SHA384,TLS_CHACHA20_POLY1305_SHA256,TLS_AES_128_GCM_SHA256
+
+# Force HTTPS redirect
+spring:
+  security:
+    require-ssl: true
+
+# ==============================================================================
+# Encryption Configuration
+# ==============================================================================
+app:
+  encryption:
+    # Generate using EncryptionService.generateEncryptionKey()
+    # Must be base64 encoded 256-bit key
+    key: ${ENCRYPTION_KEY}
+  
+  jwt:
+    # JWT secrets - must be strong random strings
+    secret: ${JWT_SECRET}
+    refresh-secret: ${JWT_REFRESH_SECRET}
+    # Token expiration times in milliseconds
+    access-expiration: 900000      # 15 minutes
+    refresh-expiration: 604800000  # 7 days
+    issuer: loyalty-system
+
+# ==============================================================================
+# Rate Limiting Configuration
+# ==============================================================================
+spring:
+  data:
+    redis:
+      host: ${REDIS_HOST:localhost}
+      port: ${REDIS_PORT:6379}
+      password: ${REDIS_PASSWORD:}
+      timeout: 2000ms
+      lettuce:
+        pool:
+          max-active: 20
+          max-idle: 10
+          min-idle: 2
+
+# ==============================================================================
+# Database Security Configuration
+# ==============================================================================
+spring:
+  datasource:
+    # Use SSL for database connections
+    url: jdbc:postgresql://${DB_HOST:localhost}:${DB_PORT:5432}/${DB_NAME:loyalty_db}?sslmode=require
+    username: ${DB_USERNAME}
+    password: ${DB_PASSWORD}
+    
+  jpa:
+    hibernate:
+      # Disable SQL logging in production to prevent data leakage
+      show-sql: false
+    properties:
+      hibernate:
+        # Enable SQL comments for audit purposes
+        use_sql_comments: false
+        format_sql: false
+
+# ==============================================================================
+# Security Headers Configuration
+# ==============================================================================
+# Additional security headers can be configured in LoyaltySecurityConfig
+# Content Security Policy, HSTS, X-Frame-Options, etc. are already configured
+
+# ==============================================================================
+# Audit Logging Configuration
+# ==============================================================================
+logging:
+  level:
+    com.example.loyalty.common.security: INFO
+    SECURITY: INFO
+  pattern:
+    # Structured logging pattern for security events
+    console: "%d{yyyy-MM-dd HH:mm:ss} [%thread] %-5level %logger{36} - %msg%n"
+  
+# ==============================================================================
+# Environment-Specific Security Settings
+# ==============================================================================
+
+---
+# Development Environment
+spring:
+  config:
+    activate:
+      on-profile: dev
+  security:
+    # Less strict in development
+    require-ssl: false
+server:
+  port: 8080
+  ssl:
+    enabled: false
+
+---
+# Production Environment  
+spring:
+  config:
+    activate:
+      on-profile: prod
+  security:
+    # Strict security in production
+    require-ssl: true
+server:
+  ssl:
+    enabled: true
+    # Production should use proper certificates
+    key-store: file:/etc/ssl/certs/loyalty-system.p12
+    
+# Additional production security settings
+management:
+  endpoints:
+    web:
+      exposure:
+        # Limit actuator endpoints in production
+        include: health,info,metrics
+  endpoint:
+    health:
+      show-details: never
