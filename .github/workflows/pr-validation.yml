@@ -96,16 +96,18 @@ jobs:
 
       - name: Run dependency vulnerability scan
         run: |
-          # Scan common library
+          # Scan common library with configured settings
           echo "Scanning common library..."
           cd shared/libs/common
-          mvn org.owasp:dependency-check-maven:check -DfailBuildOnCVSS=9 -DskipProvidedScope=true -DskipSystemScope=true -DnvdApiKey="" -DnvdMaxRetryCount=1 -DnvdApiDelay=10000 || true
+          mvn org.owasp:dependency-check-maven:check || true
           cd ../../..
           
-          # Scan each service for vulnerabilities (skip NVD for PR validation to avoid rate limits)
+          # Scan each service for vulnerabilities with configured settings  
           for service in user-service point-service rewards-service admin-service; do
             echo "Scanning $service..."
             cd services/$service
-            mvn org.owasp:dependency-check-maven:check -DfailBuildOnCVSS=9 -DskipProvidedScope=true -DskipSystemScope=true -DnvdApiKey="" -DnvdMaxRetryCount=1 -DnvdApiDelay=10000 || true
+            mvn org.owasp:dependency-check-maven:check || true
             cd ../..
           done
+        env:
+          NVD_API_KEY: ${{ secrets.NVD_API_KEY }}
