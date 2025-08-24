@@ -31,10 +31,10 @@ loyalty-system/
 │   │   ├── phase-2-enhancement.md        # Phase 2 detailed tasks
 │   │   └── phase-3-advanced.md           # Phase 3 detailed tasks
 │   ├── templates/                        # Service templates
-│   │   ├── user-service/                 # Node.js service template
+│   │   ├── user-service/                 # Java Spring Boot service template
 │   │   ├── point-service/                # Java Spring Boot template
-│   │   ├── rewards-service/              # Node.js service template
-│   │   └── admin-service/                # Node.js + React template
+│   │   ├── rewards-service/              # Java Spring Boot service template
+│   │   └── admin-service/                # Java Spring Boot + React template
 │   ├── diagrams/                         # Sequence diagrams
 │   │   └── sequence-diagrams.md          # Critical business flows
 │   ├── guidelines/                       # Development standards
@@ -73,7 +73,7 @@ loyalty-system/
 │   │   ├── docker/                       # Docker configurations
 │   │   ├── docs/                         # Service documentation
 │   │   ├── scripts/                      # Utility scripts
-│   │   ├── package.json                  # Dependencies and scripts
+│   │   ├── pom.xml                      # Maven dependencies and scripts
 │   │   ├── Dockerfile                    # Production Docker image
 │   │   └── README.md                     # Service documentation
 │   │
@@ -101,7 +101,7 @@ loyalty-system/
 │   │   ├── [Similar structure to user-service]
 │   │
 │   └── admin-service/                    # Admin dashboard service
-│       ├── backend/                      # Node.js backend
+│       ├── backend/                      # Java Spring Boot backend
 │       │   └── [Similar structure to user-service]
 │       ├── frontend/                     # React frontend
 │       │   ├── src/
@@ -276,11 +276,11 @@ loyalty-system/
 
 3. **Choose Your Service Template**
    ```bash
-   # For Node.js services (User, Rewards, Admin)
+   # For Java Spring Boot services (All backend services)
    open framework/templates/user-service/README.md
-   
-   # For Java services (Point Service)
    open framework/templates/point-service/README.md
+   open framework/templates/rewards-service/README.md
+   open framework/templates/admin-service/README.md
    ```
 
 4. **Setup Development Environment**
@@ -355,8 +355,8 @@ loyalty-system/
 ## 🛠️ Development Tools & Technologies
 
 ### Backend Technologies
-- **Node.js Services:** Express.js, JWT, Joi validation
-- **Java Services:** Spring Boot, Spring Security, JPA
+- **All Services:** Java Spring Boot + JDK 17 + Maven (standardized)
+- **GroupId:** com.example.loyalty for all microservices
 - **Databases:** PostgreSQL, Redis
 - **Message Queue:** RabbitMQ/Apache Kafka
 - **API Gateway:** Kong/AWS API Gateway
