@@ -1,12 +1,15 @@
 # User Service Template - Java Spring Boot
 
+**⚠️ IMPORTANT: This service follows the [STANDARD SPRING BOOT TEMPLATE](../SPRING-BOOT-STANDARD-TEMPLATE.md)**  
+**For new services, use the standard template and replace placeholders with user-service specifics.**
+
 **Technology Stack:** Java Spring Boot, JDK 17, Maven, PostgreSQL, Redis, JWT  
 **Architecture Pattern:** Clean Architecture (Domain-Driven Design)  
 **Purpose:** User management, authentication, profile management  
 
 ---
 
-## 📁 Project Structure
+## 📁 **STANDARDIZED** Project Structure
 
 ```
 user-service/
