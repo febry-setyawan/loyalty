@@ -1,8 +1,8 @@
 # Wireframes & User Flow Diagrams
 # Loyalty System - Interactive Flow Documentation
 
-**Tanggal:** December 2024  
-**Dokumen:** Wireframes & User Flow Diagrams  
+**Date:** December 2024  
+**Document:** Wireframes & User Flow Diagrams  
 **Project:** Loyalty System Development  
 **Companion to:** UI/UX Design Specification
 
@@ -10,7 +10,7 @@
 
 ## 📋 Overview
 
-Dokumen ini menyediakan detailed wireframes dan user flow diagrams yang mengilustrasikan interaksi user dengan sistem loyalty. Setiap flow dirancang untuk memberikan customer experience yang optimal dengan minimal friction.
+This document provides detailed wireframes and user flow diagrams that illustrate user interactions with the loyalty system. Each flow is designed to provide optimal customer experience with minimal friction.
 
 ---
 

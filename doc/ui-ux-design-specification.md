@@ -1,9 +1,9 @@
 # UI/UX Design Specification
 # Loyalty System - User Interface Mockups & Design Guidelines
 
-**Versi:** 1.0  
-**Tanggal:** Desember 2024  
-**Dokumen:** UI/UX Design Specification  
+**Version:** 1.0  
+**Date:** December 2024  
+**Document:** UI/UX Design Specification  
 **Project:** Loyalty System Development  
 **Prepared by:** Senior UI/UX Designer
 
@@ -11,14 +11,14 @@
 
 ## 📋 Executive Summary
 
-Dokumen ini menyediakan panduan lengkap design user interface dan user experience untuk sistem loyalty berdasarkan Business Requirements Document (BRD). Design ini dirancang untuk memberikan customer experience terbaik dengan fokus pada usability, accessibility, dan engagement yang tinggi.
+This document provides complete user interface and user experience design guidelines for the loyalty system based on the Business Requirements Document (BRD). This design is created to provide the best customer experience with focus on usability, accessibility, and high engagement.
 
 ### 🎯 Design Objectives
-- **User-Centric Design:** Memudahkan customer dalam earning dan redeeming points
-- **Mobile-First Approach:** Optimized untuk mobile experience dengan responsive design
-- **Intuitive Navigation:** Clear user journey dan minimal learning curve
-- **Engagement Focus:** Design yang mendorong repeat usage dan customer retention
-- **Admin Efficiency:** Streamlined admin interface untuk operational excellence
+- **User-Centric Design:** Make it easy for customers to earn and redeem points
+- **Mobile-First Approach:** Optimized for mobile experience with responsive design
+- **Intuitive Navigation:** Clear user journey and minimal learning curve
+- **Engagement Focus:** Design that encourages repeat usage and customer retention
+- **Admin Efficiency:** Streamlined admin interface for operational excellence
 
 ---
 

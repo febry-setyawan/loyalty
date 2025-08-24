@@ -1,9 +1,9 @@
 # Technical Design Architecture
 # Loyalty System - System Architecture & Technology Specifications
 
-**Versi:** 1.0  
-**Tanggal:** Desember 2024  
-**Dokumen:** Technical Design Architecture  
+**Version:** 1.0  
+**Date:** December 2024  
+**Document:** Technical Design Architecture  
 **Project:** Loyalty System Development  
 **Prepared by:** Senior Solution Architect
 
@@ -11,14 +11,14 @@
 
 ## 📋 Executive Summary
 
-Dokumen ini menyajikan desain arsitektur teknis lengkap untuk sistem loyalty berdasarkan Business Requirements Document (BRD) dan Implementation Roadmap yang telah didefinisikan. Arsitektur ini dirancang untuk mendukung 100,000 concurrent users dengan uptime 99.9% dan response time <3 detik.
+This document presents a complete technical architecture design for the loyalty system based on the Business Requirements Document (BRD) and Implementation Roadmap that have been defined. This architecture is designed to support 100,000 concurrent users with 99.9% uptime and response time <3 seconds.
 
 ### 🎯 Architecture Goals
-- **Scalability:** Support hingga 100,000 concurrent users
-- **Performance:** <3 second response time untuk semua operasi
-- **Reliability:** 99.9% uptime dengan fault tolerance
-- **Security:** Compliance dengan data protection dan PCI DSS
-- **Maintainability:** Modular design untuk easy maintenance dan updates
+- **Scalability:** Support up to 100,000 concurrent users
+- **Performance:** <3 second response time for all operations
+- **Reliability:** 99.9% uptime with fault tolerance
+- **Security:** Compliance with data protection and PCI DSS
+- **Maintainability:** Modular design for easy maintenance and updates
 
 ---
 
@@ -87,14 +87,14 @@ Dokumen ini menyajikan desain arsitektur teknis lengkap untuk sistem loyalty ber
 
 #### 3. Rewards Service
 - **Responsibility:** Catalog management, inventory, tier-based availability
-- **Technology:** Java Spring Boot + JDK 17 + Maven dengan image handling
+- **Technology:** Java Spring Boot + JDK 17 + Maven with image handling
 - **Database:** PostgreSQL (catalog) + MinIO/S3 (images)
 - **APIs:** Catalog CRUD, search, filter, availability check
 - **Maven:** groupId: com.example.loyalty, artifactId: rewards-service
 
 #### 4. Admin Service
 - **Responsibility:** Administrative dashboard, reporting, system configuration
-- **Technology:** Java Spring Boot + JDK 17 + Maven dengan React frontend  
+- **Technology:** Java Spring Boot + JDK 17 + Maven with React frontend  
 - **Database:** PostgreSQL (audit logs) + analytics database
 - **APIs:** Dashboard metrics, user management, system config
 - **Maven:** groupId: com.example.loyalty, artifactId: admin-service

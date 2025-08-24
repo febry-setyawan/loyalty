@@ -50,9 +50,9 @@ This document presents comprehensive business requirements for developing a comp
 
 ---
 
-### **FITUR 2: Point Earning System**
+### **FEATURE 2: Point Earning System**
 
-**Prioritas Phase:** Phase 1 (Foundation) - Critical
+**Priority Phase:** Phase 1 (Foundation) - Critical
 
 #### Business Requirements:
 - Sistem harus dapat menghitung dan memberikan point berdasarkan transaction value
@@ -70,9 +70,9 @@ This document presents comprehensive business requirements for developing a comp
 
 ---
 
-### **FITUR 3: Point Redemption System**
+### **FEATURE 3: Point Redemption System**
 
-**Prioritas Phase:** Phase 1 (Foundation) - Critical
+**Priority Phase:** Phase 1 (Foundation) - Critical
 
 #### Business Requirements:
 - Sistem harus memungkinkan member menukarkan point dengan rewards
@@ -90,9 +90,9 @@ This document presents comprehensive business requirements for developing a comp
 
 ---
 
-### **FITUR 4: Tiered Membership System**
+### **FEATURE 4: Tiered Membership System**
 
-**Prioritas Phase:** Phase 2 (Enhancement) - High
+**Priority Phase:** Phase 2 (Enhancement) - High
 
 #### Business Requirements:
 - Sistem harus dapat mengelola multiple membership tiers
@@ -116,9 +116,9 @@ This document presents comprehensive business requirements for developing a comp
 
 ---
 
-### **FITUR 5: Rewards Catalog Management**
+### **FEATURE 5: Rewards Catalog Management**
 
-**Prioritas Phase:** Phase 2 (Enhancement) - High
+**Priority Phase:** Phase 2 (Enhancement) - High
 
 #### Business Requirements:
 - Sistem harus dapat mengelola catalog rewards yang dinamis
@@ -136,9 +136,9 @@ This document presents comprehensive business requirements for developing a comp
 
 ---
 
-### **FITUR 6: Transaction History & Tracking**
+### **FEATURE 6: Transaction History & Tracking**
 
-**Prioritas Phase:** Phase 2 (Enhancement) - High
+**Priority Phase:** Phase 2 (Enhancement) - High
 
 #### Business Requirements:
 - Sistem harus dapat melacak semua aktivitas member (earning, redemption, tier changes)
@@ -156,9 +156,9 @@ This document presents comprehensive business requirements for developing a comp
 
 ---
 
-### **FITUR 7: Analytics & Reporting Dashboard**
+### **FEATURE 7: Analytics & Reporting Dashboard**
 
-**Prioritas Phase:** Phase 3 (Advanced) - Medium
+**Priority Phase:** Phase 3 (Advanced) - Medium
 
 #### Business Requirements:
 - Sistem harus menyediakan comprehensive analytics untuk business intelligence
@@ -184,9 +184,9 @@ This document presents comprehensive business requirements for developing a comp
 
 ---
 
-### **FITUR 8: Partner/Merchant Integration**
+### **FEATURE 8: Partner/Merchant Integration**
 
-**Prioritas Phase:** Phase 3 (Advanced) - Medium
+**Priority Phase:** Phase 3 (Advanced) - Medium
 
 #### Business Requirements:
 - Sistem harus dapat integrate dengan partner merchants
@@ -204,9 +204,9 @@ This document presents comprehensive business requirements for developing a comp
 
 ---
 
-### **FITUR 9: Mobile Application Support**
+### **FEATURE 9: Mobile Application Support**
 
-**Prioritas Phase:** Phase 3 (Advanced) - Medium
+**Priority Phase:** Phase 3 (Advanced) - Medium
 
 #### Business Requirements:
 - Sistem harus menyediakan mobile-friendly interface
@@ -224,9 +224,9 @@ This document presents comprehensive business requirements for developing a comp
 
 ---
 
-### **FITUR 10: Administrative Management System**
+### **FEATURE 10: Administrative Management System**
 
-**Prioritas Phase:** Phase 1 (Foundation) - Critical
+**Priority Phase:** Phase 1 (Foundation) - Critical
 
 #### Business Requirements:
 - Sistem harus menyediakan comprehensive admin interface
@@ -248,7 +248,7 @@ This document presents comprehensive business requirements for developing a comp
 
 ## 4. Phase Execution Priority
 
-### **Phase 1 - Foundation (Bulan 1-3)**
+### **Phase 1 - Foundation (Months 1-3)**
 **Status: Critical - Must Have**
 - User Management & Registration
 - Point Earning System  
@@ -256,30 +256,30 @@ This document presents comprehensive business requirements for developing a comp
 - Administrative Management System
 
 **Deliverables:**
-- Basic loyalty system dengan core functionality
-- Member dapat register, earn points, dan redeem rewards
-- Admin dapat mengelola system dan members
+- Basic loyalty system with core functionality
+- Members can register, earn points, and redeem rewards
+- Admin can manage system and members
 
-### **Phase 2 - Enhancement (Bulan 4-6)**
+### **Phase 2 - Enhancement (Months 4-6)**
 **Status: High Priority - Should Have**
 - Tiered Membership System
 - Rewards Catalog Management
 - Transaction History & Tracking
 
 **Deliverables:**
-- Enhanced user experience dengan tier benefits
+- Enhanced user experience with tier benefits
 - Comprehensive reward management
-- Detailed tracking dan history
+- Detailed tracking and history
 
-### **Phase 3 - Advanced Features (Bulan 7-9)**
+### **Phase 3 - Advanced Features (Months 7-9)**
 **Status: Medium Priority - Nice to Have**
 - Analytics & Reporting Dashboard
 - Partner/Merchant Integration
 - Mobile Application Support
 
 **Deliverables:**
-- Business intelligence dan analytics
-- Extended ecosystem dengan partner integration
+- Business intelligence and analytics
+- Extended ecosystem with partner integration
 - Enhanced mobile experience
 
 ---
