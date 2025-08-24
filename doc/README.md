@@ -101,6 +101,8 @@ Business intelligence: Analytics, partner integration, mobile enhancement
 - [ ] Review business objectives dan success metrics
 - [ ] Check acceptance criteria untuk fitur yang akan dikerjakan
 - [ ] Follow implementation roadmap guidelines
+- [ ] **Read [Contributing Guidelines](../CONTRIBUTING.md) for development workflow**
+- [ ] **Setup development environment using [DevOps Guide](../framework/guidelines/devops-deployment-guide.md)**
 
 ### Development Guidelines:
 - Implementasi sesuai priority phases (Phase 1 → Phase 2 → Phase 3)
@@ -112,6 +114,18 @@ Business intelligence: Analytics, partner integration, mobile enhancement
 - Ensure real-time processing dengan latency < 3 seconds
 - Implement proper security dan compliance measures
 - Follow accessibility standards (WCAG 2.1 AA compliance)
+- **Adhere to [Development Standards](../framework/guidelines/development-standards.md)**
+- **Follow [API Design Guidelines](../framework/guidelines/api-design-standards.md)**
+- **Implement [Security Framework](../framework/guidelines/security-implementation-guide.md)**
+
+### Framework Resources:
+- **[Development Framework Overview](../framework/README.md)** - Complete development blueprint
+- **[Task Breakdown - Phase 1](../framework/tasks/phase-1-foundation.md)** - Foundation implementation tasks
+- **[Task Breakdown - Phase 2](../framework/tasks/phase-2-enhancement.md)** - Enhancement features
+- **[Task Breakdown - Phase 3](../framework/tasks/phase-3-advanced.md)** - Advanced features
+- **[Service Templates](../framework/templates/)** - Ready-to-use microservice skeletons
+- **[CI/CD Pipeline](../framework/cicd/pipeline-templates.md)** - Automated deployment processes
+- **[Code Review Framework](../framework/review/code-review-framework.md)** - Quality assurance process
 
 ## 📞 Contact & Support
 
