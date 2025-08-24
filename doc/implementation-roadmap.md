@@ -1,13 +1,13 @@
 # Loyalty System - Implementation Roadmap
 
-## Quick Reference Guide untuk Development Team
+## Quick Reference Guide for Development Team
 
 ### 📋 Overview
-Dokumen ini merupakan quick reference untuk implementation roadmap sistem loyalty berdasarkan Business Requirements Document (BRD) yang telah dibuat.
+This document serves as a quick reference for the loyalty system implementation roadmap based on the Business Requirements Document (BRD) that has been created.
 
 ### 🎯 Project Goals
 - **Primary:** Customer retention, increased purchase frequency, enhanced customer lifetime value
-- **Timeline:** 9 bulan (3 phases)
+- **Timeline:** 9 months (3 phases)
 - **Architecture:** Scalable, secure, real-time processing
 
 ---
@@ -95,22 +95,22 @@ Dokumen ini merupakan quick reference untuk implementation roadmap sistem loyalt
 
 ### Backend
 - **Framework:** Java Spring Boot + JDK 17 + Maven (standardized)
-- **GroupId:** com.example.loyalty untuk semua microservices
+- **GroupId:** com.example.loyalty for all microservices
 - **Database:** PostgreSQL (primary), Redis (cache)
 - **Message Broker:** Apache Kafka
 - **API Gateway:** Kong OpenSource
-- **API:** RESTful dengan OpenAPI documentation
+- **API:** RESTful with OpenAPI documentation
 
 ### Frontend  
-- **Web:** ReactJS + TypeScript + Material UI dengan responsive design
-- **Mobile:** Flutter untuk cross-platform development
+- **Web:** ReactJS + TypeScript + Material UI with responsive design
+- **Mobile:** Flutter for cross-platform development
 - **Admin Dashboard:** ReactJS + TypeScript + Material UI
 
 ### Infrastructure
 - **Development Environment:** Docker + Docker Compose
 - **Production Environment:** Kubernetes
 - **Storage:** Development (MinIO), Production (S3)
-- **Cloud:** AWS, GCP, atau Azure dengan auto-scaling
+- **Cloud:** AWS, GCP, or Azure with auto-scaling
 - **Monitoring:** Prometheus + Grafana
 - **Security:** OAuth 2.0, JWT tokens, API rate limiting
 
@@ -118,7 +118,7 @@ Dokumen ini merupakan quick reference untuk implementation roadmap sistem loyalt
 
 ## ⚠️ Critical Success Factors
 
-### Must-Have dari Phase 1
+### Must-Have from Phase 1
 1. **Real-time Point Processing** - Core functionality
 2. **Security & Compliance** - Data protection essential
 3. **Scalable Architecture** - Support future growth
@@ -192,17 +192,25 @@ Dokumen ini merupakan quick reference untuk implementation roadmap sistem loyalt
 
 ## 📞 Next Steps
 
-1. **Review BRD** - Semua stakeholder review business requirements ✅
-2. **Technical Architecture** - System design dan database schema ✅
-3. **Sprint Planning** - Breakdown features ke development tasks  
-4. **Team Assignment** - Assign developers ke specific modules
-5. **Development Environment** - Setup CI/CD pipeline
+1. **Review BRD** - All stakeholders review business requirements ✅
+2. **Technical Architecture** - System design and database schema ✅
+3. **UI/UX Design Specification** - Complete design system and mockups ✅
+4. **Wireframes & User Flows** - Detailed interaction flows and wireframes ✅
+5. **Design System & Components** - Component library and implementation guide ✅
+6. **Task Breakdown & Review** - Development tasks and quality assurance ✅
+7. **Sprint Planning** - Breakdown features to development tasks  
+8. **Team Assignment** - Assign developers to specific modules
+9. **Development Environment** - Setup CI/CD pipeline
 
 ---
 
 **📁 Related Documents:**
-- `business-requirements-document.md` - Complete BRD dengan detailed specifications
-- `technical-design-architecture.md` - Complete system architecture dan technology specs ✅
+- `business-requirements-document.md` - Complete BRD with detailed specifications ✅
+- `technical-design-architecture.md` - Complete system architecture and technology specs ✅
+- `ui-ux-design-specification.md` - Complete UI/UX design and mockups ✅
+- `wireframes-user-flows.md` - Detailed wireframes and user interaction flows ✅
+- `design-system-components.md` - Component library and implementation guide ✅
+- `ui-ux-implementation-guide.md` - Frontend implementation quick reference guide ✅
 - Database Schema (to be created during Phase 1)
 - API Documentation (to be created during Phase 1)
 - Security Guidelines (to be created during Phase 1)

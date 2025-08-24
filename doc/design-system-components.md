@@ -1,9 +1,9 @@
 # Design System & Component Library
 # Loyalty System - UI Component Specifications
 
-**Versi:** 1.0  
-**Tanggal:** Desember 2024  
-**Dokumen:** Design System & Component Library  
+**Version:** 1.0  
+**Date:** December 2024  
+**Document:** Design System & Component Library  
 **Project:** Loyalty System Development  
 **Target:** Frontend Development Team
 
@@ -11,7 +11,7 @@
 
 ## 📋 Overview
 
-Dokumen ini menyediakan spesifikasi lengkap untuk komponen UI yang akan digunakan dalam sistem loyalty. Design system ini memastikan konsistensi visual dan interaksi di seluruh aplikasi, baik mobile maupun web admin.
+This document provides complete specifications for UI components that will be used in the loyalty system. This design system ensures visual and interaction consistency throughout the application, both mobile and web admin.
 
 ---
 
