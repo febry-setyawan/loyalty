@@ -1,0 +1,120 @@
+apiVersion: networking.k8s.io/v1
+kind: Ingress
+metadata:
+  name: loyalty-system-ingress
+  labels:
+    app: loyalty-system
+  annotations:
+    kubernetes.io/ingress.class: "nginx"
+    nginx.ingress.kubernetes.io/rewrite-target: /
+    nginx.ingress.kubernetes.io/ssl-redirect: "true"
+    nginx.ingress.kubernetes.io/use-regex: "true"
+    nginx.ingress.kubernetes.io/rate-limit: "100"
+    nginx.ingress.kubernetes.io/rate-limit-window: "1m"
+    cert-manager.io/cluster-issuer: "letsencrypt-prod"
+spec:
+  tls:
+  - hosts:
+    - api.loyalty.example.com
+    secretName: loyalty-tls
+  rules:
+  - host: api.loyalty.example.com
+    http:
+      paths:
+      # User Service Routes
+      - path: /api/v1/users
+        pathType: Prefix
+        backend:
+          service:
+            name: user-service
+            port:
+              number: 80
+      - path: /api/v1/auth
+        pathType: Prefix
+        backend:
+          service:
+            name: user-service
+            port:
+              number: 80
+      # Point Service Routes
+      - path: /api/v1/points
+        pathType: Prefix
+        backend:
+          service:
+            name: point-service
+            port:
+              number: 80
+      - path: /api/v1/transactions
+        pathType: Prefix
+        backend:
+          service:
+            name: point-service
+            port:
+              number: 80
+      # Rewards Service Routes
+      - path: /api/v1/rewards
+        pathType: Prefix
+        backend:
+          service:
+            name: rewards-service
+            port:
+              number: 80
+      - path: /api/v1/catalog
+        pathType: Prefix
+        backend:
+          service:
+            name: rewards-service
+            port:
+              number: 80
+      # Admin Service Routes
+      - path: /api/v1/admin
+        pathType: Prefix
+        backend:
+          service:
+            name: admin-service
+            port:
+              number: 80
+---
+# Health check ingress for internal monitoring
+apiVersion: networking.k8s.io/v1
+kind: Ingress
+metadata:
+  name: loyalty-health-ingress
+  labels:
+    app: loyalty-system
+  annotations:
+    kubernetes.io/ingress.class: "nginx"
+    nginx.ingress.kubernetes.io/rewrite-target: /actuator/health
+spec:
+  rules:
+  - host: health.loyalty.internal
+    http:
+      paths:
+      - path: /user
+        pathType: Prefix
+        backend:
+          service:
+            name: user-service
+            port:
+              number: 80
+      - path: /point
+        pathType: Prefix
+        backend:
+          service:
+            name: point-service
+            port:
+              number: 80
+      - path: /rewards
+        pathType: Prefix
+        backend:
+          service:
+            name: rewards-service
+            port:
+              number: 80
+      - path: /admin
+        pathType: Prefix
+        backend:
+          service:
+            name: admin-service
+            port:
+              number: 80
