@@ -24,10 +24,10 @@ This framework provides a complete development blueprint for implementing the lo
 ```
 loyalty-system/
 ├── services/
-│   ├── user-service/           # Node.js/Express - User management
+│   ├── user-service/           # Java Spring Boot - User management
 │   ├── point-service/          # Java Spring Boot - Point processing
-│   ├── rewards-service/        # Node.js/Express - Catalog management
-│   └── admin-service/          # Node.js/Express + React - Admin dashboard
+│   ├── rewards-service/        # Java Spring Boot - Catalog management
+│   └── admin-service/          # Java Spring Boot + React - Admin dashboard
 ├── shared/
 │   ├── common/                 # Shared utilities and constants
 │   ├── database/              # Database schemas and migrations
