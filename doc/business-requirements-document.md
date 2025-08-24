@@ -55,18 +55,18 @@ This document presents comprehensive business requirements for developing a comp
 **Priority Phase:** Phase 1 (Foundation) - Critical
 
 #### Business Requirements:
-- Sistem harus dapat menghitung dan memberikan point berdasarkan transaction value
-- Sistem harus mendukung multiple earning rules (purchase, referral, social engagement)
-- Sistem harus dapat memberikan bonus point untuk special occasions
-- Sistem harus dapat handle point earning secara real-time
+- System must be able to calculate and award points based on transaction value
+- System must support multiple earning rules (purchase, referral, social engagement)
+- System must be able to provide bonus points for special occasions
+- System must be able to handle point earning in real-time
 
 #### Acceptance Criteria:
-- [x] Point otomatis terakumulasi setiap transaksi dengan rate 1 point = Rp 1.000
-- [x] Sistem dapat memberikan bonus multiplier point (2x, 3x, 5x) pada event tertentu
-- [x] Member mendapat point untuk referral baru (500 points per successful referral)
-- [x] Point earning rules dapat dikonfigurasi oleh admin tanpa system downtime
-- [x] Real-time point calculation dengan latency < 3 seconds
-- [x] Sistem dapat handle earning point untuk offline dan online transactions
+- [x] Points automatically accumulate with each transaction at rate 1 point = Rp 1.000
+- [x] System can provide bonus multiplier points (2x, 3x, 5x) on certain events
+- [x] Members get points for new referrals (500 points per successful referral)
+- [x] Point earning rules can be configured by admin without system downtime
+- [x] Real-time point calculation with latency < 3 seconds
+- [x] System can handle earning points for offline and online transactions
 
 ---
 
@@ -75,18 +75,18 @@ This document presents comprehensive business requirements for developing a comp
 **Priority Phase:** Phase 1 (Foundation) - Critical
 
 #### Business Requirements:
-- Sistem harus memungkinkan member menukarkan point dengan rewards
-- Sistem harus dapat mengelola inventory rewards secara real-time
-- Sistem harus dapat menghandle partial redemption
-- Sistem harus dapat mencegah fraud dan abuse
+- System must allow members to redeem points for rewards
+- System must be able to manage reward inventory in real-time
+- System must be able to handle partial redemption
+- System must be able to prevent fraud and abuse
 
 #### Acceptance Criteria:
-- [x] Member dapat menukarkan point dengan discount voucher, produk, atau cashback
-- [x] Sistem mengurangi point balance secara real-time setelah redemption
-- [x] Inventory rewards terupdate otomatis dan menampilkan availability
-- [x] Member dapat melakukan partial redemption (point + cash)
-- [x] Sistem logging semua redemption activity untuk audit trail
-- [x] Redemption confirmation dikirim via email/SMS dalam waktu < 1 menit
+- [x] Members can redeem points for discount vouchers, products, or cashback
+- [x] System reduces point balance in real-time after redemption
+- [x] Reward inventory updates automatically and shows availability
+- [x] Members can perform partial redemption (points + cash)
+- [x] System logs all redemption activity for audit trail
+- [x] Redemption confirmation sent via email/SMS within < 1 minute
 
 ---
 
@@ -95,18 +95,18 @@ This document presents comprehensive business requirements for developing a comp
 **Priority Phase:** Phase 2 (Enhancement) - High
 
 #### Business Requirements:
-- Sistem harus dapat mengelola multiple membership tiers
-- Sistem harus dapat melakukan automatic tier upgrade/downgrade
-- Setiap tier harus memiliki benefits dan privileges yang berbeda
-- Sistem harus dapat tracking tier qualification progress
+- System must be able to manage multiple membership tiers
+- System must be able to perform automatic tier upgrade/downgrade
+- Each tier must have different benefits and privileges
+- System must be able to track tier qualification progress
 
 #### Acceptance Criteria:
-- [x] Membership tiers: Bronze, Silver, Gold, Platinum dengan requirement yang jelas
-- [x] Tier upgrade otomatis berdasarkan accumulated spending atau point earned
-- [x] Setiap tier memiliki earning rate multiplier yang berbeda
-- [x] Higher tier mendapat exclusive rewards dan early access
-- [x] Member dapat melihat progress menuju tier berikutnya
-- [x] Tier status dapat ditampilkan dalam member card/profile
+- [x] Membership tiers: Bronze, Silver, Gold, Platinum with clear requirements
+- [x] Automatic tier upgrade based on accumulated spending or points earned
+- [x] Each tier has different earning rate multipliers
+- [x] Higher tiers get exclusive rewards and early access
+- [x] Members can see progress toward next tier
+- [x] Tier status can be displayed in member card/profile
 
 **Tier Structure:**
 - Bronze: 0 - Rp 5,000,000 annual spending (1x point multiplier)
@@ -121,18 +121,18 @@ This document presents comprehensive business requirements for developing a comp
 **Priority Phase:** Phase 2 (Enhancement) - High
 
 #### Business Requirements:
-- Sistem harus dapat mengelola catalog rewards yang dinamis
-- Admin harus dapat menambah, edit, dan menghapus rewards
-- Sistem harus dapat mengelola reward categories dan filtering
-- Sistem harus dapat handle reward expiration dan seasonal offerings
+- System must be able to manage dynamic rewards catalog
+- Admin must be able to add, edit, and delete rewards
+- System must be able to manage reward categories and filtering
+- System must be able to handle reward expiration and seasonal offerings
 
 #### Acceptance Criteria:
-- [x] Admin dapat mengelola reward catalog melalui admin dashboard
-- [x] Rewards dapat dikategorisasi (discount, merchandise, experience, cashback)
-- [x] Sistem dapat set reward availability berdasarkan tier membership
-- [x] Member dapat filter dan search rewards berdasarkan kategori dan point range
-- [x] Sistem dapat menampilkan featured/recommended rewards
-- [x] Reward memiliki expiration date dan terms & conditions yang jelas
+- [x] Admin can manage reward catalog through admin dashboard
+- [x] Rewards can be categorized (discount, merchandise, experience, cashback)
+- [x] System can set reward availability based on tier membership
+- [x] Members can filter and search rewards by category and point range
+- [x] System can display featured/recommended rewards
+- [x] Rewards have expiration date and clear terms & conditions
 
 ---
 
@@ -141,18 +141,18 @@ This document presents comprehensive business requirements for developing a comp
 **Priority Phase:** Phase 2 (Enhancement) - High
 
 #### Business Requirements:
-- Sistem harus dapat melacak semua aktivitas member (earning, redemption, tier changes)
-- Member harus dapat melihat detailed transaction history
-- Sistem harus dapat export transaction data untuk audit
-- Sistem harus dapat provide real-time point balance
+- System must be able to track all member activities (earning, redemption, tier changes)
+- Members must be able to view detailed transaction history
+- System must be able to export transaction data for audit
+- System must be able to provide real-time point balance
 
 #### Acceptance Criteria:
-- [x] Member dapat melihat complete transaction history dalam member dashboard
-- [x] History menampilkan detail: tanggal, tipe transaksi, point earned/redeemed, balance
-- [x] Member dapat filter history berdasarkan date range dan transaction type
-- [x] Current point balance selalu terupdate dan akurat
-- [x] Sistem dapat export transaction history ke PDF/Excel format
-- [x] Transaction history dapat diakses hingga 2 tahun kebelakang
+- [x] Members can view complete transaction history in member dashboard
+- [x] History displays details: date, transaction type, points earned/redeemed, balance
+- [x] Members can filter history by date range and transaction type
+- [x] Current point balance is always updated and accurate
+- [x] System can export transaction history to PDF/Excel format
+- [x] Transaction history can be accessed up to 2 years back
 
 ---
 
@@ -229,20 +229,20 @@ This document presents comprehensive business requirements for developing a comp
 **Priority Phase:** Phase 1 (Foundation) - Critical
 
 #### Business Requirements:
-- Sistem harus menyediakan comprehensive admin interface
-- Admin dapat mengelola semua aspek loyalty program
-- Sistem harus mendukung role-based access control
-- Audit trail untuk semua admin activities
+- System must provide comprehensive admin interface
+- Admin can manage all aspects of loyalty program
+- System must support role-based access control
+- Audit trail for all admin activities
 
 #### Acceptance Criteria:
-- [x] Admin dashboard dengan overview metrics dan quick actions
+- [x] Admin dashboard with overview metrics and quick actions
 - [x] User management: view, edit, suspend member accounts
-- [x] Reward catalog management dengan bulk operations
-- [x] Point adjustment capabilities dengan approval workflow
-- [x] System configuration untuk earning rules, tier requirements, dll
+- [x] Reward catalog management with bulk operations
+- [x] Point adjustment capabilities with approval workflow
+- [x] System configuration for earning rules, tier requirements, etc
 - [x] Role-based permissions (Super Admin, Admin, Customer Service)
-- [x] Audit log untuk track semua admin activities dan changes
-- [x] Bulk operations untuk member communications dan updates
+- [x] Audit log to track all admin activities and changes
+- [x] Bulk operations for member communications and updates
 
 ---
 
