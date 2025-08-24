@@ -58,8 +58,8 @@ on:
 
 env:
   REGISTRY: ghcr.io
-  NODE_VERSION: '18'
   JAVA_VERSION: '17'
+  MAVEN_VERSION: '3.9.4'
 
 jobs:
   # ============================================================================
@@ -74,20 +74,21 @@ jobs:
         with:
           fetch-depth: 0  # Needed for SonarCloud analysis
 
-      - name: Setup Node.js
-        uses: actions/setup-node@v4
+      - name: Setup Java
+        uses: actions/setup-java@v3
         with:
-          node-version: ${{ env.NODE_VERSION }}
-          cache: 'npm'
+          distribution: 'temurin'
+          java-version: ${{ env.JAVA_VERSION }}
+          cache: maven
 
-      - name: Install dependencies
-        run: npm ci
+      - name: Install Maven dependencies
+        run: mvn dependency:resolve
 
-      - name: Run ESLint
-        run: npm run lint:ci
+      - name: Run checkstyle
+        run: mvn checkstyle:check
 
-      - name: Run Prettier check
-        run: npm run format:check
+      - name: Run SpotBugs
+        run: mvn spotbugs:check
 
       - name: SonarCloud Scan
         uses: SonarSource/sonarcloud-github-action@master
@@ -102,11 +103,12 @@ jobs:
       - name: Checkout code
         uses: actions/checkout@v4
 
-      - name: Setup Node.js
-        uses: actions/setup-node@v4
+      - name: Setup Java
+        uses: actions/setup-java@v3
         with:
-          node-version: ${{ env.NODE_VERSION }}
-          cache: 'npm'
+          distribution: 'temurin'
+          java-version: ${{ env.JAVA_VERSION }}
+          cache: maven
 
       - name: Install dependencies
         run: npm ci

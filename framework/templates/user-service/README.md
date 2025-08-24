@@ -1,6 +1,6 @@
-# User Service Template - Node.js/Express
+# User Service Template - Java Spring Boot
 
-**Technology Stack:** Node.js, Express.js, PostgreSQL, Redis, JWT  
+**Technology Stack:** Java Spring Boot, JDK 17, Maven, PostgreSQL, Redis, JWT  
 **Architecture Pattern:** Clean Architecture (Domain-Driven Design)  
 **Purpose:** User management, authentication, profile management  
 
@@ -11,110 +11,258 @@
 ```
 user-service/
 ├── src/
-│   ├── domain/                 # Business Logic Layer
-│   │   ├── entities/          # Domain entities
-│   │   │   ├── User.js
-│   │   │   ├── Profile.js
-│   │   │   └── AuthToken.js
-│   │   ├── repositories/      # Repository interfaces
-│   │   │   ├── UserRepository.js
-│   │   │   └── AuthRepository.js
-│   │   ├── services/         # Domain services
-│   │   │   ├── AuthService.js
-│   │   │   ├── ProfileService.js
-│   │   │   └── NotificationService.js
-│   │   └── value-objects/    # Value objects
-│   │       ├── Email.js
-│   │       ├── Phone.js
-│   │       └── Password.js
+│   ├── main/java/com/example/loyalty/users/
+│   │   ├── domain/                      # Business Logic Layer
+│   │   │   ├── entities/               # Domain entities
+│   │   │   │   ├── User.java
+│   │   │   │   ├── Profile.java
+│   │   │   │   └── AuthToken.java
+│   │   │   ├── repositories/           # Repository interfaces
+│   │   │   │   ├── UserRepository.java
+│   │   │   │   └── AuthRepository.java
+│   │   │   ├── services/              # Domain services
+│   │   │   │   ├── AuthService.java
+│   │   │   │   ├── ProfileService.java
+│   │   │   │   └── NotificationService.java
+│   │   │   └── valueobjects/          # Value objects
+│   │   │       ├── Email.java
+│   │   │       ├── Phone.java
+│   │   │       └── Password.java
+│   │   │
+│   │   ├── application/               # Application Logic Layer
+│   │   │   ├── usecases/             # Use case implementations
+│   │   │   │   ├── RegisterUser.java
+│   │   │   │   ├── AuthenticateUser.java
+│   │   │   │   ├── UpdateProfile.java
+│   │   │   │   └── ResetPassword.java
+│   │   │   ├── dto/                   # Data Transfer Objects
+│   │   │   │   ├── UserDTO.java
+│   │   │   │   └── ProfileDTO.java
+│   │   │   └── validators/            # Input validation
+│   │   │       ├── UserValidator.java
+│   │   │       └── ProfileValidator.java
+│   │   │
+│   │   ├── infrastructure/            # Infrastructure Layer
+│   │   │   ├── persistence/          # Database implementations
+│   │   │   │   ├── repositories/
+│   │   │   │   │   ├── JpaUserRepository.java
+│   │   │   │   │   └── RedisAuthRepository.java
+│   │   │   │   └── entities/
+│   │   │       ├── UserEntity.java
+│   │   │       └── ProfileEntity.java
+│   │   │   ├── external/             # External service integrations
+│   │   │   │   ├── EmailService.java
+│   │   │   │   ├── SMSService.java
+│   │   │   │   └── ImageUploadService.java
+│   │   │   ├── messaging/            # Message queue handling
+│   │   │   │   ├── EventPublisher.java
+│   │   │   │   └── EventHandler.java
+│   │   │   └── config/               # Configuration
+│   │   │       ├── DatabaseConfig.java
+│   │   │       ├── RedisConfig.java
+│   │   │       └── SecurityConfig.java
+│   │   │
+│   │   ├── interfaces/               # Interface Layer (Controllers)
+│   │   │   ├── web/                  # REST controllers
+│   │   │   │   ├── controllers/
+│   │   │   │   │   ├── UserController.java
+│   │   │   │   │   ├── AuthController.java
+│   │   │   │   │   └── ProfileController.java
+│   │   │   │   ├── dto/              # Web DTOs
+│   │   │   │   │   ├── RegisterUserRequest.java
+│   │   │   │   │   ├── LoginRequest.java
+│   │   │   │   │   └── ApiResponse.java
+│   │   │   │   ├── config/           # Web configuration
+│   │   │   │   │   ├── WebConfig.java
+│   │   │   │   │   └── SecurityConfig.java
+│   │   │   │   └── filters/          # Request/Response filters
+│   │   │   │       ├── JwtAuthenticationFilter.java
+│   │   │   │       └── RateLimitFilter.java
+│   │   │   └── messaging/            # Message consumers
+│   │   │       └── EventConsumer.java
+│   │   │
+│   │   ├── shared/                   # Shared utilities
+│   │   │   ├── exceptions/           # Custom exception classes
+│   │   │   ├── utils/                # Helper functions
+│   │   │   └── constants/            # Application constants
+│   │   │
+│   │   └── UserServiceApplication.java    # Application entry point
 │   │
-│   ├── application/           # Application Logic Layer
-│   │   ├── use-cases/        # Use case implementations
-│   │   │   ├── RegisterUser.js
-│   │   │   ├── AuthenticateUser.js
-│   │   │   ├── UpdateProfile.js
-│   │   │   └── ResetPassword.js
-│   │   ├── dto/              # Data Transfer Objects
-│   │   │   ├── UserDTO.js
-│   │   │   └── ProfileDTO.js
-│   │   └── validators/       # Input validation
-│   │       ├── UserValidator.js
-│   │       └── ProfileValidator.js
+│   ├── main/resources/               # Application resources
+│   │   ├── application.yml           # Configuration
+│   │   ├── application-dev.yml       # Development config
+│   │   ├── application-prod.yml      # Production config
+│   │   └── db/migration/             # Database migrations
 │   │
-│   ├── infrastructure/        # Infrastructure Layer
-│   │   ├── database/         # Database implementations
-│   │   │   ├── migrations/
-│   │   │   ├── repositories/
-│   │   │   │   ├── PostgresUserRepository.js
-│   │   │   │   └── RedisAuthRepository.js
-│   │   │   └── models/
-│   │   │       ├── UserModel.js
-│   │   │       └── ProfileModel.js
-│   │   ├── external/         # External service integrations
-│   │   │   ├── EmailService.js
-│   │   │   ├── SMSService.js
-│   │   │   └── ImageUploadService.js
-│   │   ├── messaging/        # Message queue handling
-│   │   │   ├── EventPublisher.js
-│   │   │   └── EventHandler.js
-│   │   └── config/           # Configuration
-│   │       ├── database.js
-│   │       ├── redis.js
-│   │       └── jwt.js
-│   │
-│   ├── interfaces/            # Interface Layer (Controllers)
-│   │   ├── http/             # HTTP controllers
-│   │   │   ├── controllers/
-│   │   │   │   ├── UserController.js
-│   │   │   │   ├── AuthController.js
-│   │   │   │   └── ProfileController.js
-│   │   │   ├── middleware/
-│   │   │   │   ├── AuthMiddleware.js
-│   │   │   │   ├── ValidationMiddleware.js
-│   │   │   │   └── RateLimitMiddleware.js
-│   │   │   ├── routes/
-│   │   │   │   ├── userRoutes.js
-│   │   │   │   ├── authRoutes.js
-│   │   │   │   └── profileRoutes.js
-│   │   │   └── app.js
-│   │   └── messaging/        # Message consumers
-│   │       └── EventConsumer.js
-│   │
-│   ├── shared/               # Shared utilities
-│   │   ├── errors/          # Custom error classes
-│   │   ├── logger/          # Logging utilities
-│   │   ├── utils/           # Helper functions
-│   │   └── constants/       # Application constants
-│   │
-│   └── server.js            # Application entry point
+│   └── test/java/                    # Test files
+│       ├── unit/                     # Unit tests
+│       ├── integration/              # Integration tests
+│       └── e2e/                      # End-to-end tests
 │
-├── tests/                   # Test files
-│   ├── unit/               # Unit tests
-│   ├── integration/        # Integration tests
-│   ├── e2e/               # End-to-end tests
-│   └── fixtures/          # Test data fixtures
-│
-├── docker/                 # Docker configurations
+├── docker/                           # Docker configurations
 │   ├── Dockerfile
 │   ├── docker-compose.yml
-│   └── .dockerignore
+│   └── docker-compose.test.yml
 │
-├── docs/                   # Service documentation
-│   ├── api/               # API documentation
-│   ├── deployment/        # Deployment guides
-│   └── development/       # Development guides
+├── docs/                             # Service documentation
+│   ├── api/                          # API documentation
+│   ├── deployment/                   # Deployment guides
+│   └── development/                  # Development guides
 │
-├── scripts/                # Utility scripts
+├── scripts/                          # Utility scripts
 │   ├── setup.sh
-│   ├── migrate.js
-│   └── seed.js
+│   └── run-tests.sh
 │
-├── .env.example            # Environment variables template
-├── package.json            # Dependencies and scripts
-├── jest.config.js         # Test configuration
-├── .eslintrc.js           # Linting configuration
+├── pom.xml                           # Maven dependencies
 ├── .gitignore
-└── README.md              # Service documentation
+└── README.md                         # Service documentation
+```
+
+## 📦 Maven Configuration (pom.xml)
+
+```xml
+<?xml version="1.0" encoding="UTF-8"?>
+<project xmlns="http://maven.apache.org/POM/4.0.0"
+         xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+         xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 
+         http://maven.apache.org/xsd/maven-4.0.0.xsd">
+    <modelVersion>4.0.0</modelVersion>
+
+    <parent>
+        <groupId>org.springframework.boot</groupId>
+        <artifactId>spring-boot-starter-parent</artifactId>
+        <version>3.2.0</version>
+        <relativePath/>
+    </parent>
+
+    <groupId>com.example.loyalty</groupId>
+    <artifactId>user-service</artifactId>
+    <version>1.0.0</version>
+    <name>User Service</name>
+    <description>User management service for loyalty system</description>
+
+    <properties>
+        <java.version>17</java.version>
+        <spring-cloud.version>2023.0.0</spring-cloud.version>
+        <testcontainers.version>1.19.3</testcontainers.version>
+    </properties>
+
+    <dependencies>
+        <!-- Spring Boot Starters -->
+        <dependency>
+            <groupId>org.springframework.boot</groupId>
+            <artifactId>spring-boot-starter-web</artifactId>
+        </dependency>
+        <dependency>
+            <groupId>org.springframework.boot</groupId>
+            <artifactId>spring-boot-starter-data-jpa</artifactId>
+        </dependency>
+        <dependency>
+            <groupId>org.springframework.boot</groupId>
+            <artifactId>spring-boot-starter-data-redis</artifactId>
+        </dependency>
+        <dependency>
+            <groupId>org.springframework.boot</groupId>
+            <artifactId>spring-boot-starter-security</artifactId>
+        </dependency>
+        <dependency>
+            <groupId>org.springframework.boot</groupId>
+            <artifactId>spring-boot-starter-validation</artifactId>
+        </dependency>
+        <dependency>
+            <groupId>org.springframework.boot</groupId>
+            <artifactId>spring-boot-starter-actuator</artifactId>
+        </dependency>
+
+        <!-- Database -->
+        <dependency>
+            <groupId>org.postgresql</groupId>
+            <artifactId>postgresql</artifactId>
+            <scope>runtime</scope>
+        </dependency>
+        <dependency>
+            <groupId>org.flywaydb</groupId>
+            <artifactId>flyway-core</artifactId>
+        </dependency>
+
+        <!-- JWT -->
+        <dependency>
+            <groupId>io.jsonwebtoken</groupId>
+            <artifactId>jjwt-api</artifactId>
+            <version>0.11.5</version>
+        </dependency>
+        <dependency>
+            <groupId>io.jsonwebtoken</groupId>
+            <artifactId>jjwt-impl</artifactId>
+            <version>0.11.5</version>
+            <scope>runtime</scope>
+        </dependency>
+        <dependency>
+            <groupId>io.jsonwebtoken</groupId>
+            <artifactId>jjwt-jackson</artifactId>
+            <version>0.11.5</version>
+            <scope>runtime</scope>
+        </dependency>
+
+        <!-- Messaging -->
+        <dependency>
+            <groupId>org.springframework.kafka</groupId>
+            <artifactId>spring-kafka</artifactId>
+        </dependency>
+
+        <!-- Documentation -->
+        <dependency>
+            <groupId>org.springdoc</groupId>
+            <artifactId>springdoc-openapi-starter-webmvc-ui</artifactId>
+            <version>2.2.0</version>
+        </dependency>
+
+        <!-- Test Dependencies -->
+        <dependency>
+            <groupId>org.springframework.boot</groupId>
+            <artifactId>spring-boot-starter-test</artifactId>
+            <scope>test</scope>
+        </dependency>
+        <dependency>
+            <groupId>org.testcontainers</groupId>
+            <artifactId>junit-jupiter</artifactId>
+            <scope>test</scope>
+        </dependency>
+        <dependency>
+            <groupId>org.testcontainers</groupId>
+            <artifactId>postgresql</artifactId>
+            <scope>test</scope>
+        </dependency>
+    </dependencies>
+
+    <build>
+        <plugins>
+            <plugin>
+                <groupId>org.springframework.boot</groupId>
+                <artifactId>spring-boot-maven-plugin</artifactId>
+            </plugin>
+            <plugin>
+                <groupId>org.jacoco</groupId>
+                <artifactId>jacoco-maven-plugin</artifactId>
+                <version>0.8.10</version>
+                <executions>
+                    <execution>
+                        <goals>
+                            <goal>prepare-agent</goal>
+                        </goals>
+                    </execution>
+                    <execution>
+                        <id>report</id>
+                        <phase>test</phase>
+                        <goals>
+                            <goal>report</goal>
+                        </goals>
+                    </execution>
+                </executions>
+            </plugin>
+        </plugins>
+    </build>
+</project>
 ```
 
 ## 🔧 Core Components

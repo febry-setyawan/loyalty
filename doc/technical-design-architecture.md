@@ -73,27 +73,31 @@ Dokumen ini menyajikan desain arsitektur teknis lengkap untuk sistem loyalty ber
 
 #### 1. User Service
 - **Responsibility:** User management, authentication, profile management
-- **Technology:** Node.js/Express with JWT authentication
+- **Technology:** Java Spring Boot + JDK 17 + Maven with Spring Security & JWT
 - **Database:** PostgreSQL (users, profiles, authentication logs)
 - **APIs:** Registration, login, profile CRUD, verification
+- **Maven:** groupId: com.example.loyalty, artifactId: user-service
 
 #### 2. Point Service  
 - **Responsibility:** Point earning, redemption, balance management
-- **Technology:** Java Spring Boot untuk transaction processing
+- **Technology:** Java Spring Boot + JDK 17 + Maven untuk transaction processing
 - **Database:** PostgreSQL (transactions) + Redis (real-time balance)
 - **APIs:** Earn points, redeem points, balance inquiry, transaction history
+- **Maven:** groupId: com.example.loyalty, artifactId: point-service
 
 #### 3. Rewards Service
 - **Responsibility:** Catalog management, inventory, tier-based availability
-- **Technology:** Node.js/Express dengan image handling
+- **Technology:** Java Spring Boot + JDK 17 + Maven dengan image handling
 - **Database:** PostgreSQL (catalog) + S3 (images)
 - **APIs:** Catalog CRUD, search, filter, availability check
+- **Maven:** groupId: com.example.loyalty, artifactId: rewards-service
 
 #### 4. Admin Service
 - **Responsibility:** Administrative dashboard, reporting, system configuration
-- **Technology:** Node.js/Express dengan React Admin dashboard  
+- **Technology:** Java Spring Boot + JDK 17 + Maven dengan React frontend  
 - **Database:** PostgreSQL (audit logs) + analytics database
 - **APIs:** Dashboard metrics, user management, system config
+- **Maven:** groupId: com.example.loyalty, artifactId: admin-service
 
 ---
 

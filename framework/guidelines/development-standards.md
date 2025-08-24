@@ -1094,20 +1094,21 @@ jobs:
     steps:
     - uses: actions/checkout@v4
     
-    - name: Setup Node.js
-      uses: actions/setup-node@v4
+    - name: Setup Java
+      uses: actions/setup-java@v3
       with:
-        node-version: '18'
-        cache: 'npm'
+        distribution: 'temurin'
+        java-version: '17'
+        cache: 'maven'
     
     - name: Install dependencies
-      run: npm ci
+      run: mvn dependency:resolve
     
     - name: Run linting
-      run: npm run lint
+      run: mvn checkstyle:check
     
     - name: Run unit tests
-      run: npm run test:unit
+      run: mvn test
       
     - name: Run integration tests
       run: npm run test:integration

@@ -191,31 +191,32 @@ Infrastructure Changes:
 
 #### Language-Specific Reviews
 
-##### Node.js/JavaScript Review
+##### Java/Spring Boot Review
 ```markdown
-## JavaScript Best Practices
-- [ ] Async/await used instead of callbacks
-- [ ] Promises properly handled with error catching
-- [ ] No use of `var`, prefer `const` and `let`
-- [ ] Arrow functions used appropriately
-- [ ] Destructuring used where beneficial
+## Java Best Practices
+- [ ] Proper exception handling with try-catch
+- [ ] Optional used for nullable values
+- [ ] Stream API used for collections processing
+- [ ] Lambda expressions used appropriately
+- [ ] Method references used where beneficial
 
-## Node.js Specific
-- [ ] Proper use of EventEmitter patterns
-- [ ] Stream handling for large data
-- [ ] Memory leak prevention measures
-- [ ] Process error handling implemented
-- [ ] Environment variables properly used
+## Spring Boot Specific
+- [ ] Dependency injection properly configured
+- [ ] Component scanning optimized
+- [ ] Configuration properties externalized
+- [ ] Profiles used for different environments
+- [ ] Auto-configuration leveraged effectively
 
-## Express.js Patterns
-- [ ] Middleware properly implemented
-- [ ] Route handlers are thin
-- [ ] Request validation implemented
-- [ ] Response formatting consistent
-- [ ] CORS properly configured
+## Spring MVC Patterns
+- [ ] Controllers are thin and focused
+- [ ] Service layer properly implements business logic
+- [ ] Repository pattern correctly implemented
+- [ ] DTO validation implemented with @Valid
+- [ ] Exception handling with @ControllerAdvice
+- [ ] Response entities used consistently
 ```
 
-##### Java/Spring Boot Review
+##### Additional Java/Spring Boot Review
 ```markdown
 ## Java Best Practices
 - [ ] Proper use of access modifiers
