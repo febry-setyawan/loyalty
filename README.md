@@ -34,6 +34,31 @@ Complete business requirements and implementation details are available in the d
 
 ## 🛠️ Getting Started
 
+### Quick Development Setup
+
+**Get the complete system running in under 5 minutes:**
+
+```bash
+# Clone the repository
+git clone <repository-url>
+cd loyalty
+
+# Start the complete development environment
+docker-compose up
+```
+
+This will start:
+- 4 microservices (user, point, rewards, admin) 
+- PostgreSQL database with initial schema
+- Redis cache
+- Apache Kafka message queue
+- Kong API Gateway
+- Monitoring (Prometheus + Grafana)
+
+**Health Check:** Visit http://localhost:8080/health to verify services are running.
+
+📖 **[Complete Development Guide](./DEV-ENVIRONMENT.md)** - Detailed setup instructions and troubleshooting
+
 ### For Developers
 1. Review the [Business Requirements Document](./doc/business-requirements-document.md) for complete specifications
 2. Check the [Implementation Roadmap](./doc/implementation-roadmap.md) for technical guidance  
