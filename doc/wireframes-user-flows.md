@@ -1,8 +1,7 @@
 # Wireframes & User Flow Diagrams
 # Loyalty System - Interactive Flow Documentation
 
-**Versi:** 1.0  
-**Tanggal:** Desember 2024  
+**Tanggal:** December 2024  
 **Dokumen:** Wireframes & User Flow Diagrams  
 **Project:** Loyalty System Development  
 **Companion to:** UI/UX Design Specification
