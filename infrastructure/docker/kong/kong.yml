@@ -2,22 +2,55 @@
 _format_version: "3.0"
 
 services:
+  # User Service with load balancing configuration
   - name: user-service
     url: http://user-service:8080
     tags:
       - loyalty
       - microservice
     routes:
-      - name: user-service-route
+      # Public routes (no authentication required)
+      - name: user-registration-route
         paths:
-          - /api/v1/users
+          - /api/v1/users/register
+          - /api/v1/users/verify
+          - /api/v1/users/login
+          - /api/v1/users/password-reset
+        methods:
+          - POST
+        strip_path: false
+        plugins:
+          - name: rate-limiting
+            config:
+              minute: 10  # Stricter rate limiting for registration/auth
+              hour: 50
+              policy: local
+      
+      # Protected routes (authentication required)
+      - name: user-profile-route
+        paths:
+          - /api/v1/users/profile
+          - /api/v1/users/logout
         methods:
           - GET
-          - POST
           - PUT
+          - POST
           - DELETE
         strip_path: false
+        plugins:
+          - name: jwt
+            config:
+              key_claim_name: iss
+              claims_to_verify:
+                - exp
+                - iss
+          - name: rate-limiting
+            config:
+              minute: 100  # Standard user rate limiting
+              hour: 1000
+              policy: local
 
+  # Point Service with enhanced rate limiting
   - name: point-service
     url: http://point-service:8081
     tags:
@@ -33,23 +66,64 @@ services:
           - PUT
           - DELETE
         strip_path: false
+        plugins:
+          - name: jwt
+            config:
+              key_claim_name: iss
+              claims_to_verify:
+                - exp
+                - iss
+          - name: rate-limiting
+            config:
+              minute: 100  # Standard user rate limiting
+              hour: 1000
+              policy: local
 
+  # Rewards Service
   - name: rewards-service
     url: http://rewards-service:8082
     tags:
       - loyalty
       - microservice
     routes:
-      - name: rewards-service-route
+      - name: rewards-catalog-route
+        paths:
+          - /api/v1/rewards/catalog
+          - /api/v1/rewards/search
+          - /api/v1/rewards/categories
+          - /api/v1/rewards/featured
+        methods:
+          - GET
+        strip_path: false
+        plugins:
+          - name: rate-limiting
+            config:
+              minute: 200  # Higher rate limit for catalog browsing
+              hour: 2000
+              policy: local
+      
+      - name: rewards-management-route
         paths:
           - /api/v1/rewards
         methods:
-          - GET
           - POST
           - PUT
           - DELETE
         strip_path: false
+        plugins:
+          - name: jwt
+            config:
+              key_claim_name: iss
+              claims_to_verify:
+                - exp
+                - iss
+          - name: rate-limiting
+            config:
+              minute: 50  # Lower rate limit for modifications
+              hour: 500
+              policy: local
 
+  # Admin Service with strict authentication and rate limiting
   - name: admin-service
     url: http://admin-service:8083
     tags:
@@ -66,16 +140,132 @@ services:
           - PUT
           - DELETE
         strip_path: false
+        plugins:
+          - name: jwt
+            config:
+              key_claim_name: iss
+              claims_to_verify:
+                - exp
+                - iss
+                - role  # Additional role claim verification for admin
+          - name: rate-limiting
+            config:
+              minute: 200  # Higher rate limit for admin operations
+              hour: 2000
+              policy: local
 
-  # Health check endpoints aggregation
-  - name: health-check
+  # Partner API Service (higher rate limits)
+  - name: partner-api-service
+    url: http://user-service:8080  # Route to user service for partner operations
+    tags:
+      - loyalty
+      - partner
+    routes:
+      - name: partner-api-route
+        paths:
+          - /api/v1/partners
+        methods:
+          - GET
+          - POST
+          - PUT
+          - DELETE
+        strip_path: false
+        plugins:
+          - name: jwt
+            config:
+              key_claim_name: iss
+              claims_to_verify:
+                - exp
+                - iss
+                - partner_id  # Partner-specific claim
+          - name: rate-limiting
+            config:
+              minute: 1000  # Higher rate limit for partners as per requirements
+              hour: 10000
+              policy: local
+
+  # Health check endpoints aggregation (no authentication required)
+  - name: health-check-user
     url: http://user-service:8080
     tags:
       - health
     routes:
-      - name: health-route
+      - name: health-user-route
         paths:
-          - /health
+          - /health/user
+        methods:
+          - GET
+        strip_path: true
+        plugins:
+          - name: rate-limiting
+            config:
+              minute: 60  # Allow health checks
+              hour: 600
+              policy: local
+
+  - name: health-check-point
+    url: http://point-service:8081
+    tags:
+      - health
+    routes:
+      - name: health-point-route
+        paths:
+          - /health/point
+        methods:
+          - GET
+        strip_path: true
+        plugins:
+          - name: rate-limiting
+            config:
+              minute: 60  # Allow health checks
+              hour: 600
+              policy: local
+
+  - name: health-check-rewards
+    url: http://rewards-service:8082
+    tags:
+      - health
+    routes:
+      - name: health-rewards-route
+        paths:
+          - /health/rewards
+        methods:
+          - GET
+        strip_path: true
+        plugins:
+          - name: rate-limiting
+            config:
+              minute: 60  # Allow health checks
+              hour: 600
+              policy: local
+
+  - name: health-check-admin
+    url: http://admin-service:8083
+    tags:
+      - health
+    routes:
+      - name: health-admin-route
+        paths:
+          - /health/admin
+        methods:
+          - GET
+        strip_path: true
+        plugins:
+          - name: rate-limiting
+            config:
+              minute: 60  # Allow health checks
+              hour: 600
+              policy: local
+
+  # Gateway metrics endpoint
+  - name: gateway-metrics
+    url: http://localhost:8001  # Kong admin API
+    tags:
+      - monitoring
+    routes:
+      - name: gateway-metrics-route
+        paths:
+          - /metrics
         methods:
           - GET
         strip_path: false
@@ -107,11 +297,133 @@ plugins:
       credentials: true
       max_age: 3600
 
-  - name: rate-limiting
+  # Prometheus metrics plugin for Kong monitoring
+  - name: prometheus
     config:
-      minute: 100
-      hour: 1000
-      policy: local
+      per_consumer: true
 
-# Global rate limiting for development
-# Production will have more specific rules per service
+# JWT Authentication - applied to protected routes
+jwt_secrets:
+  - issuer: loyalty-system
+    algorithm: HS256
+    secret: loyalty-jwt-secret-key-change-in-production
+
+consumers:
+  - username: loyalty-user
+    jwt_secrets:
+      - issuer: loyalty-system
+        algorithm: HS256
+        secret: loyalty-jwt-secret-key-change-in-production
+
+  - username: loyalty-partner
+    jwt_secrets:
+      - issuer: loyalty-system
+        algorithm: HS256
+        secret: loyalty-jwt-secret-key-change-in-production
+
+# Load balancing configuration (prepared for production scale)
+upstreams:
+  - name: user-service-upstream
+    algorithm: round-robin
+    healthchecks:
+      active:
+        healthy:
+          http_statuses:
+            - 200
+            - 302
+        unhealthy:
+          http_statuses:
+            - 429
+            - 404
+            - 500
+            - 501
+            - 502
+            - 503
+            - 504
+            - 505
+        http_path: "/health"
+        timeout: 5
+        interval: 30
+      passive:
+        healthy:
+          successes: 5
+        unhealthy:
+          http_failures: 3
+    targets:
+      - target: user-service:8080
+        weight: 100
+
+  - name: point-service-upstream
+    algorithm: round-robin
+    healthchecks:
+      active:
+        healthy:
+          http_statuses:
+            - 200
+            - 302
+        unhealthy:
+          http_statuses:
+            - 429
+            - 404
+            - 500
+            - 501
+            - 502
+            - 503
+            - 504
+            - 505
+        http_path: "/health"
+        timeout: 5
+        interval: 30
+    targets:
+      - target: point-service:8081
+        weight: 100
+
+  - name: rewards-service-upstream
+    algorithm: round-robin
+    healthchecks:
+      active:
+        healthy:
+          http_statuses:
+            - 200
+            - 302
+        unhealthy:
+          http_statuses:
+            - 429
+            - 404
+            - 500
+            - 501
+            - 502
+            - 503
+            - 504
+            - 505
+        http_path: "/health"
+        timeout: 5
+        interval: 30
+    targets:
+      - target: rewards-service:8082
+        weight: 100
+
+  - name: admin-service-upstream
+    algorithm: round-robin
+    healthchecks:
+      active:
+        healthy:
+          http_statuses:
+            - 200
+            - 302
+        unhealthy:
+          http_statuses:
+            - 429
+            - 404
+            - 500
+            - 501
+            - 502
+            - 503
+            - 504
+            - 505
+        http_path: "/health"
+        timeout: 5
+        interval: 30
+    targets:
+      - target: admin-service:8083
+        weight: 100
