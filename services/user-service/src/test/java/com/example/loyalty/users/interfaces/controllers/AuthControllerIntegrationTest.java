@@ -20,6 +20,10 @@ import org.testcontainers.junit.jupiter.Testcontainers;
 
 import java.util.Optional;
 
+import org.springframework.boot.test.mock.mockito.MockBean;
+import org.springframework.data.redis.core.RedisTemplate;
+import com.example.loyalty.common.security.JwtTokenService;
+
 import static org.assertj.core.api.Assertions.assertThat;
 import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.post;
 import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.*;
@@ -31,84 +35,87 @@ import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.
 @Transactional
 class AuthControllerIntegrationTest {
 
-    @Container
-    @ServiceConnection
-    static PostgreSQLContainer<?> postgres = new PostgreSQLContainer<>("postgres:15")
-            .withDatabaseName("loyalty_test")
-            .withUsername("test")
-            .withPassword("test");
+        @MockBean
+        private RedisTemplate<String, String> redisTemplate;
 
-    @Autowired
-    private MockMvc mockMvc;
+        @MockBean
+        private JwtTokenService jwtTokenService;
 
-    @Autowired
-    private JpaUserRepository userRepository;
+        @Container
+        @ServiceConnection
+        static PostgreSQLContainer<?> postgres = new PostgreSQLContainer<>("postgres:15")
+                        .withDatabaseName("loyalty_test")
+                        .withUsername("test")
+                        .withPassword("test");
 
-    @Autowired
-    private ObjectMapper objectMapper;
+        @Autowired
+        private MockMvc mockMvc;
 
-    @Test
-    void shouldRegisterUserSuccessfully() throws Exception {
-        // Given
-        RegisterUserRequest request = new RegisterUserRequest(
-                "test@example.com",
-                "SecurePass123!",
-                "John",
-                "Doe",
-                "+1234567890"
-        );
+        @Autowired
+        private JpaUserRepository userRepository;
 
-        // When & Then
-        mockMvc.perform(post("/api/v1/users/register")
-                        .contentType(MediaType.APPLICATION_JSON)
-                        .content(objectMapper.writeValueAsString(request)))
-                .andExpect(status().isCreated())
-                .andExpect(jsonPath("$.success").value(true))
-                .andExpect(jsonPath("$.data.email").value("test@example.com"))
-                .andExpect(jsonPath("$.data.firstName").value("John"))
-                .andExpect(jsonPath("$.data.lastName").value("Doe"))
-                .andExpect(jsonPath("$.data.status").value("PENDING_VERIFICATION"))
-                .andExpect(jsonPath("$.data.verified").value(false));
+        @Autowired
+        private ObjectMapper objectMapper;
 
-        // Verify user was created in database
-        Optional<User> savedUser = userRepository.findByEmail("test@example.com");
-        assertThat(savedUser).isPresent();
-        assertThat(savedUser.get().getStatus()).isEqualTo(UserStatus.PENDING_VERIFICATION);
-    }
+        @Test
+        void shouldRegisterUserSuccessfully() throws Exception {
+                // Given
+                RegisterUserRequest request = new RegisterUserRequest(
+                                "test@example.com",
+                                "SecurePass123!",
+                                "John",
+                                "Doe",
+                                "+1234567890");
 
-    @Test
-    void shouldRejectInvalidEmailFormat() throws Exception {
-        // Given
-        RegisterUserRequest request = new RegisterUserRequest(
-                "invalid-email",
-                "SecurePass123!",
-                "John",
-                "Doe",
-                null
-        );
+                // When & Then
+                mockMvc.perform(post("/api/v1/users/register")
+                                .contentType(MediaType.APPLICATION_JSON)
+                                .content(objectMapper.writeValueAsString(request)))
+                                .andExpect(status().isCreated())
+                                .andExpect(jsonPath("$.success").value(true))
+                                .andExpect(jsonPath("$.data.email").value("test@example.com"))
+                                .andExpect(jsonPath("$.data.firstName").value("John"))
+                                .andExpect(jsonPath("$.data.lastName").value("Doe"))
+                                .andExpect(jsonPath("$.data.status").value("PENDING_VERIFICATION"))
+                                .andExpect(jsonPath("$.data.verified").value(false));
 
-        // When & Then
-        mockMvc.perform(post("/api/v1/users/register")
-                        .contentType(MediaType.APPLICATION_JSON)
-                        .content(objectMapper.writeValueAsString(request)))
-                .andExpect(status().isBadRequest());
-    }
+                // Verify user was created in database
+                Optional<User> savedUser = userRepository.findByEmail("test@example.com");
+                assertThat(savedUser).isPresent();
+                assertThat(savedUser.get().getStatus()).isEqualTo(UserStatus.PENDING_VERIFICATION);
+        }
 
-    @Test
-    void shouldRejectWeakPassword() throws Exception {
-        // Given
-        RegisterUserRequest request = new RegisterUserRequest(
-                "test@example.com",
-                "weak",
-                "John",
-                "Doe",
-                null
-        );
+        @Test
+        void shouldRejectInvalidEmailFormat() throws Exception {
+                // Given
+                RegisterUserRequest request = new RegisterUserRequest(
+                                "invalid-email",
+                                "SecurePass123!",
+                                "John",
+                                "Doe",
+                                null);
 
-        // When & Then
-        mockMvc.perform(post("/api/v1/users/register")
-                        .contentType(MediaType.APPLICATION_JSON)
-                        .content(objectMapper.writeValueAsString(request)))
-                .andExpect(status().isBadRequest());
-    }
+                // When & Then
+                mockMvc.perform(post("/api/v1/users/register")
+                                .contentType(MediaType.APPLICATION_JSON)
+                                .content(objectMapper.writeValueAsString(request)))
+                                .andExpect(status().isBadRequest());
+        }
+
+        @Test
+        void shouldRejectWeakPassword() throws Exception {
+                // Given
+                RegisterUserRequest request = new RegisterUserRequest(
+                                "test@example.com",
+                                "weak",
+                                "John",
+                                "Doe",
+                                null);
+
+                // When & Then
+                mockMvc.perform(post("/api/v1/users/register")
+                                .contentType(MediaType.APPLICATION_JSON)
+                                .content(objectMapper.writeValueAsString(request)))
+                                .andExpect(status().isBadRequest());
+        }
 }

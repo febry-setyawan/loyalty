@@ -15,6 +15,9 @@ import java.util.UUID;
 @Table(name = "user_auth")
 @EntityListeners(AuditingEntityListener.class)
 public class UserAuth {
+  public void setUserId(UUID userId) {
+    this.userId = userId;
+  }
 
   @Id
   @Column(name = "user_id")
@@ -61,7 +64,8 @@ public class UserAuth {
   private LocalDateTime updatedAt;
 
   // Default constructor for JPA
-  protected UserAuth() {}
+  protected UserAuth() {
+  }
 
   // Constructor
   public UserAuth(User user, String passwordHash) {
@@ -104,7 +108,7 @@ public class UserAuth {
   }
 
   public boolean isVerificationTokenValid(String token) {
-    return this.verificationToken != null 
+    return this.verificationToken != null
         && this.verificationToken.equals(token)
         && this.verificationTokenExpiresAt != null
         && this.verificationTokenExpiresAt.isAfter(LocalDateTime.now());
@@ -121,7 +125,7 @@ public class UserAuth {
   }
 
   public boolean isPasswordResetTokenValid(String token) {
-    return this.passwordResetToken != null 
+    return this.passwordResetToken != null
         && this.passwordResetToken.equals(token)
         && this.passwordResetTokenExpiresAt != null
         && this.passwordResetTokenExpiresAt.isAfter(LocalDateTime.now());
