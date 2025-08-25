@@ -1,5 +1,8 @@
 package com.example.loyalty.users.config;
 
+import com.example.loyalty.common.logging.StructuredLogger;
+import com.fasterxml.jackson.databind.ObjectMapper;
+import org.springframework.boot.autoconfigure.condition.ConditionalOnMissingBean;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.context.annotation.Profile;
@@ -8,7 +11,7 @@ import org.springframework.security.config.annotation.web.configuration.EnableWe
 import org.springframework.security.web.SecurityFilterChain;
 
 /**
- * Security configuration for tests - disables security
+ * Security configuration for tests - disables security and provides test beans
  */
 @Configuration
 @EnableWebSecurity
@@ -21,5 +24,19 @@ public class TestSecurityConfig {
             .csrf(csrf -> csrf.disable())
             .authorizeHttpRequests(authz -> authz.anyRequest().permitAll());
         return http.build();
+    }
+
+    @Bean
+    @ConditionalOnMissingBean
+    public StructuredLogger structuredLogger() {
+        return new StructuredLogger(TestSecurityConfig.class);
+    }
+
+    @Bean
+    @ConditionalOnMissingBean
+    public ObjectMapper objectMapper() {
+        ObjectMapper mapper = new ObjectMapper();
+        mapper.findAndRegisterModules(); // This will register JSR310 module for LocalDateTime
+        return mapper;
     }
 }
