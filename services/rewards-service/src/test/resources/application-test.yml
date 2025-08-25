@@ -1,0 +1,18 @@
+# Test configuration for Rewards Service
+spring:
+  autoconfigure:
+    exclude:
+      - org.springframework.boot.autoconfigure.data.redis.RedisAutoConfiguration
+      - org.springframework.boot.autoconfigure.kafka.KafkaAutoConfiguration
+  jpa:
+    hibernate:
+      ddl-auto: create-drop
+    show-sql: true
+  security:
+    enabled: false
+
+# Disable external dependencies for tests
+logging:
+  level:
+    com.example.loyalty: DEBUG
+    org.springframework.security: DEBUG
