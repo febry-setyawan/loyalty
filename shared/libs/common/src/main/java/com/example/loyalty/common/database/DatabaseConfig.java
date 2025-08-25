@@ -4,15 +4,18 @@ import com.zaxxer.hikari.HikariConfig;
 import com.zaxxer.hikari.HikariDataSource;
 import javax.sql.DataSource;
 import org.springframework.beans.factory.annotation.Value;
+import org.springframework.boot.autoconfigure.condition.ConditionalOnMissingBean;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.context.annotation.Primary;
+import org.springframework.context.annotation.Profile;
 
 /**
  * Database connection configuration with connection pooling Provides optimized database connections
  * for all services
  */
 @Configuration
+@Profile("!test") // Don't activate this configuration in test profile
 public class DatabaseConfig {
 
   @Value("${spring.datasource.url}")
@@ -47,6 +50,7 @@ public class DatabaseConfig {
 
   @Bean
   @Primary
+  @ConditionalOnMissingBean
   public DataSource dataSource() {
     HikariConfig config = new HikariConfig();
 

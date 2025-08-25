@@ -4,13 +4,23 @@ spring:
     exclude:
       - org.springframework.boot.autoconfigure.data.redis.RedisAutoConfiguration
       - org.springframework.boot.autoconfigure.kafka.KafkaAutoConfiguration
-      - com.example.loyalty.common.database.DatabaseConfig
   jpa:
     hibernate:
       ddl-auto: create-drop
     show-sql: true
   security:
     enabled: false
+
+# Encryption key for tests (base64 encoded, 32 bytes)
+app:
+  encryption:
+    key: dGVzdC1lbmNyeXB0aW9uLWtleS0zMi1ieXRlcy0wMDA=
+  jwt:
+    secret: test-jwt-secret-key-for-testing-purposes
+    refresh-secret: test-refresh-secret-key-for-testing
+    expiration: 900000  # 15 minutes
+    refresh-expiration: 604800000  # 7 days
+    issuer: loyalty-test
 
 # Disable security for tests
 logging:
