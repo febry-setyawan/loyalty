@@ -99,14 +99,14 @@ jobs:
           # Scan common library with configured settings
           echo "Scanning common library..."
           cd shared/libs/common
-          mvn org.owasp:dependency-check-maven:check -DnvdApiKey=${{ secrets.NVD_API_KEY }} -DassemblyAnalyzerEnabled=false || true
+          mvn org.owasp:dependency-check-maven:check -DnvdApiKey=${{ secrets.NVD_API_KEY }} -DassemblyAnalyzerEnabled=false -Dformat=SARIF || true
           cd ../../..
           
           # Scan each service for vulnerabilities with configured settings  
           for service in user-service point-service rewards-service admin-service; do
             echo "Scanning $service..."
             cd services/$service
-            mvn org.owasp:dependency-check-maven:check -DnvdApiKey=${{ secrets.NVD_API_KEY }} -DassemblyAnalyzerEnabled=false || true
+            mvn org.owasp:dependency-check-maven:check -DnvdApiKey=${{ secrets.NVD_API_KEY }} -DassemblyAnalyzerEnabled=false -Dformat=SARIF || true
             cd ../..
           done
         env:
