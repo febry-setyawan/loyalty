@@ -65,6 +65,11 @@ jobs:
           distribution: 'temurin'
           cache: maven
 
+      - name: Install common library first
+        run: |
+          cd shared/libs/common
+          mvn clean install -DskipTests
+
       - name: Compile and validate
         run: |
           cd services/${{ matrix.service }}

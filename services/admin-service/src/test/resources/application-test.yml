@@ -1,15 +1,15 @@
-# Test configuration
+# Test configuration for Admin Service
 spring:
   autoconfigure:
     exclude:
       - org.springframework.boot.autoconfigure.data.redis.RedisAutoConfiguration
       - org.springframework.boot.autoconfigure.kafka.KafkaAutoConfiguration
   
-  # Disable Flyway for tests - Testcontainers will handle DB setup
+  # Disable Flyway for tests
   flyway:
     enabled: false
-  
-  # For unit tests that don't use Testcontainers, use H2 in-memory database
+    
+  # Use H2 in-memory database for tests
   datasource:
     url: jdbc:h2:mem:testdb;MODE=PostgreSQL;DATABASE_TO_LOWER=TRUE;DEFAULT_NULL_ORDERING=HIGH
     driver-class-name: org.h2.Driver
@@ -25,18 +25,7 @@ spring:
   security:
     enabled: false
 
-# Encryption key for tests (base64 encoded, 32 bytes)
-app:
-  encryption:
-    key: dGVzdC1lbmNyeXB0aW9uLWtleS0zMi1ieXRlcy0wMDA=
-  jwt:
-    secret: test-jwt-secret-key-for-testing-purposes
-    refresh-secret: test-refresh-secret-key-for-testing
-    expiration: 900000  # 15 minutes
-    refresh-expiration: 604800000  # 7 days
-    issuer: loyalty-test
-
-# Disable security for tests
+# Disable external dependencies for tests
 logging:
   level:
     com.example.loyalty: DEBUG
