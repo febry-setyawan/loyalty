@@ -279,7 +279,7 @@ loyalty-system/
 │
 ├── 📄 LICENSE                          # Project license
 ├── 📖 CHANGELOG.md                     # Change log
-├── 🤝 CONTRIBUTING.md                  # Contribution guidelines
+├── 🤝 doc/contributing.md                  # Contribution guidelines
 ├── 🔒 SECURITY.md                      # Security policy
 └── 📋 PROJECT.md                       # This file
 ```

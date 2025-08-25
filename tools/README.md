@@ -65,4 +65,4 @@ This directory contains utility scripts and tools for the loyalty system develop
 3. **Use --help flag with any script to see detailed options**
 4. **Test scripts in development before using in staging/production**
 
-For detailed documentation, see the individual script files and [PROJECT-STRUCTURE.md](../../PROJECT-STRUCTURE.md).
+For detailed documentation, see the individual script files and [project-structure.md](../../doc/project-structure.md).

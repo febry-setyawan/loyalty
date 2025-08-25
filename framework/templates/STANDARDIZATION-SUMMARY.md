@@ -8,11 +8,11 @@
 
 ## 🎯 Problem Statement (Original Indonesian)
 
-> "sebagai senior principle engineer, tolong kamu periksa dokumentasi di file PROJECT-STRUCTURE.md karena saat ini semua backend rencananya akan menggunakan springboot, di dokumentasi ini untuk user service nampaknya strukture tidak sama dengan poin service. tolong buat standarisasi untuk struktur project backend nya supaya template nya bisa konsisten jika ke depannya ada microservice baru"
+> "sebagai senior principle engineer, tolong kamu periksa dokumentasi di file doc/project-structure.md karena saat ini semua backend rencananya akan menggunakan springboot, di dokumentasi ini untuk user service nampaknya strukture tidak sama dengan poin service. tolong buat standarisasi untuk struktur project backend nya supaya template nya bisa konsisten jika ke depannya ada microservice baru"
 
 ## 🎯 Problem Statement (English Translation)
 
-As a senior principal engineer, please check the documentation in PROJECT-STRUCTURE.md because currently all backend services are planned to use Spring Boot. In this documentation, the user service structure appears to be different from the point service. Please create standardization for the backend project structure so that the template can be consistent if there are new microservices in the future.
+As a senior principal engineer, please check the documentation in doc/project-structure.md because currently all backend services are planned to use Spring Boot. In this documentation, the user service structure appears to be different from the point service. Please create standardization for the backend project structure so that the template can be consistent if there are new microservices in the future.
 
 ---
 
@@ -49,7 +49,7 @@ As a senior principal engineer, please check the documentation in PROJECT-STRUCT
   - Configuration templates
   - Documentation standards
 
-### 2. **Updated PROJECT-STRUCTURE.md**
+### 2. **Updated doc/project-structure.md**
 - Added reference to standard template
 - Standardized service structure descriptions
 - Added template usage instructions
@@ -162,7 +162,7 @@ src/main/java/com/example/loyalty/{service-name}/
 
 ### **Immediate Actions:**
 1. ✅ Share standardized template with development team
-2. ✅ Update PROJECT-STRUCTURE.md documentation
+2. ✅ Update doc/project-structure.md documentation
 3. ✅ Reference standard template in all service docs
 
 ### **Future Improvements:**

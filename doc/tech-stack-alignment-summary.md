@@ -61,7 +61,7 @@ This document summarizes the comprehensive review and alignment of all loyalty s
 - [x] `doc/technical-design-architecture.md` - Updated system architecture diagrams
 - [x] `doc/ui-ux-implementation-guide.md` - Complete rewrite for Material UI + Flutter
 - [x] `doc/ui-ux-design-specification.md` - Updated CSS framework recommendations  
-- [x] `PROJECT-STRUCTURE.md` - Updated mobile app structure for Flutter
+- [x] `project-structure.md` - Updated mobile app structure for Flutter
 
 ### ✅ Framework Templates  
 - [x] `framework/templates/admin-service/README.md` - Material UI + TypeScript

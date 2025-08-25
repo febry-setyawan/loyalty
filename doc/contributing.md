@@ -84,7 +84,7 @@ We follow **Git Flow** branching model:
    ```
 
 2. **Implement Feature**
-   - Follow [development standards](./framework/guidelines/development-standards.md)
+   - Follow [development standards](../framework/guidelines/development-standards.md)
    - Write comprehensive tests
    - Update documentation as needed
 

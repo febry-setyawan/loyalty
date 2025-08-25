@@ -181,7 +181,7 @@ After the environment is running:
 
 This development environment follows all requirements from:
 - ✅ **Story 1.1**: Development Environment Setup
-- ✅ **PROJECT-STRUCTURE.md**: Monorepo structure
+- ✅ **project-structure.md**: Monorepo structure
 - ✅ **development-standards.md**: Coding and deployment standards
 - ✅ **pipeline-templates.md**: Docker configuration templates
 
