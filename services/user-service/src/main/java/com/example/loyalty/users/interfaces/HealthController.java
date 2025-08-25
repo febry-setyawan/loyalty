@@ -61,15 +61,15 @@ public class HealthController {
 
   /** Test endpoint to demonstrate common library integration */
   @GetMapping("/test-validation")
-  public ResponseEntity<ApiResponse<String>> testValidation(@RequestParam(required = false) String email) {
+  public ResponseEntity<ApiResponse<String>> testValidation(
+      @RequestParam(required = false) String email) {
     try {
       if (email != null) {
         // Use ValidationUtils from common library
         String validEmail = ValidationUtils.requireValidEmail(email);
         return ResponseEntity.ok(
             ApiResponse.success(
-                "Valid email: " + validEmail,
-                "Email validation successful using common library"));
+                "Valid email: " + validEmail, "Email validation successful using common library"));
       } else {
         return ResponseEntity.ok(
             ApiResponse.success(
