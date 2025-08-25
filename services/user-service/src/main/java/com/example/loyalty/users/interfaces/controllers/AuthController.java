@@ -3,6 +3,7 @@ package com.example.loyalty.users.interfaces.controllers;
 import com.example.loyalty.common.response.ApiResponse;
 import com.example.loyalty.users.application.dto.*;
 import com.example.loyalty.users.application.usecases.*;
+import com.example.loyalty.users.infrastructure.security.RateLimit;
 import jakarta.validation.Valid;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -23,14 +24,20 @@ public class AuthController {
   private final RegisterUserUseCase registerUserUseCase;
   private final LoginUserUseCase loginUserUseCase;
   private final VerifyUserUseCase verifyUserUseCase;
+  private final PasswordResetUseCase passwordResetUseCase;
+  private final PasswordResetConfirmUseCase passwordResetConfirmUseCase;
   
   public AuthController(
       RegisterUserUseCase registerUserUseCase,
       LoginUserUseCase loginUserUseCase,
-      VerifyUserUseCase verifyUserUseCase) {
+      VerifyUserUseCase verifyUserUseCase,
+      PasswordResetUseCase passwordResetUseCase,
+      PasswordResetConfirmUseCase passwordResetConfirmUseCase) {
     this.registerUserUseCase = registerUserUseCase;
     this.loginUserUseCase = loginUserUseCase;
     this.verifyUserUseCase = verifyUserUseCase;
+    this.passwordResetUseCase = passwordResetUseCase;
+    this.passwordResetConfirmUseCase = passwordResetConfirmUseCase;
   }
   
   @PostMapping("/register")
@@ -45,6 +52,7 @@ public class AuthController {
   }
   
   @PostMapping("/login")
+  @RateLimit(limit = 5, window = 300) // 5 attempts per 5 minutes
   public ResponseEntity<ApiResponse<LoginResponse>> login(@Valid @RequestBody LoginRequest request) {
     logger.info("User login request for email: {}", request.getEmail());
     
@@ -71,5 +79,26 @@ public class AuthController {
     logger.info("User logout request");
     
     return ResponseEntity.ok(ApiResponse.success("Token should be removed from client", "Logout successful"));
+  }
+  
+  @PostMapping("/password-reset")
+  @RateLimit(limit = 3, window = 300) // 3 reset requests per 5 minutes
+  public ResponseEntity<ApiResponse<String>> requestPasswordReset(@Valid @RequestBody PasswordResetRequest request) {
+    logger.info("Password reset request for email: {}", request.getEmail());
+    
+    passwordResetUseCase.execute(request);
+    
+    logger.info("Password reset email sent to: {}", request.getEmail());
+    return ResponseEntity.ok(ApiResponse.success("Password reset instructions sent to your email", "Password reset initiated"));
+  }
+  
+  @PostMapping("/password-reset/confirm")
+  public ResponseEntity<ApiResponse<UserResponse>> confirmPasswordReset(@Valid @RequestBody PasswordResetConfirmRequest request) {
+    logger.info("Password reset confirmation request");
+    
+    UserResponse response = passwordResetConfirmUseCase.execute(request);
+    
+    logger.info("Password reset successfully for user: {}", response.getId());
+    return ResponseEntity.ok(ApiResponse.success(response, "Password reset successfully"));
   }
 }

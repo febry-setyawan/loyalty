@@ -1,0 +1,19 @@
+# Test configuration
+spring:
+  jpa:
+    hibernate:
+      ddl-auto: create-drop
+    show-sql: true
+  kafka:
+    producer:
+      bootstrap-servers: localhost:9092
+    consumer:
+      bootstrap-servers: localhost:9092
+  security:
+    enabled: false
+
+# Disable security for tests
+logging:
+  level:
+    com.example.loyalty: DEBUG
+    org.springframework.security: DEBUG
