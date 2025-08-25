@@ -155,6 +155,8 @@ jobs:
       security-events: write
       actions: read
       contents: read
+      checks: write
+      attestations: write
       id-token: write
     needs: test
     strategy:
