@@ -83,13 +83,7 @@ jobs:
   # Dependency vulnerability scan for PRs
   pr-security-scan:
     runs-on: ubuntu-latest
-    permissions:
-      security-events: write
-      actions: read
-      contents: read
-      checks: write
-      attestations: write
-      id-token: write
+    permissions: write-all
     steps:
       - name: Checkout code
         uses: actions/checkout@v4
