@@ -1,12 +1,11 @@
 package com.example.loyalty.users.config;
 
 import org.springframework.context.annotation.Configuration;
-import org.springframework.data.jpa.repository.config.EnableJpaAuditing;
 
 /**
  * JPA configuration for the user service
+ * Note: JPA Auditing is enabled by LoyaltyCommonAutoConfiguration
  */
 @Configuration
-@EnableJpaAuditing
 public class JpaConfig {
 }

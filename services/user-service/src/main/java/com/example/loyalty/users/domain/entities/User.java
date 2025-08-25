@@ -6,6 +6,8 @@ import jakarta.persistence.*;
 import jakarta.validation.constraints.Email;
 import jakarta.validation.constraints.NotBlank;
 import jakarta.validation.constraints.Size;
+import org.hibernate.annotations.JdbcTypeCode;
+import org.hibernate.type.SqlTypes;
 import java.time.LocalDate;
 import java.util.Map;
 import java.util.UUID;
@@ -55,6 +57,7 @@ public class User extends BaseEntity {
   private UserTier tier = UserTier.BRONZE;
 
   @Column(name = "preferences", columnDefinition = "jsonb")
+  @JdbcTypeCode(SqlTypes.JSON)
   private Map<String, Object> preferences;
 
   // Default constructor for JPA

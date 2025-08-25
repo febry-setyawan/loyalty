@@ -1,7 +1,9 @@
 package com.example.loyalty.users.domain.entities;
 
-import com.example.loyalty.common.database.BaseEntity;
 import jakarta.persistence.*;
+import org.springframework.data.annotation.CreatedDate;
+import org.springframework.data.annotation.LastModifiedDate;
+import org.springframework.data.jpa.domain.support.AuditingEntityListener;
 import java.time.LocalDateTime;
 import java.util.UUID;
 
@@ -11,7 +13,8 @@ import java.util.UUID;
  */
 @Entity
 @Table(name = "user_auth")
-public class UserAuth extends BaseEntity {
+@EntityListeners(AuditingEntityListener.class)
+public class UserAuth {
 
   @Id
   @Column(name = "user_id")
@@ -48,6 +51,14 @@ public class UserAuth extends BaseEntity {
 
   @Column(name = "password_reset_token_expires_at")
   private LocalDateTime passwordResetTokenExpiresAt;
+
+  @CreatedDate
+  @Column(name = "created_at", nullable = false)
+  private LocalDateTime createdAt;
+
+  @LastModifiedDate
+  @Column(name = "updated_at", nullable = false)
+  private LocalDateTime updatedAt;
 
   // Default constructor for JPA
   protected UserAuth() {}
@@ -170,5 +181,13 @@ public class UserAuth extends BaseEntity {
 
   public LocalDateTime getPasswordResetTokenExpiresAt() {
     return passwordResetTokenExpiresAt;
+  }
+
+  public LocalDateTime getCreatedAt() {
+    return createdAt;
+  }
+
+  public LocalDateTime getUpdatedAt() {
+    return updatedAt;
   }
 }
