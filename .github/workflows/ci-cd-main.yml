@@ -136,8 +136,9 @@ jobs:
       - name: Run OWASP Dependency Check
         run: |
           cd shared/libs/common
+          # Run OWASP dependency check, continue on failure (e.g., NVD API rate limits)
           mvn org.owasp:dependency-check-maven:check -DnvdApiKey=${{ secrets.NVD_API_KEY }} -DassemblyAnalyzerEnabled=false -Dformat=SARIF || true
-          # Ensure SARIF file exists even if scan fails
+          # Ensure SARIF file exists even if scan fails - prevents "Path does not exist" error in upload step
           if [ ! -f "target/dependency-check-report.sarif" ]; then
             mkdir -p target
             cat > target/dependency-check-report.sarif << 'EOF'
@@ -197,8 +198,9 @@ jobs:
       - name: Run OWASP Dependency Check
         run: |
           cd services/${{ matrix.service }}
+          # Run OWASP dependency check, continue on failure (e.g., NVD API rate limits) 
           mvn org.owasp:dependency-check-maven:check -DnvdApiKey=${{ secrets.NVD_API_KEY }} -DassemblyAnalyzerEnabled=false -Dformat=SARIF || true
-          # Ensure SARIF file exists even if scan fails
+          # Ensure SARIF file exists even if scan fails - prevents "Path does not exist" error in upload step
           if [ ! -f "target/dependency-check-report.sarif" ]; then
             mkdir -p target
             cat > target/dependency-check-report.sarif << 'EOF'
