@@ -152,7 +152,7 @@ This document serves as a quick reference for the loyalty system implementation 
 - [x] **Story 1.5:** CI/CD Pipeline & DevOps Setup - GitHub Actions, Terraform, monitoring ✅
 
 #### Epic 2: User Service Implementation  
-- [ ] **Story 2.1:** User Registration & Authentication - Multi-channel registration, JWT auth
+- [x] **Story 2.1:** User Registration & Authentication - Multi-channel registration, JWT auth ✅
 - [ ] **Story 2.2:** User Profile Management - CRUD operations, privacy settings
 
 #### Epic 3: Point Service Implementation

@@ -1,6 +1,7 @@
 package com.example.loyalty.common.config;
 
 import com.example.loyalty.common.logging.CorrelationIdFilter;
+import com.example.loyalty.common.logging.StructuredLogger;
 import jakarta.validation.Validation;
 import jakarta.validation.Validator;
 import jakarta.validation.ValidatorFactory;
@@ -32,5 +33,12 @@ public class LoyaltyCommonAutoConfiguration {
   @ConditionalOnMissingBean
   public CorrelationIdFilter correlationIdFilter() {
     return new CorrelationIdFilter();
+  }
+
+  /** Structured logger for audit service */
+  @Bean
+  @ConditionalOnMissingBean
+  public StructuredLogger structuredLogger() {
+    return new StructuredLogger(com.example.loyalty.common.security.SecurityAuditService.class);
   }
 }
