@@ -149,49 +149,7 @@
                         <removeUnusedImports />
                     </java>
                 </configuration>
-            </plugin>
-            <plugin>
-                <groupId>org.owasp</groupId>
-                <artifactId>dependency-check-maven</artifactId>
-                <version>9.0.7</version>
-                <configuration>
-                    <format>ALL</format>
-                    <outputDirectory>${project.build.directory}</outputDirectory>
-                    <failBuildOnCVSS>7</failBuildOnCVSS>
-                    <!-- Disable NVD datafeed to avoid 403 errors in CI/CD -->
-                    <nvdApiDatafeed>false</nvdApiDatafeed>
-                    <nvdDatafeedEnabled>false</nvdDatafeedEnabled>
-                    <!-- Use local cache and disable API calls that may fail -->
-                    <cacheDirectory>${user.home}/.m2/repository/nvd-cache</cacheDirectory>
-                    <dataDirectory>${user.home}/.m2/repository/nvd-data</dataDirectory>
-                    <!-- Optimize analyzers for CI/CD -->
-                    <centralAnalyzerEnabled>false</centralAnalyzerEnabled>
-                    <nexusAnalyzerEnabled>false</nexusAnalyzerEnabled>
-                    <retireJsAnalyzerEnabled>false</retireJsAnalyzerEnabled>
-                    <ossIndexAnalyzerEnabled>false</ossIndexAnalyzerEnabled>
-                    <jarAnalyzerEnabled>true</jarAnalyzerEnabled>
-                    <archiveAnalyzerEnabled>true</archiveAnalyzerEnabled>
-                    <assemblyAnalyzerEnabled>true</assemblyAnalyzerEnabled>
-                    <!-- Settings optimized for restricted network environments -->
-                    <nvdMaxRetryCount>1</nvdMaxRetryCount>
-                    <connectionTimeout>10000</connectionTimeout>
-                    <readTimeout>10000</readTimeout>
-                    <skipOnError>true</skipOnError>
-                    <!-- Suppress common false positives in CI/CD -->
-                    <suppressionFiles>
-                        <suppressionFile>${project.basedir}/dependency-check-suppressions.xml</suppressionFile>
-                    </suppressionFiles>
-                    <!-- Fail gracefully with warnings instead of errors -->
-                    <failOnError>false</failOnError>
-                </configuration>
-                <executions>
-                    <execution>
-                        <goals>
-                            <goal>check</goal>
-                        </goals>
-                    </execution>
-                </executions>
-            </plugin>
+            </plugin>            
         </plugins>
     </build>
 

@@ -136,7 +136,7 @@ jobs:
       - name: Run OWASP Dependency Check
         run: |
           cd shared/libs/common
-          mvn org.owasp:dependency-check-maven:check
+          mvn org.owasp:dependency-check-maven:check -DnvdApiKey=${{ secrets.NVD_API_KEY }} -DassemblyAnalyzerEnabled=false
         env:
           NVD_API_KEY: ${{ secrets.NVD_API_KEY }}
         continue-on-error: true
@@ -170,7 +170,7 @@ jobs:
       - name: Run OWASP Dependency Check
         run: |
           cd services/${{ matrix.service }}
-          mvn org.owasp:dependency-check-maven:check
+          mvn org.owasp:dependency-check-maven:check -DnvdApiKey=${{ secrets.NVD_API_KEY }} -DassemblyAnalyzerEnabled=false
         env:
           NVD_API_KEY: ${{ secrets.NVD_API_KEY }}
         continue-on-error: true
