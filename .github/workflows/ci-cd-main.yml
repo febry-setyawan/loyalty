@@ -196,6 +196,26 @@ jobs:
       - name: Checkout code
         uses: actions/checkout@v4
 
+      - name: Set up JDK 17
+        uses: actions/setup-java@v4
+        with:
+          java-version: ${{ env.JAVA_VERSION }}
+          distribution: 'temurin'
+          cache: maven
+
+      - name: Cache Maven dependencies
+        uses: actions/cache@v4
+        with:
+          path: ~/.m2
+          key: ${{ env.MAVEN_CACHE_KEY }}-${{ runner.os }}-${{ hashFiles('**/pom.xml') }}
+          restore-keys: |
+            ${{ env.MAVEN_CACHE_KEY }}-${{ runner.os }}-
+
+      - name: Build and install common library
+        run: |
+          cd shared/libs/common
+          mvn clean install -DskipTests -B -q
+
       - name: Set up Docker Buildx
         uses: docker/setup-buildx-action@v3
 
@@ -220,13 +240,15 @@ jobs:
       - name: Build and push Docker image
         uses: docker/build-push-action@v5
         with:
-          context: ./services/${{ matrix.service }}
+          context: .
           file: ./services/${{ matrix.service }}/Dockerfile
           push: true
           tags: ${{ steps.meta.outputs.tags }}
           labels: ${{ steps.meta.outputs.labels }}
           cache-from: type=gha
           cache-to: type=gha,mode=max
+          build-args: |
+            SERVICE_NAME=${{ matrix.service }}
 
       - name: Install Cosign
         uses: sigstore/cosign-installer@v3
