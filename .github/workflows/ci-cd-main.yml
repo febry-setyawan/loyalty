@@ -151,6 +151,11 @@ jobs:
   # Job 4: Security Scanning for Services
   security:
     runs-on: ubuntu-latest
+    permissions:
+      security-events: write
+      actions: read
+      contents: read
+      id-token: write
     needs: test
     strategy:
       matrix:
