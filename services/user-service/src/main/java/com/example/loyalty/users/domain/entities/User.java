@@ -2,6 +2,7 @@ package com.example.loyalty.users.domain.entities;
 
 import com.example.loyalty.common.database.BaseEntity;
 import com.example.loyalty.common.security.SensitiveData;
+import com.example.loyalty.users.domain.valueobjects.PrivacySettings;
 import jakarta.persistence.*;
 import jakarta.validation.constraints.Email;
 import jakarta.validation.constraints.NotBlank;
@@ -60,6 +61,19 @@ public class User extends BaseEntity {
   @JdbcTypeCode(SqlTypes.JSON)
   private Map<String, Object> preferences;
 
+  @Column(name = "avatar_url")
+  @Size(max = 500, message = "Avatar URL too long")
+  private String avatarUrl;
+
+  @Embedded
+  @AttributeOverrides({
+    @AttributeOverride(name = "emailVisible", column = @Column(name = "privacy_email_visible")),
+    @AttributeOverride(name = "phoneVisible", column = @Column(name = "privacy_phone_visible")),
+    @AttributeOverride(name = "dateOfBirthVisible", column = @Column(name = "privacy_dob_visible")),
+    @AttributeOverride(name = "profilePictureVisible", column = @Column(name = "privacy_picture_visible"))
+  })
+  private PrivacySettings privacySettings;
+
   // Default constructor for JPA
   protected User() {}
 
@@ -69,6 +83,7 @@ public class User extends BaseEntity {
     this.firstName = firstName;
     this.lastName = lastName;
     this.status = UserStatus.PENDING_VERIFICATION;
+    this.privacySettings = PrivacySettings.defaultSettings();
   }
 
   // Business methods
@@ -97,6 +112,14 @@ public class User extends BaseEntity {
     this.lastName = lastName;
     this.phoneNumber = phoneNumber;
     this.dateOfBirth = dateOfBirth;
+  }
+
+  public void updatePrivacySettings(PrivacySettings privacySettings) {
+    this.privacySettings = privacySettings;
+  }
+
+  public void updateAvatarUrl(String avatarUrl) {
+    this.avatarUrl = avatarUrl;
   }
 
   public String getFullName() {
@@ -152,5 +175,21 @@ public class User extends BaseEntity {
 
   public void setPreferences(Map<String, Object> preferences) {
     this.preferences = preferences;
+  }
+
+  public String getAvatarUrl() {
+    return avatarUrl;
+  }
+
+  public void setAvatarUrl(String avatarUrl) {
+    this.avatarUrl = avatarUrl;
+  }
+
+  public PrivacySettings getPrivacySettings() {
+    return privacySettings;
+  }
+
+  public void setPrivacySettings(PrivacySettings privacySettings) {
+    this.privacySettings = privacySettings;
   }
 }
