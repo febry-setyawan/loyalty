@@ -153,7 +153,7 @@ This document serves as a quick reference for the loyalty system implementation 
 
 #### Epic 2: User Service Implementation  
 - [x] **Story 2.1:** User Registration & Authentication - Multi-channel registration, JWT auth ✅
-- [ ] **Story 2.2:** User Profile Management - CRUD operations, privacy settings
+- [x] **Story 2.2:** User Profile Management - CRUD operations, privacy settings ✅
 
 #### Epic 3: Point Service Implementation
 - [ ] **Story 3.1:** Point Earning System - Real-time calculation, bonus multipliers, referrals
