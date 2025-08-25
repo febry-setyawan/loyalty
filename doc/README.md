@@ -101,7 +101,7 @@ Business intelligence: Analytics, partner integration, mobile enhancement
 - [ ] Review business objectives and success metrics
 - [ ] Check acceptance criteria for features to be worked on
 - [ ] Follow implementation roadmap guidelines
-- [ ] **Read [Contributing Guidelines](../CONTRIBUTING.md) for development workflow**
+- [ ] **Read [Contributing Guidelines](./contributing.md) for development workflow**
 - [ ] **Setup development environment using [DevOps Guide](../framework/guidelines/devops-deployment-guide.md)**
 
 ### Development Guidelines:

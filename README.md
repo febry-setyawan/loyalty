@@ -57,17 +57,17 @@ This will start:
 
 **Health Check:** Visit http://localhost:8080/health to verify services are running.
 
-📖 **[Complete Development Guide](./DEV-ENVIRONMENT.md)** - Detailed setup instructions and troubleshooting
+📖 **[Complete Development Guide](./doc/dev-environment.md)** - Detailed setup instructions and troubleshooting
 
 ### For Developers
 1. Review the [Business Requirements Document](./doc/business-requirements-document.md) for complete specifications
 2. Check the [Implementation Roadmap](./doc/implementation-roadmap.md) for technical guidance  
-3. Read the [Contributing Guidelines](./CONTRIBUTING.md) for development workflow
+3. Read the [Contributing Guidelines](./doc/contributing.md) for development workflow
 4. Follow the [Development Framework](./framework/README.md) for implementation standards
 5. Use the phase-based development approach as outlined in the documentation
 
 ### For Contributors
-- **[Contributing Guidelines](./CONTRIBUTING.md)** - How to contribute code, documentation, and improvements
+- **[Contributing Guidelines](./doc/contributing.md)** - How to contribute code, documentation, and improvements
 - **[Development Standards](./framework/guidelines/development-standards.md)** - Coding standards and best practices
 - **[Code Review Process](./framework/review/code-review-framework.md)** - Quality assurance guidelines
 
@@ -77,7 +77,7 @@ This will start:
 - 🚀 [Implementation Roadmap](./doc/implementation-roadmap.md)
 - 🎨 [UI/UX Design Specs](./doc/ui-ux-design-specification.md)
 - 🛠️ [Development Framework](./framework/README.md)
-- 🤝 [How to Contribute](./CONTRIBUTING.md)
+- 🤝 [How to Contribute](./doc/contributing.md)
 
 ## 📊 Success Metrics
 - System uptime: 99.9%
