@@ -82,4 +82,31 @@ class ProfileUseCaseUnitTest {
     verify(validationUtils).validate(request);
     verify(userRepository).save(user);
   }
+
+  @Test
+  @DisplayName("Should handle empty phone number in profile update")
+  void should_handle_empty_phone_number_in_profile_update() {
+    // Given
+    UUID userId = UUID.randomUUID();
+    User user = new User("test@example.com", "John", "Doe");
+    UpdateProfileRequest request = new UpdateProfileRequest(
+      "Jane", "Smith", null, LocalDate.of(1990, 1, 1)
+    );
+
+    given(userRepository.findById(userId)).willReturn(Optional.of(user));
+    given(userRepository.save(any(User.class))).willAnswer(invocation -> invocation.getArgument(0));
+
+    // When
+    User result = updateUserProfileUseCase.execute(userId, request);
+
+    // Then
+    assertThat(result).isNotNull();
+    assertThat(result.getFirstName()).isEqualTo("Jane");
+    assertThat(result.getLastName()).isEqualTo("Smith");
+    assertThat(result.getPhoneNumber()).isNull();
+    assertThat(result.getDateOfBirth()).isEqualTo(LocalDate.of(1990, 1, 1));
+    
+    verify(validationUtils).validate(request);
+    verify(userRepository).save(user);
+  }
 }

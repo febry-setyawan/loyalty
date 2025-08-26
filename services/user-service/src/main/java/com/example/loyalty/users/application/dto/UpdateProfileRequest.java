@@ -2,6 +2,7 @@ package com.example.loyalty.users.application.dto;
 
 import jakarta.validation.constraints.NotBlank;
 import jakarta.validation.constraints.Past;
+import jakarta.validation.constraints.Pattern;
 import jakarta.validation.constraints.Size;
 import java.time.LocalDate;
 
@@ -19,6 +20,7 @@ public class UpdateProfileRequest {
   private String lastName;
 
   @Size(max = 20, message = "Phone number too long")
+  @Pattern(regexp = "^\\+?[1-9]\\d{1,14}$|^$", message = "Invalid phone number format")
   private String phoneNumber;
 
   @Past(message = "Date of birth must be in the past")

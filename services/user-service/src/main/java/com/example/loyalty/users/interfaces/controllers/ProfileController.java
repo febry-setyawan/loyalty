@@ -21,10 +21,15 @@ import java.util.UUID;
 
 /**
  * REST controller for user profile management operations
+ * 
+ * TODO: Security Implementation Required
+ * - Replace hardcoded user IDs with proper JWT token extraction
+ * - Implement proper authentication and authorization
+ * - Add rate limiting and input sanitization
  */
 @RestController
 @RequestMapping("/api/v1/users")
-@CrossOrigin(origins = "*") // Configure properly for production
+@CrossOrigin(origins = "*") // FIXME: Configure properly for production - should be specific origins
 public class ProfileController {
 
   private static final Logger logger = LoggerFactory.getLogger(ProfileController.class);
@@ -45,12 +50,21 @@ public class ProfileController {
     this.uploadAvatarUseCase = uploadAvatarUseCase;
   }
 
+  /**
+   * TODO: Replace with proper JWT token extraction
+   * This is a temporary implementation for development purposes
+   * In production, this should extract the user ID from the JWT token in SecurityContext
+   */
+  private UUID getCurrentUserId() {
+    // FIXME: This is a security risk - implement proper JWT authentication
+    return UUID.fromString("550e8400-e29b-41d4-a716-446655440000");
+  }
+
   @GetMapping("/profile")
   public ResponseEntity<ApiResponse<ProfileResponse>> getProfile() {
     logger.info("Getting user profile");
     
-    // TODO: In production, get userId from JWT token/security context
-    UUID userId = UUID.fromString("550e8400-e29b-41d4-a716-446655440000"); // Placeholder
+    UUID userId = getCurrentUserId();
     
     User user = getUserProfileUseCase.execute(userId);
     ProfileResponse response = ProfileResponse.from(user);
@@ -62,8 +76,7 @@ public class ProfileController {
   public ResponseEntity<ApiResponse<ProfileResponse>> updateProfile(@Valid @RequestBody UpdateProfileRequest request) {
     logger.info("Updating user profile");
     
-    // TODO: In production, get userId from JWT token/security context
-    UUID userId = UUID.fromString("550e8400-e29b-41d4-a716-446655440000"); // Placeholder
+    UUID userId = getCurrentUserId();
     
     User user = updateUserProfileUseCase.execute(userId, request);
     ProfileResponse response = ProfileResponse.from(user);
@@ -75,8 +88,7 @@ public class ProfileController {
   public ResponseEntity<ApiResponse<ProfileResponse>> uploadAvatar(@RequestParam("file") MultipartFile file) {
     logger.info("Uploading user avatar");
     
-    // TODO: In production, get userId from JWT token/security context
-    UUID userId = UUID.fromString("550e8400-e29b-41d4-a716-446655440000"); // Placeholder
+    UUID userId = getCurrentUserId();
     
     User user = uploadAvatarUseCase.execute(userId, file);
     ProfileResponse response = ProfileResponse.from(user);
@@ -88,8 +100,7 @@ public class ProfileController {
   public ResponseEntity<ApiResponse<PrivacySettingsResponse>> getPrivacySettings() {
     logger.info("Getting user privacy settings");
     
-    // TODO: In production, get userId from JWT token/security context
-    UUID userId = UUID.fromString("550e8400-e29b-41d4-a716-446655440000"); // Placeholder
+    UUID userId = getCurrentUserId();
     
     User user = getUserProfileUseCase.execute(userId);
     PrivacySettings privacy = user.getPrivacySettings();
@@ -113,8 +124,7 @@ public class ProfileController {
   public ResponseEntity<ApiResponse<PrivacySettingsResponse>> updatePrivacySettings(@Valid @RequestBody UpdatePrivacyRequest request) {
     logger.info("Updating user privacy settings");
     
-    // TODO: In production, get userId from JWT token/security context
-    UUID userId = UUID.fromString("550e8400-e29b-41d4-a716-446655440000"); // Placeholder
+    UUID userId = getCurrentUserId();
     
     User user = updatePrivacySettingsUseCase.execute(userId, request);
     PrivacySettings privacy = user.getPrivacySettings();
