@@ -17,6 +17,9 @@ spring:
     username: test
     password: test
   
+  mail:
+    host: ""  # Disable mail for tests
+  
   jpa:
     hibernate:
       ddl-auto: create-drop
@@ -41,10 +44,6 @@ app:
     use-hardcoded-user-id: true
     hardcoded-user-id: "550e8400-e29b-41d4-a716-446655440000"
 
-  email:
-    smtp:
-      host: ""  # No SMTP in tests - will use LoggingEmailService
-  
   sms:
     provider: "log"  # Use logging SMS service for tests
 

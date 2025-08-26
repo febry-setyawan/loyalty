@@ -4,7 +4,7 @@ import com.example.loyalty.users.application.services.EmailService;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Value;
-import org.springframework.boot.autoconfigure.condition.ConditionalOnProperty;
+import org.springframework.boot.autoconfigure.condition.ConditionalOnBean;
 import org.springframework.mail.SimpleMailMessage;
 import org.springframework.mail.javamail.JavaMailSender;
 import org.springframework.stereotype.Service;
@@ -14,14 +14,14 @@ import org.springframework.stereotype.Service;
  * Uses Spring Boot's JavaMailSender for sending emails
  */
 @Service
-@ConditionalOnProperty(name = "app.email.smtp.host")
+@ConditionalOnBean(JavaMailSender.class)
 public class SmtpEmailService implements EmailService {
 
   private static final Logger logger = LoggerFactory.getLogger(SmtpEmailService.class);
 
   private final JavaMailSender mailSender;
   
-  @Value("${app.email.smtp.from}")
+  @Value("${app.email.smtp.from:noreply@loyalty.example.com}")
   private String fromEmail;
   
   @Value("${app.email.smtp.from-name:Loyalty System}")
