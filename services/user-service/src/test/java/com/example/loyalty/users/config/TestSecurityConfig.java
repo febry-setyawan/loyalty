@@ -1,6 +1,10 @@
 package com.example.loyalty.users.config;
 
 import com.example.loyalty.common.logging.StructuredLogger;
+import com.example.loyalty.users.application.services.EmailService;
+import com.example.loyalty.users.application.services.SmsService;
+import com.example.loyalty.users.application.services.impl.LoggingEmailService;
+import com.example.loyalty.users.application.services.impl.LoggingSmsService;
 import com.fasterxml.jackson.databind.ObjectMapper;
 import org.springframework.boot.autoconfigure.condition.ConditionalOnMissingBean;
 import org.springframework.context.annotation.Bean;
@@ -38,5 +42,17 @@ public class TestSecurityConfig {
         ObjectMapper mapper = new ObjectMapper();
         mapper.findAndRegisterModules(); // This will register JSR310 module for LocalDateTime
         return mapper;
+    }
+
+    @Bean
+    @ConditionalOnMissingBean
+    public EmailService emailService() {
+        return new LoggingEmailService();
+    }
+
+    @Bean
+    @ConditionalOnMissingBean
+    public SmsService smsService() {
+        return new LoggingSmsService();
     }
 }

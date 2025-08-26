@@ -51,6 +51,20 @@ spring:
       key-deserializer: org.apache.kafka.common.serialization.StringDeserializer
       value-deserializer: org.springframework.kafka.support.serializer.JsonDeserializer
 
+  mail:
+    host: ${SMTP_HOST:}
+    port: ${SMTP_PORT:587}
+    username: ${SMTP_USERNAME:}
+    password: ${SMTP_PASSWORD:}
+    properties:
+      mail:
+        smtp:
+          auth: true
+          starttls:
+            enable: true
+          ssl:
+            trust: "*"
+
 server:
   port: ${SERVER_PORT:8080}
 
@@ -80,3 +94,35 @@ loyalty:
   service:
     name: user-service
     version: 1.0.0
+
+# App-specific configuration
+app:
+  cors:
+    allowed-origins: ${CORS_ALLOWED_ORIGINS:http://localhost:3000,http://localhost:8080,http://localhost:5173}
+  
+  development:
+    use-hardcoded-user-id: ${USE_HARDCODED_USER_ID:true}
+    hardcoded-user-id: ${HARDCODED_USER_ID:550e8400-e29b-41d4-a716-446655440000}
+  
+  jwt:
+    secret: ${JWT_SECRET:default-secret-key-change-in-production-this-should-be-at-least-256-bits}
+    refresh-secret: ${JWT_REFRESH_SECRET:default-refresh-secret-change-in-production-this-should-be-at-least-256-bits}
+    access-expiration: ${JWT_ACCESS_EXPIRATION:900000}  # 15 minutes
+    refresh-expiration: ${JWT_REFRESH_EXPIRATION:604800000}  # 7 days
+    issuer: ${JWT_ISSUER:loyalty-system}
+  
+  email:
+    smtp:
+      host: ${SMTP_HOST:smtp.gmail.com}
+      port: ${SMTP_PORT:587}
+      username: ${SMTP_USERNAME:}
+      password: ${SMTP_PASSWORD:}
+      from: ${EMAIL_FROM:noreply@loyalty.example.com}
+      from-name: ${EMAIL_FROM_NAME:Loyalty System}
+    
+  sms:
+    provider: ${SMS_PROVIDER:log}  # Options: log, twilio
+    twilio:
+      account-sid: ${TWILIO_ACCOUNT_SID:}
+      auth-token: ${TWILIO_AUTH_TOKEN:}
+      from-number: ${TWILIO_FROM_NUMBER:}
