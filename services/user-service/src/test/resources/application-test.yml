@@ -4,6 +4,7 @@ spring:
     exclude:
       - org.springframework.boot.autoconfigure.data.redis.RedisAutoConfiguration
       - org.springframework.boot.autoconfigure.kafka.KafkaAutoConfiguration
+      - org.springframework.boot.autoconfigure.mail.MailSenderAutoConfiguration
   
   # Disable Flyway for tests - Testcontainers will handle DB setup
   flyway:
@@ -15,6 +16,9 @@ spring:
     driver-class-name: org.h2.Driver
     username: test
     password: test
+  
+  mail:
+    host: ""  # Disable mail for tests
   
   jpa:
     hibernate:
@@ -32,9 +36,16 @@ app:
   jwt:
     secret: test-jwt-secret-key-for-testing-purposes
     refresh-secret: test-refresh-secret-key-for-testing
-    expiration: 900000  # 15 minutes
+    access-expiration: 900000  # 15 minutes
     refresh-expiration: 604800000  # 7 days
     issuer: loyalty-test
+  
+  development:
+    use-hardcoded-user-id: true
+    hardcoded-user-id: "550e8400-e29b-41d4-a716-446655440000"
+
+  sms:
+    provider: "log"  # Use logging SMS service for tests
 
 # Disable security for tests
 logging:
