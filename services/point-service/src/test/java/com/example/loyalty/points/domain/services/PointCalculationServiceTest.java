@@ -57,11 +57,8 @@ class PointCalculationServiceTest {
 
     @Test
     void testCalculateReferralPoints() {
-        // Given
-        UUID referredUserId = UUID.randomUUID();
-        
         // When
-        Points result = pointCalculationService.calculateReferralPoints(referredUserId);
+        Points result = pointCalculationService.calculateReferralPoints();
         
         // Then
         assertEquals(500L, result.longValue()); // Business rule: 500 points per referral

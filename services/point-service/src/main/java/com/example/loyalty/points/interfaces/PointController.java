@@ -2,6 +2,7 @@ package com.example.loyalty.points.interfaces;
 
 import com.example.loyalty.points.application.dto.EarnPointsDTO;
 import com.example.loyalty.points.application.dto.PointBalanceDTO;
+import com.example.loyalty.points.application.dto.ReferralRequest;
 import com.example.loyalty.points.application.usecases.EarnPointsUseCase;
 import com.example.loyalty.points.application.usecases.GetBalanceUseCase;
 import com.example.loyalty.points.domain.entities.EarningRule;
@@ -114,9 +115,11 @@ public class PointController {
             earnRequest.setUserId(referralRequest.getUserId());
             earnRequest.setEarningType("REFERRAL");
             earnRequest.setDescription("Referral bonus points");
-            earnRequest.setPoints(referralRequest.getPoints());
-            // Optionally, if EarnPointsDTO.Request has a referrerId field, set it as well
-            // earnRequest.setReferrerId(referralRequest.getReferrerId());
+            // For referrals, set a nominal transaction amount since the business rule gives fixed points
+            earnRequest.setTransactionAmount(referralRequest.getPoints());
+            if (referralRequest.getReferrerId() != null) {
+                earnRequest.setReferenceId(referralRequest.getReferrerId());
+            }
 
             EarnPointsDTO.Response response = earnPointsUseCase.execute(earnRequest);
             return ResponseEntity.ok(

@@ -94,10 +94,10 @@ public class PointTransaction {
     public String getStatus() { return status; }
 
     // Setters for entity recreation (needed by infrastructure layer)
-    void setId(UUID id) { this.id = id; }
-    void setBalanceAfter(Points balanceAfter) { this.balanceAfter = balanceAfter; }
-    void setMetadata(String metadata) { this.metadata = metadata; }
-    void setExpiryDate(LocalDateTime expiryDate) { this.expiryDate = expiryDate; }
-    void setProcessedAt(LocalDateTime processedAt) { this.processedAt = processedAt; }
-    void setStatus(String status) { this.status = status; }
+    public void setId(UUID id) { this.id = id; }
+    public void setBalanceAfter(Points balanceAfter) { this.balanceAfter = balanceAfter; }
+    public void setMetadata(String metadata) { this.metadata = metadata; }
+    public void setExpiryDate(LocalDateTime expiryDate) { this.expiryDate = expiryDate; }
+    public void setProcessedAt(LocalDateTime processedAt) { this.processedAt = processedAt; }
+    public void setStatus(String status) { this.status = status; }
 }
