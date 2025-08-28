@@ -106,14 +106,19 @@ public class PointController {
      */
     @PostMapping("/referral")
     public ResponseEntity<ApiResponse<EarnPointsDTO.Response>> awardReferralPoints(
-            @RequestBody EarnPointsDTO.Request request) {
+            @RequestBody ReferralRequest referralRequest) {
         
         try {
-            // Set earning type to referral
-            request.setEarningType("REFERRAL");
-            request.setDescription("Referral bonus points");
-            
-            EarnPointsDTO.Response response = earnPointsUseCase.execute(request);
+            // Map ReferralRequest to EarnPointsDTO.Request
+            EarnPointsDTO.Request earnRequest = new EarnPointsDTO.Request();
+            earnRequest.setUserId(referralRequest.getUserId());
+            earnRequest.setEarningType("REFERRAL");
+            earnRequest.setDescription("Referral bonus points");
+            earnRequest.setPoints(referralRequest.getPoints());
+            // Optionally, if EarnPointsDTO.Request has a referrerId field, set it as well
+            // earnRequest.setReferrerId(referralRequest.getReferrerId());
+
+            EarnPointsDTO.Response response = earnPointsUseCase.execute(earnRequest);
             return ResponseEntity.ok(
                 ApiResponse.success(response, "Referral points awarded successfully")
             );
