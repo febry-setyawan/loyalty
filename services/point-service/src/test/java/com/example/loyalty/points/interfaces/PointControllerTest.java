@@ -5,6 +5,7 @@ import com.example.loyalty.points.application.usecases.EarnPointsUseCase;
 import com.example.loyalty.points.application.usecases.GetBalanceUseCase;
 import com.example.loyalty.points.config.TestSecurityConfig;
 import com.example.loyalty.points.domain.repositories.EarningRuleRepository;
+import com.example.loyalty.common.exceptions.GlobalExceptionHandler;
 import com.fasterxml.jackson.databind.ObjectMapper;
 import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -24,7 +25,7 @@ import static org.springframework.test.web.servlet.request.MockMvcRequestBuilder
 import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.*;
 
 @WebMvcTest(PointController.class)
-@Import(TestSecurityConfig.class)
+@Import({TestSecurityConfig.class, GlobalExceptionHandler.class})
 class PointControllerTest {
 
     @Autowired
@@ -93,7 +94,8 @@ class PointControllerTest {
                 .content(objectMapper.writeValueAsString(request)))
                 .andExpect(status().isBadRequest())
                 .andExpect(jsonPath("$.success").value(false))
-                .andExpect(jsonPath("$.error.code").value("INVALID_REQUEST"));
+                .andExpect(jsonPath("$.error.code").value("VALIDATION_ERROR"))
+                .andExpect(jsonPath("$.error.message").value("Invalid input data"));
     }
 
     @Test
