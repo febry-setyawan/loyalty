@@ -48,7 +48,7 @@ public class PointCalculationService {
     /**
      * Calculate referral points - fixed amount as per business requirements (500 points)
      */
-    public Points calculateReferralPoints(UUID referredUserId) {
+    public Points calculateReferralPoints() {
         // Business rule: 500 points per successful referral
         return new Points(500);
     }
