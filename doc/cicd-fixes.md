@@ -50,14 +50,36 @@ This document outlines the CI/CD issues that were identified and fixed in the lo
     cosign-release: 'v2.2.0'
 ```
 
-### 3. Outdated GitHub Actions ❌➡️✅
+### 3. Interactive Cosign Signing ❌➡️✅
+**Problem**: Cosign signing required manual interaction with OIDC provider, requiring users to visit URLs like `https://oauth2.sigstore.dev/auth/device?user_code=...`
+
+**Solution**: Configured automated keyless signing using GitHub OIDC:
+- Added `id-token: write` permission to build job
+- Enhanced signing step to use GitHub's identity provider
+- Added proper digest-based signing format
+
+```yaml
+permissions:
+  contents: read
+  packages: write
+  id-token: write  # Required for keyless signing with GitHub OIDC
+
+- name: Sign the published Docker image
+  env:
+    COSIGN_EXPERIMENTAL: 1
+  run: |
+    # Sign using GitHub's OIDC identity - no manual interaction required
+    echo "${{ steps.meta.outputs.tags }}" | xargs -I {} cosign sign --yes {}@${{ steps.build.outputs.digest }}
+```
+
+### 4. Outdated GitHub Actions ❌➡️✅
 **Problem**: Several GitHub Actions were using outdated versions.
 
 **Solution**: Updated actions to latest versions:
 - `codecov/codecov-action@v3` → `@v4`
 - `github/codeql-action/upload-sarif@v2` → `@v3`
 
-### 4. Code Formatting Issues ❌➡️✅
+### 5. Code Formatting Issues ❌➡️✅
 **Problem**: The Spotless plugin was configured but code wasn't properly formatted, causing CI failures.
 
 **Solution**: Applied Google Java Format to all source files:
@@ -65,7 +87,7 @@ This document outlines the CI/CD issues that were identified and fixed in the lo
 mvn spotless:apply
 ```
 
-### 5. NVD API Rate Limiting ❌➡️✅
+### 6. NVD API Rate Limiting ❌➡️✅
 **Problem**: OWASP dependency check was failing due to NVD API rate limits.
 
 **Solution**: Added configuration to handle rate limiting:
@@ -73,7 +95,7 @@ mvn spotless:apply
 - Made PR validation less strict (CVSS 9 threshold)
 - Optimized API call patterns
 
-### 6. Integration Test Configuration ❌➡️✅
+### 7. Integration Test Configuration ❌➡️✅
 **Problem**: Integration tests might run unit tests twice due to Maven lifecycle.
 
 **Solution**: Added `-DskipUnitTests=true` parameter to integration test step.
