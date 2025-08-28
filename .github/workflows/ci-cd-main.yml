@@ -242,6 +242,10 @@ jobs:
     runs-on: ubuntu-latest
     needs: [test, security, security-common]
     if: github.event_name == 'push'
+    permissions:
+      contents: read
+      packages: write
+      id-token: write  # Required for keyless signing with GitHub OIDC
     strategy:
       matrix:
         service: [user-service, point-service, rewards-service, admin-service]
@@ -292,6 +296,7 @@ jobs:
             type=raw,value=latest,enable={{is_default_branch}}
 
       - name: Build and push Docker image
+        id: build
         uses: docker/build-push-action@v5
         with:
           context: .
@@ -312,7 +317,9 @@ jobs:
       - name: Sign the published Docker image
         env:
           COSIGN_EXPERIMENTAL: 1
-        run: echo "${{ steps.meta.outputs.tags }}" | xargs -I {} cosign sign --yes {}
+        run: |
+          # Sign using GitHub's OIDC identity - no manual interaction required
+          echo "${{ steps.meta.outputs.tags }}" | xargs -I {} cosign sign --yes {}@${{ steps.build.outputs.digest }}
 
   # Job 6: Deploy to Development
   deploy-dev:

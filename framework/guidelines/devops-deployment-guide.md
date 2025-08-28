@@ -451,6 +451,10 @@ jobs:
     runs-on: ubuntu-latest
     needs: [test, security]
     if: github.ref == 'refs/heads/main'
+    permissions:
+      contents: read
+      packages: write
+      id-token: write  # Required for keyless signing with GitHub OIDC
     outputs:
       image-tag: ${{ steps.meta.outputs.tags }}
       image-digest: ${{ steps.build.outputs.digest }}
@@ -505,7 +509,11 @@ jobs:
         cosign-release: 'v2.2.0'
     
     - name: Sign the published Docker image
-      run: echo "${{ steps.meta.outputs.tags }}" | xargs -I {} cosign sign --yes {}@${{ steps.build.outputs.digest }}
+      env:
+        COSIGN_EXPERIMENTAL: 1
+      run: |
+        # Sign using GitHub's OIDC identity - no manual interaction required
+        echo "${{ steps.meta.outputs.tags }}" | xargs -I {} cosign sign --yes {}@${{ steps.build.outputs.digest }}
 
   deploy-staging:
     runs-on: ubuntu-latest
